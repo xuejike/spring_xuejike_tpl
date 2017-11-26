@@ -219,7 +219,7 @@ public class JkBuilder {
     }
     public static String formView(Object formObj,Model model){
         model.addAttribute("content",parseForm(formObj));
-        return "/form_tpl.ftl";
+        return "/form_tpl";
     }
 
     public static void main(String[] args){

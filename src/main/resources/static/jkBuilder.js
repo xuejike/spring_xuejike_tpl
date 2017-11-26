@@ -4,7 +4,9 @@ var jkBuilderConfig={
       success:200,
       error:300,
       timeout:301
-  }
+
+  },
+    dialogSize:["900px","600px"]
 };
 
 layui.use(["jquery","layer"],function () {
@@ -40,7 +42,8 @@ layui.use(["jquery","layer"],function () {
 function openUrlDialog(href,option) {
     option.type=2;
     option.content=href;
-    getLayer().open(option)
+    var df={area:jkBuilderConfig.dialogSize}
+    getLayer().open(layui.$.extend(df,option))
 }
 function openTab(href, title) {
     layui.use(["vip_tab"],function () {
@@ -133,6 +136,10 @@ function getLayer() {
 }
 // event  action@url@option
 function tableToolAction(event, data,row) {
+    if(data.length==0){
+        layer.msg("请选择元素")
+        return;
+    }
     var tagIndex= event.indexOf("@");
     if(tagIndex>=0){
         var eventArgs= event.split("@");

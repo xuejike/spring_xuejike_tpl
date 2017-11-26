@@ -1,7 +1,7 @@
 <#-- @ftlvariable name="btn" type="com.bidanet.springmvc.demo.jkbuilder.annotation.JkButton" -->
 <#-- @ftlvariable name="searchItem" type="com.bidanet.springmvc.demo.jkbuilder.type.FormFieldInfo" -->
 <!-- 工具集 -->
-<div class="my-btn-box" style="padding-top: 20px;">
+<div class="my-btn-box" style="padding-top: 20px;height: auto">
     <form class="layui-form" action="">
         <#if searchList??>
             <#list searchList as searchItem>

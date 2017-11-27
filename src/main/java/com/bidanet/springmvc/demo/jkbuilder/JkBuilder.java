@@ -102,11 +102,14 @@ public class JkBuilder {
         }
         //排序
         list.sort((o1,o2)-> o1.getSortIndex()-o2.getSortIndex());
-        JkForm jkForm = searchObj.getClass().getAnnotation(JkForm.class);
-        if (jkForm!=null){
-            map.put("searchBtn",jkForm.btns());
-            ArrayList<FormFieldInfo> formFieldInfoList = getFormFieldInfoList(searchObj);
-            map.put("searchList",formFieldInfoList);
+        if(searchObj != null){
+            JkForm jkForm = searchObj.getClass().getAnnotation(JkForm.class);
+            if (jkForm!=null){
+                map.put("searchBtn",jkForm.btns());
+                ArrayList<FormFieldInfo> formFieldInfoList = getFormFieldInfoList(searchObj);
+                map.put("searchList",formFieldInfoList);
+            }
+
         }
 
 

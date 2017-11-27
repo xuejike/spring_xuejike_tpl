@@ -12,35 +12,7 @@ var jkBuilderConfig={
     }
 };
 
-layui.use(["jquery","layer"],function () {
-    var $=layui.$;
-    var layer=layui.layer;
-    layui.$(document).on("click",".jk-btn[lay-filter=doAjax]",function (e) {
-        // console.log(e)
-        ajaxPost($(e.currentTarget).attr("href"),{});
-        e.preventDefault();
-    });
 
-    layui.$(document).on("click",".jk-btn[lay-filter=dialog]",function (e) {
-        var dom=$(e.currentTarget);
-        var width= dom.data("width");
-        var height= dom.data("height");
-        var title= dom.data("title");
-        var area=["800px","500px"];
-        if(height){
-            area[1]=height+"px";
-        }
-        if(width){
-            area[0]=width+"px";
-        }
-        var href= dom.attr("href");
-        openUrlDialog(href,{
-            area:[width,height],
-            title:title
-        });
-        e.preventDefault();
-    });
-});
 //通过URL打开对话框
 function openUrlDialog(href,option) {
     option.type=2;
@@ -217,3 +189,73 @@ function getUrlParams(url) {
 
     return params;
 }
+function uploadComponent(subId,url,max,data) {
+    var uploadFiles={
+
+    };
+    var uploadVue= new Vue({
+        el:"#upload_img_"+subId,
+        data:{
+            files:data
+        },
+        methods:{
+            remove:function (index) {
+                this.files.splice(index, 1);
+            },
+            addFile:function (file) {
+                if(this.files.length >= max){
+                    layer.msg("文件已经达到上限")
+                }else{
+                    this.files.push(file);
+                }
+            }
+        },
+        computed:{
+            filejson:function () {
+                var filedata=[];
+                for(var i=0;i<this.files.length;i++){
+                    var f= this.files[i];
+                    if(f.status=="finish"){
+                        filedata.push(f);
+                    }
+                }
+                return JSON.stringify(filedata);
+            }
+        }
+    });
+    layui.use(["upload","layer"],function () {
+        var upload=layui.upload;
+        var layer=layui.layer;
+        //多图片上传
+        upload.render({
+            elem: '#upload_img_btn_'+subId
+            ,url: url
+            ,accept:""
+            ,multiple: true
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+
+                obj.preview(function(index, file, result){
+                    uploadFiles[index]={
+                        status:"loading", url:result,filename:file.name
+                    };
+                    uploadVue.addFile(uploadFiles[index])
+                });
+            }
+            ,done: function(res,index,upload){
+                //上传完毕
+                if(res.statusCode==200){
+                    uploadFiles[index].status="finish";
+                    uploadFiles[index].url=res.data.url;
+                }
+            },
+            error:function (res, index, upload) {
+                layer.msg("网络异常");
+                if(uploadFiles[index]){
+                    uploadFiles[index].status="error";
+                }
+
+            }
+        });
+    });
+};

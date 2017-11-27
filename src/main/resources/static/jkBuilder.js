@@ -6,7 +6,10 @@ var jkBuilderConfig={
       timeout:301
 
   },
-    dialogSize:["900px","600px"]
+    dialogSize:["900px","600px"],
+    event:{
+
+    }
 };
 
 layui.use(["jquery","layer"],function () {
@@ -114,7 +117,7 @@ function ajaxActionHandle(res) {
             }
         }else{
             layui.use(["vip_tab"],function () {
-                vipTab = layui.vip_tab
+                vipTab = layui.vip_tab;
                 if(vipTab.getThisTabId()){
                     //在Tab中
                     vipTab.del(vipTab.getThisTabId());
@@ -168,11 +171,14 @@ function tableToolAction(event, data,row) {
                 return;
             default:
 
-
-
         }
     }
-    console.log("没有处理方法:"+event);
+
+    if(jkBuilderConfig.event[event]){
+        jkBuilderConfig.event[event](event,data,row);
+    }else{
+        console.log("没有处理方法:"+event);
+    }
 
 }
 //构建URL  占位符 {属性名}

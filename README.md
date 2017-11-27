@@ -1,4 +1,3 @@
-# 后台模板生成器
 ---
 title: 模板生成器-使用手册
 tags: spring
@@ -281,5 +280,36 @@ public class TableView {
 }
 
 ```
+```java
+
+@JkForm(btns = {
+        @JkButton(value = "搜索",type = JkButtonType.submit),
+        @JkButton(value = "测试",type = JkButtonType.dialog,url = "test?id={userName}")
+})
+@Data
+public class TableHeader {
+    @JkSortIndex(0)
+    @JkFormField(title = "用户名",type = TextFormFieldImpl.class)
+    private String username;
+    @JkSortIndex(1)
+    @JkFormField(title = "密码",type = TextFormFieldImpl.class)
+    private String pwd;
+}
+```
 # 3.事件定义
+事件定义和处理
+```java
+//事件定义
+ @JkButton(value = "搜索",type = JkButtonType.diy,event = "test")
+```
+
+
+```javascript
+//事件处理
+jkBuilderConfig.event={
+  test:function (event, data, row) {
+      console.log("处理-->"+event)
+  }
+};
+```
 

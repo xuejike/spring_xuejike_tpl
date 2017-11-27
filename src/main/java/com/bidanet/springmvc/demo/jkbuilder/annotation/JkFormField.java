@@ -13,5 +13,9 @@ public @interface JkFormField {
     String placeholder() default "";
     String[] attrs() default {};
 
+    /**
+     * form表单实现类
+     * @return
+     */
     Class<? extends FormFieldHtml> type();
 }

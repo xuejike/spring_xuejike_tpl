@@ -11,8 +11,21 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface JkDataSource {
+    /**
+     * 数据源类型
+     * @return
+     */
     JkSourceType type() default JkSourceType.stringArray;
+    /**
+     * 数组数据
+     * @return
+     */
     String[] arrayData() default {};
+
+    /**
+     * 分割线
+     * @return
+     */
     String arrayDivider() default "-";
     String url() default "";
 }

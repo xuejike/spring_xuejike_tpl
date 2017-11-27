@@ -21,6 +21,7 @@ public class FreeMarkerUtils {
     static {
         configuration = new Configuration(Configuration.VERSION_2_3_22);
         try {
+
             configuration.setDirectoryForTemplateLoading(new ClassPathResource("\\jk_tpl\\").getFile());
             configuration.setObjectWrapper(new DefaultObjectWrapper(Configuration.VERSION_2_3_22));
 

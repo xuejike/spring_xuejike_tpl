@@ -9,13 +9,31 @@ import java.lang.annotation.*;
 @Inherited
 public @interface JkButton {
     String value() default "按钮";
+
+    /**
+     * 按钮事件
+     * @return
+     */
     String event() default "";
 
     String cssClass() default "";
-    JkButtonType type() default JkButtonType.diy;
-    String url() default "";
-    String option() default "{}";
 
-    //type url option
+    /**
+     * 按钮类型
+     * @return
+     */
+    JkButtonType type() default JkButtonType.diy;
+
+    /**
+     * 请求地址
+     * @return
+     */
+    String url() default "";
+
+    /**
+     * 选项
+     * @return
+     */
+    String option() default "{}";
 
 }

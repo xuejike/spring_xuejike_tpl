@@ -8,10 +8,34 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface JkForm {
+    /**
+     * form表单请求地址
+     * @return
+     */
     String url() default "";
+
+    /**
+     * form表单标题
+     * @return
+     */
     String title() default "";
+
+    /**
+     * form表单CSS的class
+     * @return
+     */
     String[] cssClass() default {};
+
+    /**
+     * form表单属性
+     * @return
+     */
     String[] attrs() default {};
+
+    /**
+     * 按钮定义
+     * @return
+     */
     JkButton[] btns() default {
         @JkButton(value = "提交",type = JkButtonType.submit)
     };

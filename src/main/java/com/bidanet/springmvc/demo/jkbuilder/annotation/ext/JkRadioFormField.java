@@ -15,5 +15,10 @@ public @interface JkRadioFormField {
      * @return
      */
     String[] value() default {};
+
+    /**
+     * 分隔符
+     * @return
+     */
     String divider() default "-";
 }

@@ -111,10 +111,7 @@ function getLayer() {
 }
 // event  action@url@option
 function tableToolAction(event, data,row) {
-    if(data.length==0){
-        layer.msg("请选择元素")
-        return;
-    }
+
     var tagIndex= event.indexOf("@");
     if(tagIndex>=0){
         var eventArgs= event.split("@");
@@ -123,6 +120,9 @@ function tableToolAction(event, data,row) {
         var url="";
         if(eventArgs.length>1){
             url=buildUrl(eventArgs[1],data);
+            if(url==null){
+                return;
+            }
         }
 
         if(eventArgs.length>=3){
@@ -156,6 +156,10 @@ function tableToolAction(event, data,row) {
 //构建URL  占位符 {属性名}
 function buildUrl(url, data) {
     var params=getUrlParams(url);
+    if(params.length>0&&data.length==0){
+        layer.msg("请选择元素")
+        return null;
+    }
     if(Array.isArray(data)){
         if(data.length==0){
             return url;

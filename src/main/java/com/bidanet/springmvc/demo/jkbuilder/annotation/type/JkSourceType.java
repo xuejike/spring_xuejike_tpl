@@ -14,7 +14,12 @@ public enum JkSourceType implements JkNameValueData {
     /**
      * Url地址
      */
-    url;
+    url,
+    /**
+     * Spring BeanClass数据
+     */
+    beanClass
+    ;
 
     @Override
     public String getName(){
@@ -25,6 +30,8 @@ public enum JkSourceType implements JkNameValueData {
                 return "URL地址";
             case enumType:
                 return "枚举类型";
+            case beanClass:
+                return "接口数据";
         }
         return "";
     }

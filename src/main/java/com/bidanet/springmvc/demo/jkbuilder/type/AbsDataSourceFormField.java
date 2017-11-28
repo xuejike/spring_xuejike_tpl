@@ -1,5 +1,6 @@
 package com.bidanet.springmvc.demo.jkbuilder.type;
 
+import com.bidanet.bdcms.core.common.SpringWebTool;
 import com.bidanet.springmvc.demo.jkbuilder.annotation.JkDataSource;
 import com.bidanet.springmvc.demo.jkbuilder.annotation.type.JkSourceType;
 import com.bidanet.springmvc.demo.jkbuilder.data.JkNameValueData;
@@ -38,6 +39,10 @@ public abstract class AbsDataSourceFormField extends AbsBaseFormField {
 
             }else if (jkDataSource.type()== JkSourceType.url){
                 // TODO: 2017/11/20 通过URL地址加载
+            }else if (jkDataSource.type()==JkSourceType.beanClass){
+                JkTypeDataSource bean = SpringWebTool.getBean(jkDataSource.beanCls());
+                List<JkNameValueData> list = bean.search(null);
+                map.put("arrayData",list);
             }
         }
     }

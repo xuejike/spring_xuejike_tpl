@@ -1,6 +1,7 @@
 package com.bidanet.springmvc.demo.jkbuilder.annotation;
 
 import com.bidanet.springmvc.demo.jkbuilder.annotation.type.JkSourceType;
+import com.bidanet.springmvc.demo.jkbuilder.type.JkTypeDataSource;
 
 import java.lang.annotation.*;
 
@@ -28,4 +29,5 @@ public @interface JkDataSource {
      */
     String arrayDivider() default "-";
     String url() default "";
+    Class<? extends JkTypeDataSource> beanCls() default JkTypeDataSource.class;
 }

@@ -205,6 +205,7 @@ public class JkBuilder {
             return list;
         }
 
+
         do{
             Field[] fields = cls.getDeclaredFields();
             Collections.addAll(list,fields);

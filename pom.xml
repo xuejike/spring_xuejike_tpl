@@ -22,11 +22,11 @@
         <!--<id>oschina</id>-->
         <!--<url>http://maven.oschina.net/content/groups/public/</url>-->
         <!--</repository>-->
-        <repository>
-            <id>center</id>
+        <!--<repository>-->
+            <!--<id>center</id>-->
 
-            <url>http://maven.aliyun.com/nexus/content/repositories/central/</url>
-        </repository>
+            <!--<url>http://maven.aliyun.com/nexus/content/repositories/central/</url>-->
+        <!--</repository>-->
         <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>

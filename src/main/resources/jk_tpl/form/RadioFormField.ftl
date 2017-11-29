@@ -7,7 +7,7 @@
                 <input type="radio" name="${formField.name}"
 
                     <#if formField.val??>
-                        <#if "${formField.val?c}" == "${val.getValue()!}"> checked</#if>
+                        <#if "${formField.getValString()}" == "${val.getValue()!}"> checked</#if>
                     </#if>
 
                        value="${val.getValue()!}" title="${val.getName()!}">

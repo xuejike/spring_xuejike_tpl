@@ -7,7 +7,7 @@
                 <input type="checkbox" name="${formField.name}"
                        <#if formField.val??>
                            <#list formField.val as v>
-                                <#if "${v?c}" == "${val.getValue()!}">checked</#if>
+                                <#if "${v!}" == "${val.getValue()!}">checked</#if>
                            </#list>
                        </#if>
 

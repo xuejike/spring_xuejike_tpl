@@ -22,7 +22,7 @@ public class FreeMarkerUtils {
         configuration = new Configuration(Configuration.VERSION_2_3_22);
         try {
 
-            configuration.setDirectoryForTemplateLoading(new ClassPathResource("\\jk_tpl\\").getFile());
+            configuration.setClassForTemplateLoading(FreeMarkerUtils.class,"/jk_tpl");
             configuration.setObjectWrapper(new DefaultObjectWrapper(Configuration.VERSION_2_3_22));
 
         } catch (Exception e) {

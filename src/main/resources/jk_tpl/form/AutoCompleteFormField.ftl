@@ -20,7 +20,7 @@
                 <#list arrayData as val>
                     <option value="${val.getValue()!}"
                             <#if formField.val??>
-                                <#if "${formField.val?c}" == "${val.getValue()!}"> selected</#if>
+                                <#if "${formField.getValString()}" == "${val.getValue()!}"> selected</#if>
                             </#if>
                     >${val.getName()!}</option>
                 </#list>

@@ -9,7 +9,11 @@
 
             <#if arrayData??>
                 <#list arrayData as val>
-                    <option value="${val.getValue()!}" <#if "${formField.val!}" == "${val.getValue()!}"> selected</#if>>${val.getName()!}</option>
+                    <option value="${val.getValue()!}"
+                        <#if formField.val??>
+                            <#if "${formField.val?c}" == "${val.getValue()!}"> selected</#if>
+                        </#if>
+                    >${val.getName()!}</option>
                 </#list>
             </#if>
 

@@ -14,4 +14,7 @@ public interface JkTypeDataSource {
      * @return
      */
     List<JkNameValueData> search(String key) ;
+    default String getText(String val){
+        return val;
+    }
 }

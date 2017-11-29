@@ -99,7 +99,15 @@ layui.use(['layer', 'element', 'util'], function () {
     };
 
     window.getNowTabIframe=function () {
-        var ifr = $(document).find('.my-body .layui-tab-content .layui-tab-item iframe').eq(cardIdx);
+        var tabs= $(".layui-tab-title li");
+        var tabIndex=0;
+        for(var i=0;i<tabs.length;i++){
+            if($(tabs[i]).hasClass("layui-this")){
+                tabIndex=i;
+                break;
+            }
+        }
+        var ifr = $(document).find('.my-body .layui-tab-content .layui-tab-item iframe').eq(tabIndex);
 
         return ifr;
     };

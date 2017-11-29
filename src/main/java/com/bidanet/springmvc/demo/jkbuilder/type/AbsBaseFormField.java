@@ -3,6 +3,8 @@ package com.bidanet.springmvc.demo.jkbuilder.type;
 import com.bidanet.springmvc.demo.jkbuilder.FreeMarkerUtils;
 import com.bidanet.springmvc.demo.jkbuilder.annotation.JkPlaceholder;
 import com.bidanet.springmvc.demo.jkbuilder.annotation.JkTitle;
+import com.bidanet.springmvc.demo.jkbuilder.annotation.JkVerify;
+import com.bidanet.springmvc.demo.jkbuilder.annotation.type.JkVerifyType;
 import lombok.Data;
 
 import java.util.HashMap;
@@ -13,6 +15,7 @@ public abstract class AbsBaseFormField implements FormFieldHtml {
 
     protected JkPlaceholder jkPlaceholder;
     protected JkTitle jkTitle;
+    protected JkVerify jkVerify;
 // <input type="hidden" name="" value=""/>
     @Override
     public String html(FormFieldInfo info) {
@@ -31,9 +34,13 @@ public abstract class AbsBaseFormField implements FormFieldHtml {
 
         map.put("formField",info);
         map.put("layout",layout);
+
+        map.put("verifyInfo",new VerifyInfo(jkVerify));
+
         addExpansionData(info,map);
         return FreeMarkerUtils.build(getTpl(),map);
     }
+
 
     /**
      * 获取模板文件

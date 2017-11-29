@@ -6,19 +6,12 @@ package com.bidanet.springmvc.demo.jkbuilder.annotation.type;
  */
 
 public enum JkVerifyType {
-    none,
     required,
     phone,
     email,
     url,
     number,
-    identity;
-
-    @Override
-    public String toString() {
-        if (this==none){
-            return "";
-        }
-        return super.toString();
-    }
+    identity,
+    regExp,
+    ajax;
 }

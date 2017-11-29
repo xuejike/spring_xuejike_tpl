@@ -1,6 +1,7 @@
 package com.bidanet.springmvc.demo.jkbuilder.annotation;
 
 import com.bidanet.springmvc.demo.jkbuilder.annotation.type.JkVerifyType;
+import com.bidanet.springmvc.demo.jkbuilder.type.JkVerifyRemote;
 
 import java.lang.annotation.*;
 
@@ -12,5 +13,8 @@ import java.lang.annotation.*;
 @Inherited
 public @interface JkVerify {
     JkVerifyType[] rules() default {};
-    String[] regexs() default {};
+    String[] rulesTag() default {};
+    JkVerifyRegExp[] regExps() default {};
+    String message() default "";
+    Class<? extends JkVerifyRemote> ajaxCls() default JkVerifyRemote.class;
 }

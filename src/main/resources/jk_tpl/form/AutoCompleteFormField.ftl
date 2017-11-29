@@ -5,7 +5,7 @@
     <div class="layui-input-${layout!"block"} ${formField.getCssClassTpl()} <#if auto.type()=="remote"> jk-search-select</#if>">
         <select name="${formField.name!}"
                 lay-search=""
-
+                lay-verify="${verify!}"
                 ${formField.getAttrsTpl()}
                 <#if auto.type()=="remote">
                     data-url="/jkBuilder/selectDataSource"

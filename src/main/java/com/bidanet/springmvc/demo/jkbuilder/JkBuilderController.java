@@ -1,8 +1,10 @@
 package com.bidanet.springmvc.demo.jkbuilder;
 
+import com.bidanet.bdcms.core.bean.ApiResult;
 import com.bidanet.bdcms.core.common.SpringWebTool;
 import com.bidanet.springmvc.demo.jkbuilder.data.JkNameValueData;
 import com.bidanet.springmvc.demo.jkbuilder.type.JkTypeDataSource;
+import com.bidanet.springmvc.demo.jkbuilder.type.JkVerifyRemote;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -49,5 +51,28 @@ public class JkBuilderController {
         });
         return list;
 
+    }
+    @RequestMapping("/verify")
+    @ResponseBody
+    public ApiResult<String> verify(String value,String beanCls){
+        try {
+            Class<?> beanClass = Class.forName(beanCls);
+            Object bean = SpringWebTool.getBean(beanClass);
+            if (bean instanceof JkVerifyRemote){
+                String verify = ((JkVerifyRemote) bean).verify(value);
+                if (verify==null){
+                    return ApiResult.success("");
+                }else{
+                    return ApiResult.error(verify);
+                }
+            }
+        } catch (ClassNotFoundException e) {
+
+            e.printStackTrace();
+            return ApiResult.error("处理类不存在："+beanCls);
+        }catch (Exception ex){
+            return ApiResult.error(ex.getMessage());
+        }
+        return ApiResult.error("服务异常");
     }
 }

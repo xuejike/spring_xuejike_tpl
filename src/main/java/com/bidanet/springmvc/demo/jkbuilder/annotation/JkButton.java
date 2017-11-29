@@ -36,4 +36,10 @@ public @interface JkButton {
      */
     String option() default "{}";
 
+    /**
+     * 条件表达式(row)
+     * @return
+     */
+    String ifExp() default "";
+
 }

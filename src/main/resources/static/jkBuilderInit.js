@@ -106,4 +106,18 @@ layui.use(["jquery","form"],function () {
 //            $('input').click().focus().val(val)
         })
     }
-})
+});
+
+layui.use(['form'], function(){
+    var form = layui.form;
+
+    //监听提交
+    form.on('submit(ajax_submit)', function(data){
+        setTimeout(function(){
+            ajaxPost(data.form.action,layui.$(data.form).serialize());
+        },1);
+
+
+        return false;
+    });
+});

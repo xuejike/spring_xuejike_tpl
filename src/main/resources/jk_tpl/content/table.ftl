@@ -170,7 +170,14 @@
 <#list toolbar?keys as key>
 <script type="text/html" id="${key!}">
     <#list toolbar[key] as btn>
+        <#if btn.ifExp() != "">
+            {{#  if(${btn.ifExp()}){ }}
+        </#if>
     <a class="layui-btn layui-btn-sm ${btn.cssClass()}" lay-event="<#if btn.type()=="diy">${btn.event()}<#else>${btn.type()}@${btn.url()}@${btn.option()}</#if>">${btn.value()}</a>
+        <#if btn.ifExp() != "">
+        {{#  }  }}
+        </#if>
+
     </#list>
 
 </script>

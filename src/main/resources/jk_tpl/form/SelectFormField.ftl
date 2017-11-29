@@ -2,7 +2,7 @@
 
     <label class="layui-form-label">${formField.title!}</label>
     <div class="layui-input-${layout!"block"}">
-        <select name="${formField.name!}" lay-verify="" class="${formField.getCssClassTpl()}" ${formField.getAttrsTpl()} >
+        <select name="${formField.name!}"  lay-verify="${verify!}" class="${formField.getCssClassTpl()}" ${formField.getAttrsTpl()} >
             <#if formField.placeholder??>
                 <option value="">${formField.placeholder!}</option>
             </#if>

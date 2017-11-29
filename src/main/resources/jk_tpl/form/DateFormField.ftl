@@ -4,6 +4,7 @@
         <input type="text" name="${formField.name!}"
                id="id_${formField.name!}"
                autocomplete="off"
+               lay-verify="${verify!}"
                ${formField.getAttrsTpl()}
                placeholder="${formField.placeholder!}"
                class="layui-input ${formField.getCssClassTpl()}">

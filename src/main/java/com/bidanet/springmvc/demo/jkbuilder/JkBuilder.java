@@ -1,6 +1,7 @@
 package com.bidanet.springmvc.demo.jkbuilder;
 
 import com.alibaba.fastjson.JSON;
+import com.bidanet.bdcms.core.common.SpringWebTool;
 import com.bidanet.springmvc.demo.jkbuilder.annotation.*;
 import com.bidanet.springmvc.demo.jkbuilder.annotation.type.JkColumnAlign;
 import com.bidanet.springmvc.demo.jkbuilder.exception.JkBuilderException;
@@ -218,17 +219,39 @@ public class JkBuilder {
 
 
     public static String tableView(Class tableCls, Object searchTool, Model model){
+        return tableView(tableCls, searchTool, model,false);
+    }
+    public static String tableView(Class tableCls, Object searchTool, Model model,boolean loadFooter){
         model.addAttribute("content",parseTable(tableCls,searchTool));
+
+        if (loadFooter){
+            String urlPath = getUrlPath()+".ftl";
+            model.addAttribute("footerTpl",urlPath);
+        }
         return "/table_tpl";
     }
-    public static String formView(Object formObj,Model model){
+
+    public static String formView(Object formObj,Model model,boolean loadFooter){
         model.addAttribute("content",parseForm(formObj));
+        if (loadFooter){
+            String urlPath = getUrlPath()+".ftl";
+            model.addAttribute("footerTpl",urlPath);
+        }
         return "/form_tpl";
+    }
+    public static String formView(Object formObj,Model model){
+        return formView(formObj, model,false);
+    }
+    protected static String getUrlPath(){
+        String requestURI = SpringWebTool.getRequest().getRequestURI();
+        return requestURI;
     }
 
     public static void main(String[] args){
 //        TestView testView = new TestView();
 //        String s = parseTable(TableView.class, null);
 //        System.out.println(s);
+
+//        JSON.parseObject()
     }
 }

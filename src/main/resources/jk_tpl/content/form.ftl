@@ -33,18 +33,6 @@
         </div>
 
     <script>
-        layui.use(['form'], function(){
-            var form = layui.form;
 
-            //监听提交
-            form.on('submit(ajax_submit)', function(data){
-                setTimeout(function(){
-                    ajaxPost(data.form.action,data.field);
-                },1);
-
-
-                return false;
-            });
-        });
     </script>
 </form>

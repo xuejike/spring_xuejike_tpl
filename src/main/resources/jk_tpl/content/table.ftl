@@ -128,7 +128,7 @@
         $('.my-btn-box .tool-btn').on('click', function(){
             var type = $(this).data('event');
             var data=table.checkStatus('dataTable');
-            console.log(data);
+       
             tableToolAction(type,data.data,data)
         });
 
@@ -144,7 +144,7 @@
                     delete data.field[key];
                 }
             }
-            table.reload('dataTable', {
+            tableIns.reload({
                 page: {
                     curr: 1 //重新从第 1 页开始
                 }

@@ -12,6 +12,7 @@ import org.springframework.core.annotation.AnnotationUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.util.regex.Pattern;
 
 public class JkVerifyUtils {
     public static void verify(Object obj){
@@ -19,14 +20,20 @@ public class JkVerifyUtils {
             throw new CheckException("obj is null");
         }
         Class<?> cls = obj.getClass();
-        Field[] fields = cls.getFields();
+        Field[] fields = cls.getDeclaredFields();
+        for (Field field : fields) {
+            checkField(field,obj);
+        }
 
     }
     protected static void checkField(Field field,Object obj){
         JkVerify jkVerify = AnnotationUtils.findAnnotation(field, JkVerify.class);
+        if (jkVerify==null){
+            return;
+        }
         JkVerifyType[] rules = jkVerify.rules();
         JkVerifyRegExp[] regExps = jkVerify.regExps();
-        Class<? extends JkVerifyRemote> ajaxCls = jkVerify.ajaxCls();
+
 
         try {
             Object property = PropertyUtils.getProperty(obj, field.getName());
@@ -38,8 +45,10 @@ public class JkVerifyUtils {
                         break;
                     case ajax:
                         checkAjax(property,jkVerify.ajaxCls());
+                        break;
                     case regExp:
                         checkRegExp(property,regExps);
+                        break;
                     default:
                 }
             }
@@ -50,6 +59,12 @@ public class JkVerifyUtils {
     }
 
     private static void checkRegExp(Object property, JkVerifyRegExp[] regExps) {
+        for (JkVerifyRegExp regExp : regExps) {
+            boolean matches = Pattern.matches(regExp.regExp(), String.valueOf(property));
+            if (!matches){
+                throw new CheckException(regExp.message());
+            }
+        }
 
     }
 

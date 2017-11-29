@@ -196,7 +196,9 @@ public class JkBuilder {
         if(jkColumn.fixed()!= JkColumnAlign.none){
             tableColumnInfo.setFixed(jkColumn.fixed().toString());
         }
-
+        if (!jkColumn.templet().isEmpty()){
+            tableColumnInfo.setTemplet(jkColumn.templet());
+        }
         return tableColumnInfo;
     }
 
@@ -217,7 +219,13 @@ public class JkBuilder {
     }
 
 
-
+    /**
+     * 表格视图
+     * @param tableCls
+     * @param searchTool
+     * @param model
+     * @return
+     */
     public static String tableView(Class tableCls, Object searchTool, Model model){
         return tableView(tableCls, searchTool, model,false);
     }
@@ -248,10 +256,6 @@ public class JkBuilder {
     }
 
     public static void main(String[] args){
-//        TestView testView = new TestView();
-//        String s = parseTable(TableView.class, null);
-//        System.out.println(s);
 
-//        JSON.parseObject()
     }
 }

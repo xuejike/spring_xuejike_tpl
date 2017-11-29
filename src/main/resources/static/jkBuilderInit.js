@@ -27,3 +27,83 @@ layui.use(["jquery","layer"],function () {
         e.preventDefault();
     });
 });
+
+layui.use(["jquery","form"],function () {
+    var $=layui.$;
+    setInputKeUp();
+    function setInputKeUp() {
+        layui.$(".jk-search-select  .layui-input").on("keyup",function (event) {
+            var elBody=layui.$(event.currentTarget).parents(".jk-search-select");
+            if((event.keyCode>=48&&event.keyCode<=105)||(event.keyCode==8)){
+                var v=$(event.currentTarget).val();
+                var opt="";
+
+
+                var url= elBody.find("select").data("url");
+                var beanCls= elBody.find("select").data("bean-cls");
+                $.post(url,{key:v,beanCls:beanCls},function (data) {
+                    for(var i=0;i<data.length;i++){
+                        opt+="<option value='"+data[i].value+"'>"+data[i].name+"</option>"
+                    }
+                    elBody.find("select").html(opt);
+                    layui.form.render();
+                    elBody.find(".layui-input").click().focus().val(v);
+                    setInputKeUp();
+                });
+
+                return;
+            }
+            var selectOpt= elBody.find(".layui-this");
+
+            //Enter
+            if(event.keyCode==13){
+                var val=selectOpt.attr("lay-value");
+                var txt=selectOpt.text();
+                elBody.find("input").val(txt);
+//                    console.log("-->"+val+"->"+txt);
+                elBody.find("select").val(val);
+                //关闭
+                elBody.find(".layui-form-select").removeClass("layui-form-selected layui-form-selectup")
+                return;
+            }
+            var nextSelectOpt;
+            var selectDl=elBody.find("dl");
+            if(selectOpt.length==0){
+                selectOpt= $(elBody.find("dd")[0]);
+                nextSelectOpt=selectOpt;
+                selectDl.scrollTop(0);
+            }else{
+                //up
+                if(event.keyCode==38){
+                    nextSelectOpt=selectOpt.prev();
+                    if(nextSelectOpt.length==0){
+                        nextSelectOpt=selectOpt;
+                    }
+
+                }
+                //down
+                if(event.keyCode==40){
+                    nextSelectOpt=selectOpt.next();
+                    if(nextSelectOpt.length==0){
+                        nextSelectOpt=selectOpt;
+                    }
+
+                }
+            }
+            selectOpt.removeClass("layui-this");
+            nextSelectOpt.addClass("layui-this");
+
+
+            if(nextSelectOpt.position().top<0){
+                selectDl.scrollTop(selectDl.scrollTop()
+                    -selectOpt.height());
+            }
+            if(nextSelectOpt.position().top>(selectDl.height()-selectOpt.height())){
+                selectDl.scrollTop(selectDl.scrollTop()
+                    +selectOpt.height());
+            }
+
+//            $('input').click().focus().val(val)
+        })
+    }
+})

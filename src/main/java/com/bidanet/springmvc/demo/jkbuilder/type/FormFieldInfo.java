@@ -35,4 +35,7 @@ public class FormFieldInfo {
         return "";
     }
 
+    public String getValString(){
+        return String.valueOf(getVal());
+    }
 }

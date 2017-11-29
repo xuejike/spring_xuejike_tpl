@@ -20,5 +20,9 @@ public enum JkButtonType {
 
     submit,
     reset,
+    /**
+     * 询问框
+     */
+    confirm,
     diy
 }

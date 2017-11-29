@@ -141,6 +141,13 @@ function tableToolAction(event, data,row) {
             case "windows":
                 window.open(url);
                 return;
+            case "confirm":
+                getLayer().confirm(option, {icon: 3, title:'提示'}, function(index){
+                    //do something
+                    ajaxPost(url,{});
+                    layer.close(index);
+                });
+                return;
             default:
 
         }

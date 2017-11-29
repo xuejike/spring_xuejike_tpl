@@ -13,6 +13,11 @@
 <body class="body">
 <#include "body_js_tpl.ftl"/>
 ${content!}
-<script type="text/javascript" src="/jkBuilder.js"></script>
+<script type="text/javascript" src="/jkBuilderInit.js"></script>
+<script type="text/javascript" src="/jkEvent.js"></script>
+<#if footerTpl??>
+    <#include  footerTpl />
+</#if>
+
 </body>
 </html>

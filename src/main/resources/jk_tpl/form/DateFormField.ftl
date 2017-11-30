@@ -6,6 +6,7 @@
                autocomplete="off"
                lay-verify="${verify!}"
                ${formField.getAttrsTpl()}
+                value="${formField.val!}"
                placeholder="${formField.placeholder!}"
                class="layui-input ${formField.getCssClassTpl()}">
     </div>

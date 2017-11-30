@@ -3,7 +3,7 @@
     <div class="layui-input-${layout!"block"}">
         <input type="text" name="${formField.name!}"
                autocomplete="off"
-
+                value="${formField.val!}"
                 <@verify verifyInfo=verifyInfo/>
 
                 ${formField.getAttrsTpl()}

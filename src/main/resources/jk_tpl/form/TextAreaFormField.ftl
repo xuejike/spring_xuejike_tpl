@@ -4,6 +4,6 @@
         <textarea name="${formField.name!}"  lay-verify="${verify!}"
                 ${formField.getAttrsTpl()}
                   placeholder="${formField.placeholder!}"
-                  class="layui-textarea ${formField.getCssClassTpl()} "></textarea>
+                  class="layui-textarea ${formField.getCssClassTpl()} ">${formField.val!}</textarea>
 
     </div>

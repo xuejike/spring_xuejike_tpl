@@ -219,37 +219,21 @@ public class JkBuilder {
     }
 
 
-    /**
-     * 表格视图
-     * @param tableCls
-     * @param searchTool
-     * @param model
-     * @return
-     */
-    public static String tableView(Class tableCls, Object searchTool, Model model){
-        return tableView(tableCls, searchTool, model,false);
-    }
-    public static String tableView(Class tableCls, Object searchTool, Model model,boolean loadFooter){
+
+    public static String tableView(Class tableCls, Object searchTool, Model model,String... loadFooter)
+    {
         model.addAttribute("content",parseTable(tableCls,searchTool));
 
-        if (loadFooter){
-            String urlPath = getUrlPath()+".ftl";
-            model.addAttribute("footerTpl",urlPath);
-        }
+        model.addAttribute("footerTpl",loadFooter);
         return "/table_tpl";
     }
 
-    public static String formView(Object formObj,Model model,boolean loadFooter){
+    public static String formView(Object formObj,Model model,String... loadFooter){
         model.addAttribute("content",parseForm(formObj));
-        if (loadFooter){
-            String urlPath = getUrlPath()+".ftl";
-            model.addAttribute("footerTpl",urlPath);
-        }
+        model.addAttribute("footerTpl",loadFooter);
         return "/form_tpl";
     }
-    public static String formView(Object formObj,Model model){
-        return formView(formObj, model,false);
-    }
+
     protected static String getUrlPath(){
         String requestURI = SpringWebTool.getRequest().getRequestURI();
         return requestURI;

@@ -55,7 +55,9 @@
 ${content!}
 
 <#if footerTpl??>
-    <#include  footerTpl />
+    <#list footerTpl as tpl>
+        <#include tpl/>
+    </#list>
 </#if>
 <script type="text/javascript" src="/jkBuilderInit.js"></script>
 <script type="text/javascript" src="/jkEvent.js"></script>

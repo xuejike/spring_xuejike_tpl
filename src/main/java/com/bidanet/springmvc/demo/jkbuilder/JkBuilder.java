@@ -71,7 +71,7 @@ public class JkBuilder {
         return formFieldInfoList;
     }
 
-    public static String parseTable(Class tableCls,Object searchObj){
+    public static String parseTable(Class tableCls,Object searchObj,String urlParams){
         HashMap<String, Object> map = new HashMap<>();
         JkTable table = AnnotationUtils.findAnnotation(tableCls, JkTable.class);
         if (table==null){
@@ -79,7 +79,12 @@ public class JkBuilder {
         }
         JkDataSource jkDataSource = AnnotationUtils.findAnnotation(tableCls, JkDataSource.class);
         if (jkDataSource!=null){
-            map.put("url",jkDataSource.url());
+            if(urlParams==null){
+                map.put("url",jkDataSource.url());
+            }else{
+                map.put("url",jkDataSource.url()+urlParams);
+            }
+
         }
         Field[] tableField = tableCls.getDeclaredFields();
         ArrayList<List<TableColumnInfo>> headList = new ArrayList<>(2);
@@ -220,9 +225,9 @@ public class JkBuilder {
 
 
 
-    public static String tableView(Class tableCls, Object searchTool, Model model,String... loadFooter)
+    public static String tableView(Class tableCls, Object searchTool, Model model,String urlParams,String... loadFooter)
     {
-        model.addAttribute("content",parseTable(tableCls,searchTool));
+        model.addAttribute("content",parseTable(tableCls,searchTool,urlParams));
 
         model.addAttribute("footerTpl",loadFooter);
         return "/table_tpl";

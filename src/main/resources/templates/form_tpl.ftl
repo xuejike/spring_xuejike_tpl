@@ -61,5 +61,6 @@ ${content!}
 </#if>
 <script type="text/javascript" src="/jkBuilderInit.js"></script>
 <script type="text/javascript" src="/jkEvent.js"></script>
+
 </body>
 </html>

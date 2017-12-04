@@ -81,12 +81,6 @@ function ajaxActionHandle(res) {
             //关闭对话框，且刷新当前tab
             parent.layer.close(index); //再执行关闭
 
-            var ifs=parent.getNowTabIframe();
-            if(ifs.length>0){
-                if(ifs[0].contentWindow.reloadContent){
-                    ifs[0].contentWindow.reloadContent();
-                }
-            }
         }else{
             layui.use(["vip_tab"],function () {
                 vipTab = layui.vip_tab;
@@ -98,6 +92,13 @@ function ajaxActionHandle(res) {
             });
         }
 
+    }
+
+    var ifs=parent.getNowTabIframe();
+    if(ifs.length>0){
+        if(ifs[0].contentWindow.reloadContent){
+            ifs[0].contentWindow.reloadContent();
+        }
     }
 
     //

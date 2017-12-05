@@ -3,6 +3,7 @@ package com.bidanet.springmvc.demo.jkbuilder.type.impl;
 import com.bidanet.springmvc.demo.jkbuilder.annotation.ext.JkTplFormField;
 import com.bidanet.springmvc.demo.jkbuilder.type.AbsBaseFormField;
 import com.bidanet.springmvc.demo.jkbuilder.type.FormFieldInfo;
+import org.apache.commons.lang.StringEscapeUtils;
 
 import java.util.Map;
 import java.util.Random;
@@ -23,6 +24,7 @@ public class TplFormFieldImpl extends AbsBaseFormField {
         }else{
             map.put("tpl",jkTplFormField.value());
         }
+        info.setVal(StringEscapeUtils.escapeJavaScript(String.valueOf(info.getVal())));
 
     }
 

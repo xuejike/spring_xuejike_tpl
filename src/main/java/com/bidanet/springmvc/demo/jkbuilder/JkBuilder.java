@@ -10,6 +10,7 @@ import com.bidanet.springmvc.demo.jkbuilder.type.FormFieldInfo;
 import com.bidanet.springmvc.demo.jkbuilder.type.TableColumnInfo;
 
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.ui.Model;
 
@@ -245,6 +246,7 @@ public class JkBuilder {
     }
 
     public static void main(String[] args){
-
+        String s = StringEscapeUtils.escapeJavaScript("{\"\\}");
+        System.out.println(s);
     }
 }

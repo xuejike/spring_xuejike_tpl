@@ -21,4 +21,12 @@ public class TextFormFieldImpl extends AbsBaseFormField {
             map.put("type",jkTextFormField.value());
         }
     }
+
+    public JkTextFormField getJkTextFormField() {
+        return jkTextFormField;
+    }
+
+    public void setJkTextFormField(JkTextFormField jkTextFormField) {
+        this.jkTextFormField = jkTextFormField;
+    }
 }

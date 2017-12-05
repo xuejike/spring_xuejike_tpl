@@ -50,5 +50,5 @@
     </div>
 </div>
 <script>
-    uploadComponent("${uuid!}","${upload.url()}","${upload.max()}",${formField.val!"[]"})
+    uploadComponent("${uuid!}","${upload.url()}","${upload.max()}",${formField.val!"[]"},"${upload.type()}","${upload.exts()}")
 </script>

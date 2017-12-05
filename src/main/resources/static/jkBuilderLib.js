@@ -201,10 +201,11 @@ function getUrlParams(url) {
 
     return params;
 }
-function uploadComponent(subId,url,max,data) {
+function uploadComponent(subId,url,max,data,type,exts) {
     var uploadFiles={
 
     };
+
     var uploadVue= new Vue({
         el:"#upload_img_"+subId,
         data:{
@@ -238,11 +239,10 @@ function uploadComponent(subId,url,max,data) {
     layui.use(["upload","layer"],function () {
         var upload=layui.upload;
         var layer=layui.layer;
-        //多图片上传
-        upload.render({
+        var obj={
             elem: '#upload_img_btn_'+subId
             ,url: url
-            ,accept:""
+            ,accept:type
             ,multiple: true
             ,before: function(obj){
                 //预读本地文件示例，不支持ie8
@@ -268,6 +268,11 @@ function uploadComponent(subId,url,max,data) {
                 }
 
             }
-        });
+        };
+        if(exts!=""){
+            obj['exts']=exts;
+        }
+        //多图片上传
+        upload.render(obj);
     });
 };

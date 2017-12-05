@@ -1,7 +1,7 @@
 <#include "/libs.ftl"/>
     <label class="layui-form-label">${formField.title!}</label>
     <div class="layui-input-${layout!"block"}">
-        <input type="text" name="${formField.name!}"
+        <input type="${type!"text"}" name="${formField.name!}"
                autocomplete="off"
                 value="${formField.val!}"
                 <@verify verifyInfo=verifyInfo/>

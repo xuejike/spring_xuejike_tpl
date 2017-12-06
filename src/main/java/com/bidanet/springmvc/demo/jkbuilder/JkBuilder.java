@@ -205,7 +205,7 @@ public class JkBuilder {
         if (!jkColumn.templet().isEmpty()){
             tableColumnInfo.setTemplet(jkColumn.templet());
         }
-        if (!jkColumn.width().isEmpty()){
+        if (jkColumn.width()!=0){
             tableColumnInfo.setWidth(jkColumn.width());
         }
         return tableColumnInfo;

@@ -7,7 +7,7 @@ import lombok.Data;
 public class TableColumnInfo {
     private String field;
     private String title;
-    private String width;
+    private Integer width;
     private boolean sort;
     private boolean edit;
     private String event;

@@ -29,7 +29,7 @@ public class AutoCompleteFormFieldImpl extends AbsDataSourceFormField {
         if (info.getVal()!=null){
             if (jkAutoCompleteFormField.type()== AutoCompleteType.remote){
                 for (JkNameValueData data : dataSource) {
-                    if (data.getValue().equals(info.getVal())){
+                    if (data.getValue().equals(String.valueOf(info.getVal()))){
                         return;
                     }
                 }

@@ -62,6 +62,7 @@ public @interface JkColumn {
      * @return
      */
     String templet() default "";
+    String width() default "";
     JkColumnAlign fixed() default JkColumnAlign.none;
 
 }

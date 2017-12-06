@@ -31,6 +31,9 @@
                         <#case "reset">
                             <button type="reset" class="layui-btn ${btn.cssClass()}">${btn.value()!}</button>
                             <#break >
+                        <#case "brBtn">
+                            <br/>
+                            <#break >
                         <#default>
                             <a class="layui-btn tool-btn  ${btn.cssClass()}"
                                lay-filter="toolClick"

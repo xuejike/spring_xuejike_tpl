@@ -24,5 +24,12 @@ public enum JkButtonType {
      * 询问框
      */
     confirm,
-    diy
+    /**
+     * 自定义数据
+     */
+    diy,
+    /**
+     * 换行
+     */
+    brBtn
 }

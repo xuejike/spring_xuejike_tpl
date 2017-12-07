@@ -47,13 +47,15 @@ public class JkBuilder {
 
 
     }
-
-    protected static ArrayList<FormFieldInfo> getFormFieldInfoList(Object obj) {
+    protected static ArrayList<FormFieldInfo> getFormFieldInfoList(Object obj){
+        return getFormFieldInfoList(obj,obj.getClass());
+    }
+    protected static ArrayList<FormFieldInfo> getFormFieldInfoList(Object obj,Class cls) {
         if(obj==null){
             return new ArrayList<FormFieldInfo>(0);
         }
-        Field[] fields = obj.getClass().getDeclaredFields();
-        ArrayList<FormFieldInfo> formFieldInfoList = new ArrayList<>(fields.length);
+        List<Field> fields = getAllField(cls);
+        ArrayList<FormFieldInfo> formFieldInfoList = new ArrayList<>(fields.size());
         try{
             for (Field field : fields) {
                 //填充值
@@ -73,6 +75,7 @@ public class JkBuilder {
     }
 
     public static String parseTable(Class tableCls,Object searchObj,String urlParams){
+
         HashMap<String, Object> map = new HashMap<>();
         JkTable table = AnnotationUtils.findAnnotation(tableCls, JkTable.class);
         if (table==null){
@@ -126,6 +129,8 @@ public class JkBuilder {
 
 
         return FreeMarkerUtils.build("/content/table.ftl",map);
+
+
     }
     protected static FormFieldInfo parseFormField(Field field) throws IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
 
@@ -139,7 +144,7 @@ public class JkBuilder {
             info.setTitle(formField.title());
             info.setAttrs(formField.attrs());
             info.setCssClass(formField.cssClass());
-
+            info.setValCls(field.getType());
 
             //排序
             JkSortIndex jkSortIndex = AnnotationUtils.findAnnotation(field, JkSortIndex.class);
@@ -213,40 +218,41 @@ public class JkBuilder {
 
     protected static List<Field> getAllField(Class cls){
         ArrayList<Field> list = new ArrayList<>();
-        if (cls==null){
-            return list;
-        }
-
-
-        do{
+        while (cls !=Object.class){
             Field[] fields = cls.getDeclaredFields();
             Collections.addAll(list,fields);
             cls=cls.getSuperclass();
-        }while (cls !=null);
-
+        }
         return list;
+
     }
 
 
 
     public static String tableView(Class tableCls, Object searchTool, Model model,String urlParams,String... loadFooter)
     {
-        model.addAttribute("content",parseTable(tableCls,searchTool,urlParams));
 
-        model.addAttribute("footerTpl",loadFooter);
-        return "/table_tpl";
+        return JkTableBuilder.create(tableCls)
+                .addHeaderTool(searchTool).addQueryString(urlParams)
+                .addTplFooters(loadFooter).build(model);
+
+//        model.addAttribute("content",parseTable(tableCls,searchTool,urlParams));
+//
+//        model.addAttribute("footerTpl",loadFooter);
+//        return "/table_tpl";
     }
 
     public static String formView(Object formObj,Model model,String... loadFooter){
-        model.addAttribute("content",parseForm(formObj));
-        model.addAttribute("footerTpl",loadFooter);
-        return "/form_tpl";
+        return JkFormBuilder.create(formObj).addTplFooters(loadFooter).build(model);
+//        return "/form_tpl";
     }
 
     protected static String getUrlPath(){
         String requestURI = SpringWebTool.getRequest().getRequestURI();
         return requestURI;
     }
+
+
 
     public static void main(String[] args){
         String s = StringEscapeUtils.escapeJavaScript("{\"\\}");

@@ -1,10 +1,11 @@
-
+<#include "/libs.ftl"/>
     <label class="layui-form-label">${formField.title!}</label>
     <div class="layui-input-${layout!"block"}">
         <input type="text" name="${formField.name!}"
                id="id_${formField.name!}"
                autocomplete="off"
-               lay-verify="${verify!}"
+                <@verify verifyInfo=verifyInfo/>
+        ${disable!}
                ${formField.getAttrsTpl()}
                 value="${formField.val!}"
                placeholder="${formField.placeholder!}"

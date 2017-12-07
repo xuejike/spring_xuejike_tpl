@@ -5,7 +5,8 @@
         <#if arrayData??>
             <#list arrayData as  val>
                 <input type="radio" name="${formField.name}"
-
+                ${disable!}
+                ${formField.getAttrsTpl()}
                     <#if formField.val??>
                         <#if "${formField.getValString()}" == "${val.getValue()!}"> checked</#if>
                     </#if>

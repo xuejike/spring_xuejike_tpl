@@ -1,9 +1,7 @@
 package com.bidanet.springmvc.demo.jkbuilder.type;
 
 import com.bidanet.springmvc.demo.jkbuilder.FreeMarkerUtils;
-import com.bidanet.springmvc.demo.jkbuilder.annotation.JkPlaceholder;
-import com.bidanet.springmvc.demo.jkbuilder.annotation.JkTitle;
-import com.bidanet.springmvc.demo.jkbuilder.annotation.JkVerify;
+import com.bidanet.springmvc.demo.jkbuilder.annotation.*;
 import com.bidanet.springmvc.demo.jkbuilder.annotation.type.JkVerifyType;
 import lombok.Data;
 
@@ -16,6 +14,9 @@ public abstract class AbsBaseFormField implements FormFieldHtml {
     protected JkPlaceholder jkPlaceholder;
     protected JkTitle jkTitle;
     protected JkVerify jkVerify;
+    protected JkDisable jkDisable;
+    protected JkCssClass jkCssClass;
+    protected JkInputAttrs jkInputAttrs;
 // <input type="hidden" name="" value=""/>
     @Override
     public String html(FormFieldInfo info) {
@@ -36,6 +37,15 @@ public abstract class AbsBaseFormField implements FormFieldHtml {
         map.put("layout",layout);
 
         map.put("verifyInfo",new VerifyInfo(jkVerify));
+        if (jkDisable!=null){
+            map.put("disable","disabled");
+        }
+        if (jkCssClass!=null){
+            info.setCssClass(jkCssClass.value());
+        }
+        if (jkInputAttrs!=null){
+            info.setAttrs(jkInputAttrs.value());
+        }
 
         addExpansionData(info,map);
         return FreeMarkerUtils.build(getTpl(),map);

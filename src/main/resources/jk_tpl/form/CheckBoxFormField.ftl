@@ -5,6 +5,8 @@
         <#if arrayData??>
             <#list arrayData as  val>
                 <input type="checkbox" name="${formField.name}"
+                ${disable!}
+                ${formField.getAttrsTpl()}
                        <#if formField.val??>
                            <#list formField.val as v>
                                 <#if "${v!}" == "${val.getValue()!}">checked</#if>

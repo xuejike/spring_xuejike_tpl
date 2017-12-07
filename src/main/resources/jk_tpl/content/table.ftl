@@ -85,7 +85,12 @@
             , height: vipTable.getFullHeight()    //容器高度
             , cols: ${head!"[[]]"}
             , id: 'dataTable'
-            , url: '${url!}'
+            <#if data??>
+                , data: '${data![]}'
+                <#else>
+                    , url: '${url!}'
+            </#if>
+
             , method: 'post'
             , page: true
             , limits: [30, 60, 90, 150, 300]
@@ -99,6 +104,9 @@
                 ,dataName: 'rows' //数据列表的字段名称，默认：data
             }
             , done: function (res, curr, count) {
+                <#if finishFun??>
+                    ${finishFun}(res, curr, count);
+                </#if>
                 //如果是异步请求数据方式，res即为你接口返回的信息。
                 //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
 //                console.log(res);

@@ -3,6 +3,8 @@
     <div class="layui-input-${layout!"block"}">
         <input type="${type!"text"}" name="${formField.name!}"
                autocomplete="off"
+
+                ${disable!}
                 value="${formField.val!}"
                 <@verify verifyInfo=verifyInfo/>
 

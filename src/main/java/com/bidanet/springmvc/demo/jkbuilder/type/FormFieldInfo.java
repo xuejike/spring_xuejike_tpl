@@ -9,6 +9,7 @@ public class FormFieldInfo {
     private String title;
     private String placeholder;
     private Object val;
+    private Class valCls;
     private String[] cssClass;
     private String[] attrs;
     private int sort;

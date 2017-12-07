@@ -30,4 +30,5 @@ public @interface JkDataSource {
     String arrayDivider() default "-";
     String url() default "";
     Class<? extends JkTypeDataSource> beanCls() default JkTypeDataSource.class;
+
 }

@@ -31,6 +31,7 @@ public @interface JkForm {
      * @return
      */
     String[] attrs() default {};
+    String id() default "jk-form";
 
     /**
      * 按钮定义

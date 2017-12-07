@@ -21,6 +21,7 @@ public class JkFormBuilder {
     private List<FormFieldInfo> formFieldInfoList=new ArrayList<>(1);
     private List<JkButton> btns=new ArrayList<>(1);
     protected JkForm form;
+    private String url;
     private List<String> tplFooterList=new ArrayList<>(1);
 
     private JkFormBuilder(Class formCls, Object obj){
@@ -38,6 +39,7 @@ public class JkFormBuilder {
         if (form ==null){
             throw new JkBuilderException("没有@JkForm注解");
         }
+        url=form.url();
         formFieldInfoList = getFormFieldInfoList(obj,formCls);
         btns.clear();
         Collections.addAll(btns, form.btns());
@@ -94,10 +96,14 @@ public class JkFormBuilder {
         return addForm(obj, null,formCls);
     }
 
+    public void setActionUrl(String url){
+        this.url=url;
+    }
     public String buildTpl(Predicate<FormFieldInfo> filter){
         HashMap<String, Object> map = new HashMap<>(3);
         map.put("form",form);
         map.put("btns",btns);
+        map.put("url",url);
 
         if (filter!=null){
             formFieldInfoList= formFieldInfoList.stream().filter(filter).collect(Collectors.toList());

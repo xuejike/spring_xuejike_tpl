@@ -5,7 +5,7 @@
 </fieldset>
 </#if>
 
-<form class="layui-form" action="${form.url()!}">
+<form class="layui-form" action="${url!}" id="${form.id()}">
     <#list formFieldList as formField>
     <div class="layui-form-item">
         ${formField.type.html(formField)}

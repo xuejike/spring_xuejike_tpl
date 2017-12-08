@@ -25,8 +25,8 @@ public abstract class AbsDataSourceFormField extends AbsBaseFormField {
                 dataSource = JkNameValueDataImpl.parseList(jkDataSource.arrayData(), jkDataSource.arrayDivider());
 
             }else if (jkDataSource.type()== JkSourceType.enumType){
-                Object val = info.getVal();
-                Class<? extends Enum> aClass = (Class<? extends Enum>) val.getClass();
+//                Object val = info.getVal();
+                Class<? extends Enum> aClass = (Class<? extends Enum>) info.getValCls();
                 EnumSet enumSet = EnumSet.allOf(aClass);
                 dataSource = new ArrayList<>(enumSet.size());
                 for (Object o : enumSet) {

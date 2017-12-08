@@ -7,7 +7,7 @@
 
 <form class="layui-form" action="${url!}" id="${form.id()}">
     <#list formFieldList as formField>
-    <div class="layui-form-item">
+    <div class="layui-form-item ${formField.getDivCssTpl()}" ${formField.getDivAttrTpl()}>
         ${formField.type.html(formField)}
     </div>
     </#list>

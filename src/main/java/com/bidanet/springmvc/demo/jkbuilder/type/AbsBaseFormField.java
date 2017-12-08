@@ -17,6 +17,10 @@ public abstract class AbsBaseFormField implements FormFieldHtml {
     protected JkDisable jkDisable;
     protected JkCssClass jkCssClass;
     protected JkInputAttrs jkInputAttrs;
+    protected JkDivAttrs jkDivAttrs;
+    protected JkDivCssClass jkDivCssClass;
+
+
 // <input type="hidden" name="" value=""/>
     @Override
     public String html(FormFieldInfo info) {
@@ -45,6 +49,12 @@ public abstract class AbsBaseFormField implements FormFieldHtml {
         }
         if (jkInputAttrs!=null){
             info.setAttrs(jkInputAttrs.value());
+        }
+        if (jkDivAttrs!=null){
+            info.setDivAttr(jkDivAttrs.value());
+        }
+        if (jkDivCssClass !=null){
+            info.setDivCss(jkDivCssClass.value());
         }
 
         addExpansionData(info,map);

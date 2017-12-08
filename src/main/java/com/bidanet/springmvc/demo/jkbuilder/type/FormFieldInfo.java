@@ -15,27 +15,32 @@ public class FormFieldInfo {
     private int sort;
     private FormFieldHtml type;
 
+    private String[] divCss;
+    private String[] divAttr;
+
     public String getCssClassTpl(){
-        if (cssClass!=null){
+        return getTplString(cssClass);
+    }
+    public String getDivCssTpl(){
+        return getTplString(divCss);
+    }
+    public String getDivAttrTpl(){
+        return getTplString(divAttr);
+    }
+    public String getAttrsTpl(){
+        return getTplString(attrs);
+    }
+
+    private String getTplString(String[] strings){
+        if (strings!=null){
             StringBuilder sb=new StringBuilder(" ");
-            for (String css : cssClass) {
+            for (String css : strings) {
                 sb.append(css).append(" ");
             }
             return sb.toString();
         }
         return "";
     }
-    public String getAttrsTpl(){
-        if (attrs!=null){
-            StringBuffer sb = new StringBuffer(" ");
-            for (String attr : attrs) {
-                sb.append(attr).append(" ");
-            }
-            return sb.toString();
-        }
-        return "";
-    }
-
     public String getValString(){
         return String.valueOf(getVal());
     }

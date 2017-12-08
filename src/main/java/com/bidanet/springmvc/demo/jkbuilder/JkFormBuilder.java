@@ -3,6 +3,7 @@ package com.bidanet.springmvc.demo.jkbuilder;
 import com.bidanet.springmvc.demo.jkbuilder.annotation.JkButton;
 import com.bidanet.springmvc.demo.jkbuilder.annotation.JkForm;
 import com.bidanet.springmvc.demo.jkbuilder.exception.JkBuilderException;
+import com.bidanet.springmvc.demo.jkbuilder.type.FormFieldGroup;
 import com.bidanet.springmvc.demo.jkbuilder.type.FormFieldInfo;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import static com.bidanet.springmvc.demo.jkbuilder.JkBuilder.fieldsGroup;
 import static com.bidanet.springmvc.demo.jkbuilder.JkBuilder.getFormFieldInfoList;
 
 public class JkFormBuilder {
@@ -24,6 +26,7 @@ public class JkFormBuilder {
     protected JkForm form;
     private String url;
     private List<String> tplFooterList=new ArrayList<>(1);
+    protected List<FormFieldGroup> groupList;
 
     private JkFormBuilder(Class formCls, Object obj){
         parseForm(obj, formCls);
@@ -47,6 +50,8 @@ public class JkFormBuilder {
         }
         url=form.url();
         formFieldInfoList = getFormFieldInfoList(obj,formCls);
+
+
         btns.clear();
         Collections.addAll(btns, form.btns());
     }
@@ -59,6 +64,7 @@ public class JkFormBuilder {
      */
     public JkFormBuilder addField(int index,FormFieldInfo formFieldInfo){
         formFieldInfoList.add(index,formFieldInfo);
+
         return this;
     }
 
@@ -82,16 +88,25 @@ public class JkFormBuilder {
         return setForm(obj,obj.getClass());
     }
 
+
+
     /**
      * 添加新Form
      * @param obj 数据对象
      * @param addIndex 新表单插入位置
      * @param formCls 表单类型
+     * @param groupPrefix 分组前缀
      * @return
      */
-    public JkFormBuilder addForm(Object obj,Integer addIndex,Class formCls){
+    public JkFormBuilder addForm(Object obj,Integer addIndex,Class formCls,String groupPrefix){
         List<FormFieldInfo> list = getFormFieldInfoList(obj,formCls);
-
+        if (groupPrefix!=null&&!groupPrefix.isEmpty()){
+            formFieldInfoList.stream().forEach(f->{
+                if (f.getGroupId()!=null){
+                    f.setGroupId(groupPrefix+f.getGroupId());
+                }
+            });
+        }
         if (addIndex==null){
             formFieldInfoList.addAll(list);
         }else{
@@ -99,7 +114,9 @@ public class JkFormBuilder {
         }
         return this;
     }
-
+    public JkFormBuilder addForm(Object obj,Integer addIndex,Class formCls){
+       return addForm(obj, addIndex, formCls,null);
+    }
     /**
      * 添加新Form
      * @param obj 数据对象
@@ -153,6 +170,7 @@ public class JkFormBuilder {
         }
 
         map.put("formFieldList",collect);
+        map.put("groupList", fieldsGroup(formFieldInfoList));
 
         return FreeMarkerUtils.build("/content/form.ftl",map);
     }

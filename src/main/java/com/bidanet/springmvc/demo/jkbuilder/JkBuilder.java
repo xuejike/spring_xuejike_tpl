@@ -5,6 +5,7 @@ import com.bidanet.bdcms.core.common.SpringWebTool;
 import com.bidanet.springmvc.demo.jkbuilder.annotation.*;
 import com.bidanet.springmvc.demo.jkbuilder.annotation.type.JkColumnAlign;
 import com.bidanet.springmvc.demo.jkbuilder.exception.JkBuilderException;
+import com.bidanet.springmvc.demo.jkbuilder.type.FormFieldGroup;
 import com.bidanet.springmvc.demo.jkbuilder.type.FormFieldHtml;
 import com.bidanet.springmvc.demo.jkbuilder.type.FormFieldInfo;
 import com.bidanet.springmvc.demo.jkbuilder.type.TableColumnInfo;
@@ -74,6 +75,44 @@ public class JkBuilder {
         return formFieldInfoList;
     }
 
+    /**
+     * 对字段进行分组
+     * @param fieldInfoList
+     * @return
+     */
+    protected static List<FormFieldGroup> fieldsGroup(List<FormFieldInfo> fieldInfoList){
+        ArrayList<FormFieldGroup> list = new ArrayList<>();
+        HashMap<String, FormFieldGroup> map = new HashMap<>();
+
+        for (FormFieldInfo info : fieldInfoList) {
+            FormFieldGroup nowGroup;
+            if (info.getGroupId()==null||info.getGroupId().isEmpty()){
+                nowGroup=new FormFieldGroup(info.getGroupId(),info);
+                nowGroup.setGroup(info.getGroup());
+                list.add(nowGroup);
+            }else{
+                nowGroup = map.get(info.getGroupId());
+                if (nowGroup==null){
+                    nowGroup=new FormFieldGroup(info.getGroupId(),info);
+                    nowGroup.setGroup(info.getGroup());
+                    list.add(nowGroup);
+                    map.put(info.getGroupId(),nowGroup);
+                }else{
+                    nowGroup.addItem(info);
+                }
+            }
+
+        }
+        list.forEach(group->{
+            if (group.getItems().size()>1){
+                group.getItems().forEach(item->{
+
+                });
+            }
+        });
+        return list;
+
+    }
     public static String parseTable(Class tableCls,Object searchObj,String urlParams){
 
         HashMap<String, Object> map = new HashMap<>();
@@ -145,6 +184,11 @@ public class JkBuilder {
             info.setAttrs(formField.attrs());
             info.setCssClass(formField.cssClass());
             info.setValCls(field.getType());
+            JkFormGroup jkFormGroup = AnnotationUtils.getAnnotation(field, JkFormGroup.class);
+            if (jkFormGroup!=null){
+                info.setGroupId(jkFormGroup.value());
+                info.setGroup(jkFormGroup);
+            }
 
             //排序
             JkSortIndex jkSortIndex = AnnotationUtils.findAnnotation(field, JkSortIndex.class);
@@ -228,7 +272,16 @@ public class JkBuilder {
     }
 
 
-
+    public static String getTplString(String[] strings){
+        if (strings!=null){
+            StringBuilder sb=new StringBuilder(" ");
+            for (String css : strings) {
+                sb.append(css).append(" ");
+            }
+            return sb.toString();
+        }
+        return "";
+    }
     public static String tableView(Class tableCls, Object searchTool, Model model,String urlParams,String... loadFooter)
     {
 

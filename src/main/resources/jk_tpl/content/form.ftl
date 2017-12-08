@@ -1,4 +1,5 @@
 <#-- @ftlvariable name="btn" type="com.bidanet.springmvc.demo.jkbuilder.annotation.JkButton" -->
+<#-- @ftlvariable name="group" type="com.bidanet.springmvc.demo.jkbuilder.type.FormFieldGroup" -->
 <#if form.title()!="">
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
     <legend>${form.title()!}</legend>
@@ -6,11 +7,25 @@
 </#if>
 
 <form class="layui-form" action="${url!}" id="${form.id()}">
-    <#list formFieldList as formField>
-    <div class="layui-form-item ${formField.getDivCssTpl()}" ${formField.getDivAttrTpl()}>
-        ${formField.type.html(formField)}
-    </div>
+    <#list groupList as group>
+             <div class="layui-form-item ${group.getCssClass()}" ${group.getAttrs()} id="${group.id!}">
+
+                 <#list group.items as formField>
+                     <#if group.checkBlock()>
+                         ${formField.type.html(formField)}
+                        <#else>
+                           <div class="layui-inline">
+                            ${formField.type.html(formField,"inline")}
+                           </div>
+
+                     </#if>
+
+                 </#list>
+             </div>
+
     </#list>
+
+
 
         <div class="layui-form-item">
             <div class="layui-input-block">

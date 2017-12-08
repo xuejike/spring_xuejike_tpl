@@ -1,6 +1,9 @@
 package com.bidanet.springmvc.demo.jkbuilder.type;
 
+import com.bidanet.springmvc.demo.jkbuilder.annotation.JkFormGroup;
 import lombok.Data;
+
+import static com.bidanet.springmvc.demo.jkbuilder.JkBuilder.getTplString;
 
 @Data
 public class FormFieldInfo {
@@ -14,33 +17,20 @@ public class FormFieldInfo {
     private String[] attrs;
     private int sort;
     private FormFieldHtml type;
+    private String layout;
 
-    private String[] divCss;
-    private String[] divAttr;
+    private String groupId;
+    private JkFormGroup group;
 
     public String getCssClassTpl(){
         return getTplString(cssClass);
     }
-    public String getDivCssTpl(){
-        return getTplString(divCss);
-    }
-    public String getDivAttrTpl(){
-        return getTplString(divAttr);
-    }
+
     public String getAttrsTpl(){
         return getTplString(attrs);
     }
 
-    private String getTplString(String[] strings){
-        if (strings!=null){
-            StringBuilder sb=new StringBuilder(" ");
-            for (String css : strings) {
-                sb.append(css).append(" ");
-            }
-            return sb.toString();
-        }
-        return "";
-    }
+
     public String getValString(){
         return String.valueOf(getVal());
     }

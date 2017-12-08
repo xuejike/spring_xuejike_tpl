@@ -105,6 +105,7 @@ layui.use(["jquery","form"],function () {
 
 //            $('input').click().focus().val(val)
         })
+        layui.$("select")
     }
 });
 

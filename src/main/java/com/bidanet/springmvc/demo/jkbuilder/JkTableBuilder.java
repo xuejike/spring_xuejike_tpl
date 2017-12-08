@@ -108,7 +108,7 @@ public class JkTableBuilder {
         return this;
     }
     /**
-     * 构建存模板
+     * 构建-生成模板Html代码
      * @return
      */
     public String buildTpl(){
@@ -129,6 +129,11 @@ public class JkTableBuilder {
         return FreeMarkerUtils.build("/content/table.ftl",map);
     }
 
+    /**
+     *构建结合Spring MVC模板生成页面
+     * @param model
+     * @return
+     */
     public String build(Model model){
         model.addAttribute("content",buildTpl());
 
@@ -137,6 +142,11 @@ public class JkTableBuilder {
     }
 
 
+    /**
+     * 设置新的数据URL地址
+     * @param url 新URL地址
+     * @return
+     */
     public JkTableBuilder setUrl(String url){
         this.url=url;
         return this;
@@ -171,16 +181,32 @@ public class JkTableBuilder {
         Collections.addAll(tplFooterList,tplPaths);
         return this;
     }
+
+    /**
+     * 添加 表格上方模板
+     * @param tplPath
+     * @return
+     */
     public JkTableBuilder addTplHeaderTool(String tplPath){
         tplHeaderTool.add(tplPath);
         return this;
     }
 
+    /**
+     * 设置静态数据，当静态数据有效时，URL自动失效
+     * @param data 表格数据
+     * @return
+     */
     public JkTableBuilder setData(List data){
         this.data=data;
         return this;
     }
 
+    /**
+     * 设置表格渲染完成后的回调
+     * @param finishFun
+     * @return
+     */
     public JkTableBuilder setFinishFun(String finishFun) {
         this.finishFun = finishFun;
         return this;

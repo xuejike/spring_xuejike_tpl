@@ -7,6 +7,7 @@ import com.bidanet.springmvc.demo.jkbuilder.type.FormFieldInfo;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.ui.Model;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -34,6 +35,11 @@ public class JkFormBuilder {
         return new JkFormBuilder(formCls,formObj);
     }
 
+    /**
+     * 解析表单
+     * @param obj 数据对象
+     * @param formCls 表单类型
+     */
     private void parseForm(Object obj,Class formCls){
         form = AnnotationUtils.findAnnotation(formCls, JkForm.class);
         if (form ==null){
@@ -47,33 +53,40 @@ public class JkFormBuilder {
 
     /**
      * 添加字段
-     * @param formFieldInfo
+     * @param index 字段位置索引
+     * @param formFieldInfo 字段描述
      * @return
      */
-    public JkFormBuilder addField(FormFieldInfo formFieldInfo){
-        formFieldInfoList.add(formFieldInfo);
+    public JkFormBuilder addField(int index,FormFieldInfo formFieldInfo){
+        formFieldInfoList.add(index,formFieldInfo);
         return this;
     }
 
     /**
-     * 设置新的Form
-     * @param obj
-     * @param formCls
+     * 设置替换为新的Form
+     * @param obj 数据对象
+     * @param formCls 表单类型
      * @return
      */
     public JkFormBuilder setForm(Object obj,Class formCls){
        parseForm(obj, formCls);
        return this;
     }
+
+    /**
+     * 设置替换为新的Form
+     * @param obj 数据对象
+     * @return
+     */
     public JkFormBuilder setForm(Object obj){
         return setForm(obj,obj.getClass());
     }
 
     /**
      * 添加新Form
-     * @param obj
-     * @param addIndex
-     * @param formCls
+     * @param obj 数据对象
+     * @param addIndex 新表单插入位置
+     * @param formCls 表单类型
      * @return
      */
     public JkFormBuilder addForm(Object obj,Integer addIndex,Class formCls){
@@ -86,48 +99,96 @@ public class JkFormBuilder {
         }
         return this;
     }
-    public JkFormBuilder addForm(Object obj,Integer addIndex){
+
+    /**
+     * 添加新Form
+     * @param obj 数据对象
+     * @param addIndex 新表单插入位置
+     * @return
+     */
+    public JkFormBuilder addForm(@NotNull Object obj,Integer addIndex){
         return addForm(obj,addIndex,obj.getClass());
     }
-    public JkFormBuilder addForm(Object obj){
+
+    /**
+     *添加新Form到最下方
+     * @param obj 数据对象
+     * @return
+     */
+    public JkFormBuilder addForm(@NotNull Object obj){
         return addForm(obj,null,obj.getClass());
     }
-    public JkFormBuilder addForm(Object obj,Class formCls){
+
+    /**
+     *添加新Form到最下方
+     * @param obj 数据对象
+     * @param formCls 表单类型
+     * @return
+     */
+    public JkFormBuilder addForm(Object obj,@NotNull Class formCls){
         return addForm(obj, null,formCls);
     }
 
+    /**
+     * 重新设置URL地址
+     * @param url 新URL地址
+     */
     public void setActionUrl(String url){
         this.url=url;
     }
+
+    /**
+     * 构建生成 表单html内容
+     * @param filter 字段过滤器，生成的时候动态去除无效字段
+     * @return
+     */
     public String buildTpl(Predicate<FormFieldInfo> filter){
         HashMap<String, Object> map = new HashMap<>(3);
         map.put("form",form);
         map.put("btns",btns);
         map.put("url",url);
-
+        List<FormFieldInfo> collect=formFieldInfoList;
         if (filter!=null){
-            formFieldInfoList= formFieldInfoList.stream().filter(filter).collect(Collectors.toList());
+            collect= formFieldInfoList.stream().filter(filter).collect(Collectors.toList());
         }
 
-        map.put("formFieldList",formFieldInfoList);
+        map.put("formFieldList",collect);
 
         return FreeMarkerUtils.build("/content/form.ftl",map);
     }
+
+    /**
+     * 构建生成 表单html内容
+     * @return
+     */
     public String buildTpl(){
         return buildTpl(null);
     }
+
+    /**
+     *配合Spring MVC生成HTML模板
+     * @param model
+     * @param filter
+     * @return
+     */
     public String build(Model model,Predicate<FormFieldInfo> filter){
         model.addAttribute("content",buildTpl(filter));
         model.addAttribute("footerTpl",tplFooterList);
         return "/form_tpl";
     }
+
+    /**
+     * 配合Spring MVC生成HTML模板
+     * @param model
+     * @return
+     */
     public String build(Model model){
         return build(model,null);
     }
 
     /**
      * 加底部模板
-     * @param tplPath
+     * @param tplPath 模板路径
      * @return
      */
     public JkFormBuilder addTplFooter(String tplPath){
@@ -137,7 +198,7 @@ public class JkFormBuilder {
 
     /**
      * 加底部模板
-     * @param tplPaths
+     * @param tplPaths 模板路径
      * @return
      */
     public JkFormBuilder addTplFooters(String ... tplPaths){

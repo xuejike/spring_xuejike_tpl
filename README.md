@@ -313,3 +313,191 @@ jkBuilderConfig.event={
 };
 ```
 
+# 4.API文档
+
+## 4.1 表格生成器（JkTableBuilder）
+
+### `private void parseTable(Class tableCls)`
+
+解析表格
+
+ * **Parameters:** `tableCls` — 
+
+### `public JkTableBuilder addHeaderTool(Object headerTool)`
+
+添加头部工具栏
+
+ * **Parameters:** `headerTool` — 
+ * **Returns:** 
+
+### `public String buildTpl()`
+
+构建-生成模板Html代码
+
+ * **Returns:** 
+
+### `public String build(Model model)`
+
+ * **Parameters:** `model` — 
+ * **Returns:** 
+
+### `public JkTableBuilder setUrl(String url)`
+
+设置新的数据URL地址
+
+ * **Parameters:** `url` — 新URL地址
+ * **Returns:** 
+
+### `public JkTableBuilder addQueryString(String queryString)`
+
+添加查询参数
+
+ * **Parameters:** `queryString` — 
+ * **Returns:** 
+
+### `public JkTableBuilder addTplFooter(String tplPath)`
+
+加底部模板
+
+ * **Parameters:** `tplPath` — 
+ * **Returns:** 
+
+### `public JkTableBuilder addTplFooters(String ... tplPaths)`
+
+加底部模板
+
+ * **Parameters:** `tplPaths` — 
+ * **Returns:** 
+
+### `public JkTableBuilder addTplHeaderTool(String tplPath)`
+
+添加 表格上方模板
+
+ * **Parameters:** `tplPath` — 
+ * **Returns:** 
+
+### `public JkTableBuilder setData(List data)`
+
+设置静态数据，当静态数据有效时，URL自动失效
+
+ * **Parameters:** `data` — 表格数据
+ * **Returns:** 
+
+### `public JkTableBuilder setFinishFun(String finishFun)`
+
+设置表格渲染完成后的回调
+
+ * **Parameters:** `finishFun` — 
+ * **Returns:** 
+## 4.2 表单生成器（JkFormBuilder）
+
+### `private void parseForm(Object obj,Class formCls)`
+
+解析表单
+
+ * **Parameters:**
+   * `obj` — 数据对象
+   * `formCls` — 表单类型
+
+### `public JkFormBuilder addField(int index,FormFieldInfo formFieldInfo)`
+
+添加字段
+
+ * **Parameters:**
+   * `index` — 字段位置索引
+   * `formFieldInfo` — 字段描述
+ * **Returns:** 
+
+### `public JkFormBuilder setForm(Object obj,Class formCls)`
+
+设置替换为新的Form
+
+ * **Parameters:**
+   * `obj` — 数据对象
+   * `formCls` — 表单类型
+ * **Returns:** 
+
+### `public JkFormBuilder setForm(Object obj)`
+
+设置替换为新的Form
+
+ * **Parameters:** `obj` — 数据对象
+ * **Returns:** 
+
+### `public JkFormBuilder addForm(Object obj,Integer addIndex,Class formCls)`
+
+添加新Form
+
+ * **Parameters:**
+   * `obj` — 数据对象
+   * `addIndex` — 新表单插入位置
+   * `formCls` — 表单类型
+ * **Returns:** 
+
+### `public JkFormBuilder addForm(@NotNull Object obj,Integer addIndex)`
+
+添加新Form
+
+ * **Parameters:**
+   * `obj` — 数据对象
+   * `addIndex` — 新表单插入位置
+ * **Returns:** 
+
+### `public JkFormBuilder addForm(@NotNull Object obj)`
+
+ * **Parameters:** `obj` — 数据对象
+ * **Returns:** 
+
+### `public JkFormBuilder addForm(Object obj,@NotNull Class formCls)`
+
+ * **Parameters:**
+   * `obj` — 数据对象
+   * `formCls` — 表单类型
+ * **Returns:** 
+
+### `public void setActionUrl(String url)`
+
+重新设置URL地址
+
+ * **Parameters:** `url` — 新URL地址
+
+### `public String buildTpl(Predicate<FormFieldInfo> filter)`
+
+构建生成 表单html内容
+
+ * **Parameters:** `filter` — 字段过滤器，生成的时候动态去除无效字段
+ * **Returns:** 
+
+### `public String buildTpl()`
+
+构建生成 表单html内容
+
+ * **Returns:** 
+
+### `public String build(Model model,Predicate<FormFieldInfo> filter)`
+
+ * **Parameters:**
+   * `model` — 
+   * `filter` — 
+ * **Returns:** 
+
+### `public String build(Model model)`
+
+配合Spring MVC生成HTML模板
+
+ * **Parameters:** `model` — 
+ * **Returns:** 
+
+### `public JkFormBuilder addTplFooter(String tplPath)`
+
+加底部模板
+
+ * **Parameters:** `tplPath` — 模板路径
+ * **Returns:** 
+
+### `public JkFormBuilder addTplFooters(String ... tplPaths)`
+
+加底部模板
+
+ * **Parameters:** `tplPaths` — 模板路径
+ * **Returns:** 

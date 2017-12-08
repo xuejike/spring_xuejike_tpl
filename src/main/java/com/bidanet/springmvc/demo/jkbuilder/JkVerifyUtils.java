@@ -15,6 +15,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.regex.Pattern;
 
 public class JkVerifyUtils {
+    /**
+     * 验证对象
+     * @param obj
+     */
     public static void verify(Object obj){
         if (obj==null){
             throw new CheckException("obj is null");

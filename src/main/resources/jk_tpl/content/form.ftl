@@ -6,7 +6,7 @@
 </fieldset>
 </#if>
 
-<form class="layui-form" action="${url!}" id="${form.id()}">
+<form class="layui-form" action="${url!}" id="${form.id()}" method="post" enctype="multipart/form-data">
     <#list groupList as group>
              <div class="layui-form-item ${group.getCssClass()}" ${group.getAttrs()} id="${group.id!}">
 
@@ -39,7 +39,9 @@
                             <button type="reset" class="layui-btn ${btn.cssClass()}">${btn.value()!}</button>
                         <#break >
                         <#default>
-
+                           <button class="layui-btn  ${btn.cssClass()}" lay-submit="" lay-filter="<#if btn.type()=="diy">${btn.event()}<#else>${btn.type()}</#if>"
+                           data-event="<#if btn.type()=="diy">${btn.event()}<#else>${btn.type()}@${btn.url()}@${btn.option()}</#if>"
+                           >${btn.value()!}</button>
                     </#switch>
                 </#list>
 

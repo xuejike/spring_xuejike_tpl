@@ -19,4 +19,5 @@ public @interface JkCheckBoxFormField {
      */
     String[] value() default {};
     String divider() default "-";
+
 }

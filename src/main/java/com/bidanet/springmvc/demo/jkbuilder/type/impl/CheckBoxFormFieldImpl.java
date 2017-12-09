@@ -7,6 +7,7 @@ import com.bidanet.springmvc.demo.jkbuilder.type.AbsDataSourceFormField;
 import com.bidanet.springmvc.demo.jkbuilder.type.FormFieldInfo;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,6 +33,16 @@ public class CheckBoxFormFieldImpl extends AbsDataSourceFormField {
 
             map.put("arrayData", JkNameValueDataImpl.parseList(value,divider));
 
+        }
+        if (val!=null){
+            if (val.getClass().isArray()){
+
+            }else if (val instanceof Iterable){
+
+            }else if (val instanceof  String){
+                String[] split = ((String) val).split(",");
+                info.setVal(split);
+            }
         }
         super.addExpansionData(info, map);
     }

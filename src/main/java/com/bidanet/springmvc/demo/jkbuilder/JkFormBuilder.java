@@ -150,8 +150,9 @@ public class JkFormBuilder {
      * 重新设置URL地址
      * @param url 新URL地址
      */
-    public void setActionUrl(String url){
+    public JkFormBuilder setActionUrl(String url){
         this.url=url;
+        return this;
     }
 
     /**

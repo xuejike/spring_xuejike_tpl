@@ -5,10 +5,7 @@ import com.bidanet.bdcms.core.common.SpringWebTool;
 import com.bidanet.springmvc.demo.jkbuilder.annotation.*;
 import com.bidanet.springmvc.demo.jkbuilder.annotation.type.JkColumnAlign;
 import com.bidanet.springmvc.demo.jkbuilder.exception.JkBuilderException;
-import com.bidanet.springmvc.demo.jkbuilder.type.FormFieldGroup;
-import com.bidanet.springmvc.demo.jkbuilder.type.FormFieldHtml;
-import com.bidanet.springmvc.demo.jkbuilder.type.FormFieldInfo;
-import com.bidanet.springmvc.demo.jkbuilder.type.TableColumnInfo;
+import com.bidanet.springmvc.demo.jkbuilder.type.*;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringEscapeUtils;
@@ -55,6 +52,8 @@ public class JkBuilder {
         if(obj==null){
             return new ArrayList<FormFieldInfo>(0);
         }
+        JkDisable jkDisable = AnnotationUtils.getAnnotation(cls, JkDisable.class);
+
         List<Field> fields = getAllField(cls);
         ArrayList<FormFieldInfo> formFieldInfoList = new ArrayList<>(fields.size());
         try{
@@ -64,6 +63,11 @@ public class JkBuilder {
                 if (formFieldInfo!=null){
                     formFieldInfo.setVal(PropertyUtils.getProperty(obj,field.getName()));
                     formFieldInfoList.add(formFieldInfo);
+                    if (jkDisable!=null){
+                        if (formFieldInfo.getType() instanceof AbsBaseFormField){
+                            ((AbsBaseFormField) formFieldInfo.getType()).setJkDisable(jkDisable);
+                        }
+                    }
                 }
 
             }

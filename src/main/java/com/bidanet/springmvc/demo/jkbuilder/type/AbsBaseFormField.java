@@ -35,6 +35,9 @@ public abstract class AbsBaseFormField implements FormFieldHtml {
             info.setTitle(jkTitle.value());
         }
 
+        if (info.getVal() instanceof Number){
+            info.setVal(String.valueOf(info.getVal()));
+        }
         map.put("formField",info);
         map.put("layout",layout);
 

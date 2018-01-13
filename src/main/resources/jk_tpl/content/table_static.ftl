@@ -49,18 +49,7 @@
     </form>
 
 
-    <#--<span class="fl">-->
-        <#--<a class="layui-btn layui-btn-danger radius btn-delect" id="btn-delete-all">批量删除</a>-->
-        <#--<a class="layui-btn btn-add btn-default" id="btn-add">添加</a>-->
-        <#--<a class="layui-btn btn-add btn-default" id="btn-refresh"><i class="layui-icon">&#x1002;</i></a>-->
-    <#--</span>-->
-    <#--<span class="fr">-->
-        <#--<span class="layui-form-label">搜索条件：</span>-->
-        <#--<div class="layui-input-inline">-->
-            <#--<input type="text" autocomplete="off" placeholder="请输入搜索条件" class="layui-input">-->
-        <#--</div>-->
-        <#--<button class="layui-btn mgl-20">查询</button>-->
-    <#--</span>-->
+
 </div>
 
 <!-- 表格 -->
@@ -82,10 +71,7 @@
         // 表格渲染
         var tableIns = table.render({
             elem: '#dateTable'                  //指定原始表格元素选择器（推荐id选择器）
-            <#if height??>
-            , height: ${height!"vipTable.getFullHeight()"}
-            </#if>
-
+            , height: vipTable.getFullHeight()
             , cols: ${head!"[[]]"}
             , id: 'dataTable'
             <#if data??>

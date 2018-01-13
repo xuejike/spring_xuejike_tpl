@@ -33,6 +33,7 @@ public class JkTableBuilder {
     private List data;
     private JkButton[] searchBtn;
     private ArrayList<FormFieldInfo> searchList;
+    private String height;
 
     private JkTableBuilder(Class tableCls){
         parseTable(tableCls);
@@ -114,6 +115,24 @@ public class JkTableBuilder {
     public String buildTpl(){
         HashMap<String, Object> map = new HashMap<>();
         map.put("head", JSON.toJSONString(headList));
+        map.put("toolbar",toolMap);
+        map.put("searchBtn",searchBtn);
+        map.put("searchList",searchList);
+        if (data==null){
+            if (url!=null){
+                map.put("url",url+queryString);
+            }
+        }else{
+            map.put("data",JSON.toJSONString(data));
+        }
+        map.put("finishFun",finishFun);
+        map.put("height",height);
+        map.put("tableId",tableId);
+        return FreeMarkerUtils.build("/content/table.ftl",map);
+    }
+    public String buildTable(){
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("head", headList);
         map.put("toolbar",toolMap);
         map.put("searchBtn",searchBtn);
         map.put("searchList",searchList);
@@ -211,4 +230,18 @@ public class JkTableBuilder {
         this.finishFun = finishFun;
         return this;
     }
+    public JkTableBuilder setHeight(String height){
+        this.height="\""+height+"\"";
+        return this;
+    }
+    public JkTableBuilder setHeight(Integer height){
+        this.height=String.valueOf(height);
+        return this;
+    }
+    public JkTableBuilder setHeightFull(){
+        this.height="vipTable.getFullHeight()";
+        return this;
+    }
+
+
 }

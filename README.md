@@ -1,8 +1,4 @@
----
-title: 模板生成器-使用手册
-tags: spring
-grammar_cjkRuby: true
----
+
 # 1.表单生成器
 ```java
 

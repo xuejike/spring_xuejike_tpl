@@ -10,5 +10,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @JkFormField(type = HtmlFormFieldImpl.class)
-public @interface JkHtml {
+public @interface JkHtmlFormField {
 }

@@ -1,3 +1,4 @@
+[![](https://jitpack.io/v/xuejike/spring_xuejike_tpl.svg)](https://jitpack.io/#xuejike/spring_xuejike_tpl)
 
 # 1.表单生成器
 ```java

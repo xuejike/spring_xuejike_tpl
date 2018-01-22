@@ -1,1 +1,5 @@
-rootProject.name = 'spring_tpl_builder'
+rootProject.name = 'demo'
+include "demo"
+include 'tpl_core'
+include 'theme_layui'
+

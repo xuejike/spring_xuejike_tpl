@@ -1,0 +1,32 @@
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+repositories {
+    maven { url 'http://maven.aliyun.com/nexus/content/repositories/central/'}
+    maven { url "http://repo.maven.apache.org/maven2" }
+    maven { url "https://jitpack.io" }
+    maven { url "https://jcenter.bintray.com" }
+}
+
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version:'1.5.4.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-configuration-processor', version:'1.5.4.RELEASE'
+    compile group: 'org.slf4j', name: 'slf4j-api', version:'1.7.25'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'1.5.4.RELEASE'
+    compile group: 'com.google.guava', name: 'guava', version:'18.0'
+    compile group: 'org.freemarker', name: 'freemarker', version:'2.3.26-incubating'
+//    compile group: 'com.github.xuejike', name: 'bd_framework_core', version:'v0.1.5.6_starter'
+    compile(group: 'commons-beanutils', name: 'commons-beanutils', version:'1.9.3') {
+        exclude(module: 'commons-logging')
+    }
+    compile group: 'commons-codec', name: 'commons-codec', version:'1.10'
+    compile group: 'commons-lang', name: 'commons-lang', version:'2.6'
+    compile(group: 'org.projectlombok', name: 'lombok', version:'1.16.18')
+    compile 'com.alibaba:fastjson:1.2.44'
+//        testCompile group: 'junit', name: 'junit', version: '4.12'
+}

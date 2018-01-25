@@ -1,17 +1,15 @@
 package com.bidanet.springmvc.demo.jkbuilder.type.impl;
 
-import com.bidanet.springmvc.demo.jkbuilder.annotation.JkTplTypeRegister;
+import com.bidanet.springmvc.demo.jkbuilder.annotation.core.JkTplTypeRegister;
 import com.bidanet.springmvc.demo.jkbuilder.annotation.ext.JkAutoCompleteFormField;
 import com.bidanet.springmvc.demo.jkbuilder.annotation.type.AutoCompleteType;
 import com.bidanet.springmvc.demo.jkbuilder.config.TplConfig;
 import com.bidanet.springmvc.demo.jkbuilder.data.JkNameValueData;
-import com.bidanet.springmvc.demo.jkbuilder.type.AbsBaseFormField;
 import com.bidanet.springmvc.demo.jkbuilder.type.AbsDataSourceFormField;
 import com.bidanet.springmvc.demo.jkbuilder.type.FormFieldInfo;
 import com.bidanet.springmvc.demo.jkbuilder.type.JkTypeDataSource;
 import lombok.Data;
 
-import java.util.List;
 import java.util.Map;
 
 @Data

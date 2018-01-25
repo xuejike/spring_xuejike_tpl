@@ -1,4 +1,6 @@
-package com.bidanet.springmvc.demo.jkbuilder.annotation;
+package com.bidanet.springmvc.demo.jkbuilder.annotation.core;
+
+import org.springframework.stereotype.Component;
 
 import java.lang.annotation.*;
 
@@ -8,6 +10,7 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
+@Component
 public @interface JkTplTypeRegister {
-    Class value();
+    Class<? extends Annotation> value();
 }

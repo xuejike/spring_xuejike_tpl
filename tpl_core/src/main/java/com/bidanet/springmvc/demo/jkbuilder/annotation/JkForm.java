@@ -1,5 +1,6 @@
 package com.bidanet.springmvc.demo.jkbuilder.annotation;
 
+import com.bidanet.springmvc.demo.jkbuilder.annotation.core.JkTplTag;
 import com.bidanet.springmvc.demo.jkbuilder.annotation.type.JkButtonType;
 
 import java.lang.annotation.*;
@@ -7,6 +8,7 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
+@JkTplTag
 public @interface JkForm {
     /**
      * form表单请求地址

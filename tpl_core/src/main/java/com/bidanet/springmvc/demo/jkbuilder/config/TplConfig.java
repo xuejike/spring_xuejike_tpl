@@ -22,7 +22,7 @@ import java.util.List;
 
 @Configuration
 @Slf4j
-public class TplConfig implements BeanFactoryAware, ImportBeanDefinitionRegistrar, ResourceLoaderAware {
+public class TplConfig implements BeanFactoryAware {
 
     public static<T> T getBean(Class<T> cls){
         if (beanFactory!=null){
@@ -35,42 +35,11 @@ public class TplConfig implements BeanFactoryAware, ImportBeanDefinitionRegistra
     private ResourceLoader resourceLoader;
     @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-        this.beanFactory = beanFactory;
+        TplConfig.beanFactory = beanFactory;
 
 
     }
 
-    @Override
-    public void setResourceLoader(ResourceLoader resourceLoader) {
-        this.resourceLoader = resourceLoader;
 
-    }
-
-    @Override
-    public void registerBeanDefinitions(AnnotationMetadata annotationMetadata, BeanDefinitionRegistry beanDefinitionRegistry) {
-        TplTypeRegisterScan scanner = new TplTypeRegisterScan(beanDefinitionRegistry);
-
-
-        if (this.resourceLoader != null) {
-            scanner.setResourceLoader(this.resourceLoader);
-        }
-        List<String> packages = new ArrayList<>();
-        try {
-            packages = AutoConfigurationPackages.get(this.beanFactory);
-            if (log.isDebugEnabled()) {
-                for (String pkg : packages) {
-                    log.debug("客户端扫描包:{}", pkg);
-                }
-            }
-
-        } catch (Exception ex) {
-            log.debug("无法获取到AutoConfig基础包", ex);
-            packages.add("com");
-        }
-
-        scanner.doScan(StringUtils.toStringArray(packages));
-
-
-    }
 
 }

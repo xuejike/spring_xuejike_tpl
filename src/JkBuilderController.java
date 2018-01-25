@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@RequestMapping("/jkBuilder")
+//@RequestMapping("/jkBuilder")
 public class JkBuilderController {
 
 

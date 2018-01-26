@@ -1,6 +1,8 @@
 package com.github.xuejike.tpl.demo.controller;
 
 import com.bidanet.springmvc.demo.jkbuilder.JkTplBuilder;
+import com.bidanet.springmvc.demo.jkbuilder.core.JkTplViewBeanParser;
+import com.bidanet.springmvc.demo.jkbuilder.model.JkInfo;
 import com.github.xuejike.tpl.demo.controller.view.FormView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,8 @@ public class HomeController {
         FormView formView = new FormView();
         formView.setTl("123456");
         formView.setDate(new Date());
-        return JkTplBuilder.build(formView);
+
+        return JkTplBuilder.create(formView)
+                .addParse(formView.getClass(),formView).build();
     }
 }

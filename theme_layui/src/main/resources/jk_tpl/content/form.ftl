@@ -1,5 +1,4 @@
-<#-- @ftlvariable name="btn" type="com.bidanet.springmvc.demo.JkButton" -->
-<#-- @ftlvariable name="group" type="com.bidanet.springmvc.demo.FormFieldGroup" -->
+
 <#if form.title()!="">
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
     <legend>${form.title()!}</legend>

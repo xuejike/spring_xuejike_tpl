@@ -10,4 +10,6 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile project(":tpl_core")
+    compile(group: 'org.projectlombok', name: 'lombok', version:'1.16.18')
 }

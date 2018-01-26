@@ -12,7 +12,9 @@ import java.io.OutputStreamWriter;
 import java.util.Map;
 
 /**
- * Created by xuejike on 2017/7/19.
+ *FreeMarker 模板工具类
+ * @author xuejike
+ * @date 2017/7/19
  */
 public class FreeMarkerUtils {
 
@@ -22,7 +24,7 @@ public class FreeMarkerUtils {
         configuration = new Configuration(Configuration.VERSION_2_3_22);
         try {
 
-            configuration.setClassForTemplateLoading(FreeMarkerUtils.class,"/jk_tpl");
+            configuration.setClassForTemplateLoading(FreeMarkerUtils.class,"/");
             configuration.setObjectWrapper(new DefaultObjectWrapper(Configuration.VERSION_2_3_22));
 
         } catch (Exception e) {

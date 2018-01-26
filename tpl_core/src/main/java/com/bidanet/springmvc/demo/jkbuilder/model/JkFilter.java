@@ -3,11 +3,7 @@ package com.bidanet.springmvc.demo.jkbuilder.model;
 import java.lang.annotation.Annotation;
 import java.util.Set;
 
-/**
- * 类型注解过滤器
- * @param <T>
- */
-public interface JkAnnotationFilter<T extends JkInfo> {
+public interface JkFilter<T extends JkInfo> {
     /**
      * 过滤器
      * @param info
@@ -15,9 +11,8 @@ public interface JkAnnotationFilter<T extends JkInfo> {
     void doFilter(T info);
 
     /**
-     * 执行的方法
-     * @param cls
+     * 过滤支持的注解
      * @return
      */
-    Set<Annotation> supportSet(Class cls);
+    Set<Class> getSupportSet();
 }

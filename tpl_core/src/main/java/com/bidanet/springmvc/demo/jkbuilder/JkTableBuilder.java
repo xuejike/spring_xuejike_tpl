@@ -3,7 +3,7 @@ package com.bidanet.springmvc.demo.jkbuilder;
 import com.alibaba.fastjson.JSON;
 import com.bidanet.springmvc.demo.jkbuilder.annotation.*;
 import com.bidanet.springmvc.demo.jkbuilder.annotation.type.JkColumnAlign;
-import com.bidanet.springmvc.demo.jkbuilder.exception.JkBuilderException;
+import com.bidanet.springmvc.demo.jkbuilder.exception.JkParserException;
 import com.bidanet.springmvc.demo.jkbuilder.type.FormFieldInfo;
 import com.bidanet.springmvc.demo.jkbuilder.type.TableColumnInfo;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -53,7 +53,7 @@ public class JkTableBuilder {
         //解析头
         JkTable table = AnnotationUtils.findAnnotation(tableCls, JkTable.class);
         if (table==null){
-            throw new JkBuilderException("JkTable 注解未发现");
+            throw new JkParserException("JkTable 注解未发现");
         }
         tableId=table.id();
         JkDataSource jkDataSource = AnnotationUtils.findAnnotation(tableCls, JkDataSource.class);
@@ -104,7 +104,7 @@ public class JkTableBuilder {
             searchList = getFormFieldInfoList(headerTool);
 
         }else{
-            throw new JkBuilderException("缺少 JkForm 注解");
+            throw new JkParserException("缺少 JkForm 注解");
         }
         return this;
     }

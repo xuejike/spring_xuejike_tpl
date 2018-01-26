@@ -2,7 +2,7 @@ package com.bidanet.springmvc.demo.jkbuilder;
 
 import com.bidanet.springmvc.demo.jkbuilder.annotation.JkButton;
 import com.bidanet.springmvc.demo.jkbuilder.annotation.JkForm;
-import com.bidanet.springmvc.demo.jkbuilder.exception.JkBuilderException;
+import com.bidanet.springmvc.demo.jkbuilder.exception.JkParserException;
 import com.bidanet.springmvc.demo.jkbuilder.type.FormFieldGroup;
 import com.bidanet.springmvc.demo.jkbuilder.type.FormFieldInfo;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -46,7 +46,7 @@ public class JkFormBuilder {
     private void parseForm(Object obj,Class formCls){
         form = AnnotationUtils.findAnnotation(formCls, JkForm.class);
         if (form ==null){
-            throw new JkBuilderException("没有@JkForm注解");
+            throw new JkParserException("没有@JkForm注解");
         }
         url=form.url();
         formFieldInfoList = getFormFieldInfoList(obj,formCls);

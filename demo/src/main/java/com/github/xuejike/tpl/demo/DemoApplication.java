@@ -5,7 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan({"com.github.xuejike.tpl.demo","com.bidanet.springmvc.demo.jkbuilder"})
+@ComponentScan({"com.github.xuejike.tpl.demo"
+		,"com.bidanet.springmvc.demo.jkbuilder"
+		,"vip.xuejike.jktpl.layui"})
 public class DemoApplication {
 
 

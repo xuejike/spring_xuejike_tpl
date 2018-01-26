@@ -4,8 +4,7 @@ import com.alibaba.fastjson.JSON;
 
 import com.bidanet.springmvc.demo.jkbuilder.annotation.*;
 import com.bidanet.springmvc.demo.jkbuilder.annotation.type.JkColumnAlign;
-import com.bidanet.springmvc.demo.jkbuilder.config.TplConfig;
-import com.bidanet.springmvc.demo.jkbuilder.exception.JkBuilderException;
+import com.bidanet.springmvc.demo.jkbuilder.exception.JkParserException;
 import com.bidanet.springmvc.demo.jkbuilder.type.*;
 
 import org.apache.commons.beanutils.PropertyUtils;
@@ -32,7 +31,7 @@ public class JkBuilder {
     public static String parseForm(Object obj)  {
         JkForm form = AnnotationUtils.findAnnotation(obj.getClass(), JkForm.class);
         if (form==null){
-            throw new JkBuilderException("没有JkForm注解");
+            throw new JkParserException("没有JkForm注解");
         }
         ArrayList<FormFieldInfo> formFieldInfoList = getFormFieldInfoList(obj);
 
@@ -73,7 +72,7 @@ public class JkBuilder {
 
             }
         }catch (Exception ex){
-            throw new JkBuilderException("解析数据异常",ex);
+            throw new JkParserException("解析数据异常",ex);
         }
 
         formFieldInfoList.sort((o1, o2) -> o1.getSort()-o2.getSort());
@@ -123,7 +122,7 @@ public class JkBuilder {
         HashMap<String, Object> map = new HashMap<>();
         JkTable table = AnnotationUtils.findAnnotation(tableCls, JkTable.class);
         if (table==null){
-            throw new JkBuilderException("JkTable 注解未发现");
+            throw new JkParserException("JkTable 注解未发现");
         }
         JkDataSource jkDataSource = AnnotationUtils.findAnnotation(tableCls, JkDataSource.class);
         if (jkDataSource!=null){

@@ -1,5 +1,4 @@
-package com.bidanet.springmvc.demo.jkbuilder.annotation;
-
+package vip.xuejike.jktpl.layui.anno;
 
 import com.bidanet.springmvc.demo.jkbuilder.annotation.core.JkInfoTag;
 
@@ -9,8 +8,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @JkInfoTag
-public @interface JkFormGroup {
-    String value() default "";
-    String[] cssClass() default {};
-    String[] attrs() default {};
+public @interface LongDate {
 }

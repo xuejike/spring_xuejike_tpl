@@ -33,7 +33,7 @@ import java.util.Map;
 @Component
 @Slf4j
 public class TplTypeRegisterManage {
-    HashMap<Class<? extends Annotation>,List<JkTplText>> tagsMap;
+    HashMap<Class<? extends Annotation>,List<JkTplText>> tagsMap=new HashMap<>();
 
     @EventListener(ContextRefreshedEvent.class)
     public void register(ContextRefreshedEvent contextRefreshedEvent){
@@ -56,5 +56,14 @@ public class TplTypeRegisterManage {
         }
         list.add(tplText);
     }
+    public JkTplText getTplText(Class<? extends Annotation> annotation){
+        List<JkTplText> list = tagsMap.get(annotation);
+        if (list!=null&&list.size()>0){
+            return list.get(0);
+        }
+        return null;
+    }
+
+
 
 }

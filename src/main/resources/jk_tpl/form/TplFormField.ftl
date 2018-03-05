@@ -1,7 +1,7 @@
 <#include "/libs.ftl"/>
 <label class="layui-form-label">${formField.title!}</label>
 <div class="layui-input-${layout!"block"}">
-    <div id="${divId!}" data-tpl="${tpl!}" data-name="${formField.name!}" data-value="${formField.val!}">
+    <div id="${divId!}" data-tpl="${tpl!}">
 
     </div>
     <script>

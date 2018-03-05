@@ -16,7 +16,9 @@
                         <i class="layui-icon jk-remove" v-on:click="remove(index)">&#x1007;</i>
 
                         <i v-if="file.status =='loading'" class="layui-icon jk-upload layui-anim layui-anim-rotate layui-anim-loop">&#xe63d;</i>
-                        <img v-if="file.status =='finish'" v-bind:src="file.url" v-bind:alt="file.filename"/>
+                        <img v-if="file.status =='finish'"
+                             style="width: 100px;height: 100px"
+                             v-bind:src="file.url" v-bind:alt="file.filename"/>
 
                     </span>
 

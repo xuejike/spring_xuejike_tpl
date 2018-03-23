@@ -106,6 +106,10 @@
                 ,countName: 'total' //数据总数的字段名称，默认：count
                 ,dataName: 'rows' //数据列表的字段名称，默认：data
             }
+            ,request: {
+                pageName: 'pageCurrent' //页码的参数名称，默认：page
+                ,limitName: 'pageSize' //每页数据量的参数名，默认：limit
+            }
             , done: function (res, curr, count) {
                 <#if finishFun??>
                     ${finishFun}(res, curr, count);

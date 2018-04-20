@@ -33,14 +33,19 @@
 
                     <#switch btn.type()>
                         <#case "submit">
-                            <button class="layui-btn ${btn.cssClass()}" lay-submit="" lay-filter="ajax_submit">${btn.value()!}</button>
+                            <button class="layui-btn ${btn.cssClass()}"
+                            lay-submit="" lay-filter="ajax_submit">${btn.value()!}</button>
                         <#break>
                         <#case "reset">
                             <button type="reset" class="layui-btn ${btn.cssClass()}">${btn.value()!}</button>
                         <#break >
                         <#default>
-                           <button class="layui-btn  ${btn.cssClass()}" lay-submit="" lay-filter="<#if btn.type()=="diy">${btn.event()}<#else>${btn.type()}</#if>"
+                           <button class="layui-btn  ${btn.cssClass()}"
+                           lay-submit=""
+                           lay-filter="<#if btn.type()=="diy">${btn.event()}
+                           <#else>${btn.type()}</#if>"
                            data-event="<#if btn.type()=="diy">${btn.event()}<#else>${btn.type()}@${btn.url()}@${btn.option()}</#if>"
+
                            >${btn.value()!}</button>
                     </#switch>
                 </#list>

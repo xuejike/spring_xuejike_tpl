@@ -276,3 +276,16 @@ function uploadComponent(subId,url,max,data,type,exts) {
         upload.render(obj);
     });
 };
+
+function initDateInput(id) {
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+        var date=layui.$(id);
+        var ext=date.attr("lay-data");
+        var config=layui.$.parseJSON(ext);
+        config["elem"]=id;
+        //执行一个laydate实例
+        laydate.render(config);
+    });
+}

@@ -10,8 +10,8 @@ import java.util.List;
  */
 @Data
 public class JkNameValueDataImpl implements JkNameValueData {
-    private String name;
-    private String value;
+    public String name;
+    public String value;
 
     public JkNameValueDataImpl(String name, String value) {
         this.name = name;

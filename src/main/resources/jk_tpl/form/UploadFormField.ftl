@@ -4,7 +4,8 @@
 <div class="layui-input-block" id="upload_img_${uuid!}">
     <div class="layui-upload">
         <#if !disable??>
-            <button type="button" class="layui-btn" id="upload_img_btn_${uuid!}">${upload.btn()}</button>
+            <button type="button" class="layui-btn" id="upload_img_btn_${uuid!}">
+                ${upload.btn()}</button>
         </#if>
 
         <input type="hidden" v-model="filejson" name="${formField.name!}"/>
@@ -43,9 +44,7 @@
                                 </td>
                                 <td>
                                     <a target="_blank" v-bind:href="file.url" class="layui-btn" >下载</a>
-                <#if !disable??>
-                    <a class="layui-btn layui-btn-warm" v-on:click="remove(index)">删除</a>
-                </#if>
+                                    <a class="layui-btn layui-btn-warm" v-on:click="remove(index)">删除</a>
 
                                 </td>
                             </tr>

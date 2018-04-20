@@ -14,6 +14,7 @@
 <#include "body_js_tpl.ftl"/>
 ${content!}
 
+
 <script type="text/javascript" src="/jkBuilder.js"></script>
 </body>
 </html>

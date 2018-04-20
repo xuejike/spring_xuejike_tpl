@@ -278,14 +278,63 @@ function uploadComponent(subId,url,max,data,type,exts) {
 };
 
 function initDateInput(id) {
-    layui.use('laydate', function(){
+    layui.use(['laydate',"jquery"], function(){
         var laydate = layui.laydate;
 
-        var date=layui.$(id);
-        var ext=date.attr("lay-data");
-        var config=layui.$.parseJSON(ext);
+
+        var config=getLayuiDomConfig(id);
         config["elem"]=id;
         //执行一个laydate实例
         laydate.render(config);
     });
+}
+function initPage(id) {
+    layui.use(['laypage',"jquery"], function(){
+        var laypage = layui.laypage;
+        var config=getLayuiDomConfig("#"+id);
+        config["elem"]=id;
+        //执行一个laypage实例
+        if(!config["jump"]){
+            config["jump"]=function (obj, first) {
+                if(!first){
+                    var params=getQueryString();
+                    params["pageNo"]=obj.curr;
+                    params["pageSize"]=obj.limit;
+                    var url=window.location.pathname+"?";
+                    for(var k in params){
+                        url+=k+"="+params[k]+"&"
+                    }
+                    window.location.href=url;
+
+                }
+            }
+        }
+        laypage.render(config);
+    });
+}
+function getLayuiDomConfig(id) {
+    var date=layui.$(id);
+    var ext=date.attr("lay-data");
+    var config={};
+    if(ext!=undefined&&ext!=""){
+        config=layui.$.parseJSON(ext);
+    }
+    return config;
+}
+function getQueryString() {
+    var qs = location.search.substr(1), // 获取url中"?"符后的字串
+        args = {}, // 保存参数数据的对象
+        items = qs.length ? qs.split("&") : [], // 取得每一个参数项,
+        item = null,
+        len = items.length;
+
+    for(var i = 0; i < len; i++) {
+        item = items[i].split("=");
+        var name = decodeURIComponent(item[0]),
+            value = decodeURIComponent(item[1]);
+        if(name) {
+            args[name] = value;
+        }
+    }
+    return args;
 }

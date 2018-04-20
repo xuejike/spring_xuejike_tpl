@@ -417,7 +417,8 @@ enum class JkButtonType{
     brBtn
 }
 //-----------------表单部分结束---------------------------
-fun <T>FlowContent.jkTable(headNames:LinkedHashMap<String, JkTableCol<T>>,dataList:ArrayList<T>){
+fun <T>FlowContent.jkTable(headNames:LinkedHashMap<String, JkTableCol<T>>
+                           ,dataList:List<T>){
 
 
     table {

@@ -51,6 +51,10 @@ class TestFormView: FormJkKtView() {
                          classes+="layui-btn"
                          text("百度")
                      }
+                     jkButton(type = JkButtonType.dialog.name,
+                             url = "http://www.baidu.com") {
+                         attributes["style"]="width:200px"
+                     }
                  }
          ),dataList = listData)
          jkPage(1,100)

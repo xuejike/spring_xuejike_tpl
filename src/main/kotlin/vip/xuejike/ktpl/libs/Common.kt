@@ -344,9 +344,16 @@ fun FlowContent.jkUpload(title: String="",
     }
 }
 fun FlowContent.jkButton(title:String="按钮",
+                         aLink:Boolean=false,
                          type:String=JkButtonType.submit.name
                          ,event:String="",url:String=""
-                         ,option:Map<String,Any>?=null){
+                         ,option:Map<String,Any>?=null,block: BUTTON.() -> Unit={}){
+
+    if (aLink){
+        a{
+
+        }
+    }
     button {
 
         var map= HashMap<String,String>();
@@ -422,7 +429,7 @@ fun <T>FlowContent.jkTable(headNames:LinkedHashMap<String, JkTableCol<T>>
 
 
     table {
-        classes+="layui-table"
+        classes+="layui-table jk-table"
         thead {
             tr{
                 for (head in headNames){

@@ -111,6 +111,50 @@ function getLayer() {
     }
 }
 // event  action@url@option
+function btnEvent(event) {
+
+    var tagIndex= event.indexOf("@");
+    if(tagIndex>=0){
+        var eventArgs= event.split("@");
+        var action= eventArgs[0];
+        var option="";
+        var url=eventArgs[1];
+
+
+        if(eventArgs.length>=3){
+            eval("option="+eventArgs[2])
+        }
+        switch (action){
+            case "tab":
+                openTab(url,option["title"]);
+                return;
+            case "dialog":
+                openUrlDialog(url,option);
+                return;
+            case "doAjax":
+                ajaxPost(url,{});
+                return;
+            case "windows":
+                window.open(url);
+                return;
+            case "confirm":
+                getLayer().confirm(option, {icon: 3, title:'提示'}, function(index){
+                    //do something
+                    ajaxPost(url,{});
+                    layer.close(index);
+                });
+                return;
+            default:
+
+        }
+    }
+
+    if(jkBuilderConfig.event[event]){
+        jkBuilderConfig.event[event](event,data,row);
+    }else{
+        console.log("没有处理方法:"+event);
+    }
+}
 function tableToolAction(event, data,row) {
 
     var tagIndex= event.indexOf("@");

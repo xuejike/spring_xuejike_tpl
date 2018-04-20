@@ -7,6 +7,15 @@ layui.use(["jquery","layer"],function () {
         e.preventDefault();
     });
 
+
+    layui.$(".jk-table button").on("click",function (e) {
+        // alert("ss")
+        var evn=$(e.currentTarget).attr("data-event");
+        if(evn){
+            btnEvent(evn)
+        }
+
+    });
     layui.$(document).on("click",".jk-btn[lay-filter=dialog]",function (e) {
         var dom=$(e.currentTarget);
         var width= dom.data("width");
@@ -122,3 +131,4 @@ layui.use(['form'], function(){
         return false;
     });
 });
+

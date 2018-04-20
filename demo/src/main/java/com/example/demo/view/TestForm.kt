@@ -42,7 +42,7 @@ class TestFormView: FormJkKtView() {
          }
 
          jkTable(linkedMapOf(
-                 "用户名" to JkTableCol(){
+                 "用户名" to JkTableCol(attrsCall = { mapOf("width" to "450px")}){
                      img { src="http://www.baidu.com/img/bd_logo1.png" }
                  },
                  "操作" to JkTableCol{

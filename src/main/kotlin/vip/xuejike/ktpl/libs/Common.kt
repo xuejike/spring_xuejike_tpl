@@ -437,6 +437,7 @@ fun <T>FlowContent.jkTable(headNames:LinkedHashMap<String, JkTableCol<T>>
                 tr {
                     for(head in headNames){
                         td {
+
                             if(head.value.value!=null){
                                 when(head.value.value){
                                     is KProperty1<*,*>->{
@@ -452,11 +453,14 @@ fun <T>FlowContent.jkTable(headNames:LinkedHashMap<String, JkTableCol<T>>
                                         text(head.value.value.toString())
                                     }
                                 }
-
-
-//                            this.text()
                             }
+                            var map=head.value.attrsCall(item);
+                            if(map!=null){
+                                attributes.putAll(map);
+                            }
+
                             head.value.call(item)
+
                         }
 
 
@@ -468,6 +472,7 @@ fun <T>FlowContent.jkTable(headNames:LinkedHashMap<String, JkTableCol<T>>
     }
 }
 data class JkTableCol<T>(var value:Any?=null,
+                         var attrsCall:(T)->Map<String,String>?={null},
                       var call:(T)->Unit={})
 
 fun FlowContent.jkPage(pageNo:Int,count:Int,limit:Int=30,block:(Map<String,Any>) -> Unit={}){

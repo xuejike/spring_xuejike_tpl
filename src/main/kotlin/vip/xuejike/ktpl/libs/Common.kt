@@ -456,7 +456,7 @@ fun <T>FlowContent.jkTable(headNames:LinkedHashMap<String, JkTableCol<T>>
 
 //                            this.text()
                             }
-                            head.value.call(this)
+                            head.value.call(item)
                         }
 
 
@@ -468,7 +468,7 @@ fun <T>FlowContent.jkTable(headNames:LinkedHashMap<String, JkTableCol<T>>
     }
 }
 data class JkTableCol<T>(var value:Any?=null,
-                      var call:(TD)->Unit={})
+                      var call:(T)->Unit={})
 
 fun FlowContent.jkPage(pageNo:Int,count:Int,limit:Int=30,block:(Map<String,Any>) -> Unit={}){
     var uuid=UUID.randomUUID().toString();

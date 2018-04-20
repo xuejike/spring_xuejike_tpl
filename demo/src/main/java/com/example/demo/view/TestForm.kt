@@ -3,10 +3,10 @@ package com.example.demo.view
 import com.bidanet.springmvc.demo.jkbuilder.data.JkNameValueDataImpl
 import kotlinx.html.*
 import kotlinx.html.stream.createHTML
-import vip.xuejike.ktpl.FormJkKtView
+import vip.xuejike.ktpl.PageJkKtView
 import vip.xuejike.ktpl.libs.*
 
-class TestFormView: FormJkKtView() {
+class TestFormView: PageJkKtView() {
     var vo:TestModel?=null;
 
     override fun content(): String {

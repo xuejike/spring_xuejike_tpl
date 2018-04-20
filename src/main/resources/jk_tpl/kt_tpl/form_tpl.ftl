@@ -9,12 +9,13 @@
     <title>${title!}</title>
     <#include "head_css_tpl.ftl"/>
 
+    ${head!""}
 </head>
 <body class="body">
 <#include "body_js_tpl.ftl"/>
 ${content!}
 
 <script type="text/javascript" src="/jkBuilderInit.js"></script>
-
+${footer!""}
 </body>
 </html>

@@ -8,10 +8,13 @@ layui.use(["jquery","layer"],function () {
     });
 
 
-    layui.$(".layui-table button").on("click",function (e) {
+    layui.$(".jk-table button").on("click",function (e) {
         // alert("ss")
         var evn=$(e.currentTarget).attr("data-event");
-        btnEvent(evn)
+        if(evn){
+            btnEvent(evn)
+        }
+
     });
     layui.$(document).on("click",".jk-btn[lay-filter=dialog]",function (e) {
         var dom=$(e.currentTarget);

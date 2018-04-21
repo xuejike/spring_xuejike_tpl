@@ -347,11 +347,20 @@ fun FlowContent.jkButton(title:String="按钮",
                          aLink:Boolean=false,
                          type:String=JkButtonType.submit.name
                          ,event:String="",url:String=""
-                         ,option:Map<String,Any>?=null,block: BUTTON.() -> Unit={}){
+                         ,option:Map<String,Any>?=null,
+                         block: BUTTON.() -> Unit={}){
 
     if (aLink){
         a{
+            href=url;
+            var mp=mapOf("lay-filter" to type,
+                    "data-width" to option?.get("width").toString(),
+                    "data-height" to option?.get("height").toString(),
+                    "data-title" to option?.get("title").toString()
+                    )
+            attributes.putAll(mp);
 
+            
         }
     }
     button {
@@ -387,6 +396,7 @@ fun FlowContent.jkButton(title:String="按钮",
         attributes.putAll(map);
         classes+="layui-btn"
         text(title)
+        block(this)
     }
 }
 enum class JkButtonType{

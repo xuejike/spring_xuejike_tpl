@@ -17,6 +17,7 @@ fun FlowContent.jkForm(title:String="", action:String="",
     form(action = action,method = method){
         this.classes+="layui-form"
         block(this)
+
     }
 }
 
@@ -43,6 +44,7 @@ fun FlowContent.jkFormTitle(title: String="",
             }
 
             block(this)
+            text("")
         }
     }
     if (formItem){
@@ -79,6 +81,7 @@ fun FlowContent.jkInput(title:String="",formItem:Boolean=true,placeholder:String
             this.name=info.name;
             this.value=info.valueString;
             inputCall(this)
+            text("")
         }
         block(this)
     }
@@ -348,7 +351,7 @@ fun FlowContent.jkButton(title:String="按钮",
                          type:String=JkButtonType.submit.name
                          ,event:String="",url:String=""
                          ,option:Map<String,Any>?=null,
-                         block: BUTTON.() -> Unit={}){
+                         block: FlowContent.() -> Unit={}){
 
     if (aLink){
         a{
@@ -359,7 +362,9 @@ fun FlowContent.jkButton(title:String="按钮",
                     "data-title" to option?.get("title").toString()
                     )
             attributes.putAll(mp);
-
+            classes+="layui-btn"
+            block(this)
+            text(title)
             
         }
     }
@@ -393,10 +398,14 @@ fun FlowContent.jkButton(title:String="按钮",
                 map["data-event"]="${type}@${url}@${JSON.toJSONString(op)}"
             }
         }
+
         attributes.putAll(map);
         classes+="layui-btn"
-        text(title)
         block(this)
+        text(title)
+
+
+
     }
 }
 enum class JkButtonType{

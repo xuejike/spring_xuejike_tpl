@@ -6,6 +6,8 @@
     <JAVADOC />
     <SOURCES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-html-jvm/0.6.6/9a8ae223e885f4383b8c8dd0dcff1f4fad2efcca/kotlinx-html-jvm-0.6.6-sources.jar!/" />
+      <root url="file://$PROJECT_DIR$/../kotlinx.html/jvm/src/main" />
+      <root url="file://$PROJECT_DIR$/../kotlinx.html/jvm/src/main/kotlin" />
     </SOURCES>
   </library>
 </component>

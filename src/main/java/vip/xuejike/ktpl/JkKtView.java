@@ -27,4 +27,9 @@ public abstract class JkKtView {
         return FreeMarkerUtils.build(tpl,map);
 
     }
+
+    @Override
+    public String toString() {
+        return toHtml();
+    }
 }

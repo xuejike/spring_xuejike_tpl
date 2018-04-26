@@ -256,11 +256,13 @@ fun FlowContent.jkSelect(title: String="",
 }
 fun FlowContent.jkTextArea(title:String="",formItem:Boolean=true,placeholder:String="",name:String="", value:Any?=null,
                            bind: KMutableProperty0<out Any?>?=null, type:InputType=InputType.text,
-                           inline:Boolean=false, call:TEXTAREA.()->Unit,block: FlowContent.() -> Unit={}){
+                           inline:Boolean=false,rows:String?=null,cols:String?=null,
+                           call:TEXTAREA.()->Unit={},block: FlowContent.() -> Unit={}){
     jkFormTitle(title, inline, formItem) {
-        textArea {
+        textArea(rows, cols) {
             var bindInfo=getBindInfo(bind, name, value);
             this.name=bindInfo.name
+            this.classes+="layui-textarea"
             call()
             this.text(bindInfo.valueString)
 

@@ -130,5 +130,12 @@ layui.use(['form'], function(){
 
         return false;
     });
+
+    form.on('submit(reset_submit)',function (data) {
+        setTimeout(function () {
+            data.form.reset();
+            data.form.submit();
+        })
+    })
 });
 

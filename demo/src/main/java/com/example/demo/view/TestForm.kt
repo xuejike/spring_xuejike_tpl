@@ -12,19 +12,20 @@ class TestFormView: PageJkKtView() {
     override fun content(): String {
      return createHTML().div {
 //         JkNameValueDataImpl::getName.call()
-//         vo=TestModel("xuejike")
+         vo=TestModel("value-3")
          var listData=arrayListOf<JkNameValueDataImpl>();
          for (i in 0..10){
              listData.add(JkNameValueDataImpl("name${i}","value-${i}"));
          }
          jkForm {
              jkInput(bind = vo!!::username,title = "哇哈哈", type = InputType.text);
-             jkAutoComplete(title = "自动完成",dataList =listData ,placeholder = "输入查询");
+             jkAutoComplete(title = "自动完成",dataList =listData ,
+                     placeholder = "输入查询",bind = vo!!::username);
              jkCheckBox(title = "选中",dataList = listData){}
              jkDate(title = "日期")
              jkRadio(title = "单选框",dataList = listData,name = "rd");
 
-             jkSelect(title = "下拉框",dataList = listData)
+             jkSelect(title = "下拉框",dataList = listData,bind = vo!!::username)
              jkUpload()
 
 

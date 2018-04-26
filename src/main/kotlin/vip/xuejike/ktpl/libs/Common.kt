@@ -134,10 +134,11 @@ fun FlowContent.jkAutoComplete(title: String="",
                 for (item in dataList){
                     option{
                         this.value=item.value
-                        this.text(item.name)
+
                         if (item.value==info.valueString){
                             this.selected=true
                         }
+                        this.text(item.name)
                     }
                 }
             }
@@ -253,7 +254,19 @@ fun FlowContent.jkSelect(title: String="",
 
     jkAutoComplete(title, inline, formItem, bind, name, value,search = false,dataList = dataList,placeholder = placeholder,selectCall = selectCall,block = block)
 }
-fun FlowContent.jkTextArea(){
+fun FlowContent.jkTextArea(title:String="",formItem:Boolean=true,placeholder:String="",name:String="", value:Any?=null,
+                           bind: KMutableProperty0<out Any?>?=null, type:InputType=InputType.text,
+                           inline:Boolean=false, call:TEXTAREA.()->Unit,block: FlowContent.() -> Unit={}){
+    jkFormTitle(title, inline, formItem) {
+        textArea {
+            var bindInfo=getBindInfo(bind, name, value);
+            this.name=bindInfo.name
+            call()
+            this.text(bindInfo.valueString)
+
+        }
+        block(this)
+    }
 
 }
 fun FlowContent.jkUpload(title: String="",
@@ -346,12 +359,16 @@ fun FlowContent.jkUpload(title: String="",
         """.trimIndent())
     }
 }
+fun <T>jkUrlBuild(url:String,obj:T){
+
+}
 fun FlowContent.jkButton(title:String="按钮",
                          aLink:Boolean=false,
                          type:String=JkButtonType.submit.name
                          ,event:String="",url:String=""
                          ,option:Map<String,Any>?=null,
                          block: FlowContent.() -> Unit={}){
+
 
     if (aLink){
         a{

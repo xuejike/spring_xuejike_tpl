@@ -98,7 +98,10 @@ function ajaxActionHandle(res) {
     if(ifs.length>0){
         if(ifs[0].contentWindow.reloadContent){
             ifs[0].contentWindow.reloadContent();
+        }else{
+            ifs[0].contentWindow.location.reload(true)
         }
+
     }
 
     //

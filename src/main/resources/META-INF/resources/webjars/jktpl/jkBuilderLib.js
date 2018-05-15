@@ -153,7 +153,7 @@ function btnEvent(event) {
     }
 
     if(jkBuilderConfig.event[event]){
-        jkBuilderConfig.event[event](event,data,row);
+        jkBuilderConfig.event[event](event);
     }else{
         console.log("没有处理方法:"+event);
     }

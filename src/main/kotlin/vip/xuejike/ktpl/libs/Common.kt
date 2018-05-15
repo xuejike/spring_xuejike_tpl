@@ -84,6 +84,12 @@ fun FlowContent.jkInput(title:String="",formItem:Boolean=true,placeholder:String
         block(this)
     }
 }
+fun FlowContent.jkTest(block: FlowContent.() -> Unit){
+    div {
+
+    }
+    block()
+}
 data class JkFormItemConfig(var title: String="");
 /**
  * 自动完成
@@ -368,7 +374,7 @@ fun FlowContent.jkButton(title:String="按钮",
                          aLink:Boolean=false,
                          type:Any=JkButtonType.submit
                          ,event:String="",url:String=""
-                         ,option:Map<String,Any>?=null,
+                         ,option:Any?=null,
                          block: FlowContent.() -> Unit={}){
 
     var typeStr:String;
@@ -381,12 +387,17 @@ fun FlowContent.jkButton(title:String="按钮",
     if (aLink){
         a{
             href=url;
-            var mp=mapOf("lay-filter" to typeStr,
-                    "data-width" to option?.get("width").toString(),
-                    "data-height" to option?.get("height").toString(),
-                    "data-title" to option?.get("title").toString()
-                    )
-            attributes.putAll(mp);
+            if(option is Map<*,*>){
+                option as Map<String,Any?>;
+                var mp=mapOf("lay-filter" to typeStr,
+                        "data-width" to option["width"].toString(),
+                        "data-height" to option["height"].toString(),
+                        "data-title" to option["title"].toString()
+                )
+                attributes.putAll(mp);
+            }
+
+
             classes+="layui-btn"
             block(this)
             text(title)
@@ -417,11 +428,16 @@ fun FlowContent.jkButton(title:String="按钮",
                 map["lay-submit"]="";
                 map["lay-filter"]=typeStr
 
-                var op=option;
-                if(option==null){
-                    op= mapOf();
+                var op:String;
+                when(option){
+                    null -> op= "{}";
+                    is Map<*, *> ->op=JSON.toJSONString(option)
+                    is String -> op="\"$option\""
+                    else ->op="{}"
                 }
-                map["data-event"]="${type}@${url}@${JSON.toJSONString(op)}"
+
+
+                map["data-event"]="${type}@${url}@${op}"
             }
         }
 

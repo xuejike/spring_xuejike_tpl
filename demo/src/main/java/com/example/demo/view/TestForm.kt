@@ -21,10 +21,9 @@ class TestFormView: PageJkKtView() {
              jkInput(bind = vo!!::username,title = "哇哈哈", type = InputType.text,inputCall =
              {
                  //修改input属性
-                 it.id="sss"
 //                 lay-verify="required|
                  it.attributes["lay-verify"]="required"
-                 it.attributes["dd"]="1s1s1s"
+
              })
              jkAutoComplete(title = "自动完成",dataList =listData ,
                      placeholder = "输入查询",bind = vo!!::username,selectCall = {
@@ -80,7 +79,26 @@ class TestFormView: PageJkKtView() {
          ),dataList = listData)
          jkPage(1,100)
 
+         //按钮使用
+
+         //请求 url地址
+         jkButton("Ajax按钮",type = JkButtonType.doAjax,url = "http://www.baidu.com?dd=")
+         //打开对话框 加载 url地址
+         jkButton("对话框",type = JkButtonType.dialog,url = "http://www.baidu.com?dd=")
+
+         jkButton(
+                 "表单 ajax提交",
+                 type = JkButtonType.ajax_submit,
+                 option = hashMapOf("" to "")
+         )
+         jkButton("带确认的提示框",type = JkButtonType.confirm,url = "",option = "确认删除？")
+
         }
+
+
+
+
+
 
 
     }

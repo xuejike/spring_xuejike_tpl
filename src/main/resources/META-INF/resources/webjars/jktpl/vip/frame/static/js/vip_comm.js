@@ -114,6 +114,9 @@ layui.use(['layer', 'element', 'util'], function () {
     // 监听顶部左侧导航
     element.on('nav(side-top-left)', function (elem) {
         // 添加tab方法
+        var sbLi= layui.$(elem).parent().children();
+        sbLi.removeClass("jk-menu-selected");
+        layui.$(elem).addClass("jk-menu-selected");
         window.addTab(elem);
     });
 

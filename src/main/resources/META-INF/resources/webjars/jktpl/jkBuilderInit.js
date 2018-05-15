@@ -6,16 +6,13 @@ layui.use(["jquery","layer"],function () {
         ajaxPost($(e.currentTarget).attr("href"),{});
         e.preventDefault();
     });
-
-
-    layui.$(".jk-table button").on("click",function (e) {
-        // alert("ss")
-        var evn=$(e.currentTarget).attr("data-event");
-        if(evn){
-            btnEvent(evn)
-        }
-
+    layui.$(document).on("click","button[lay-filter]",function (e) {
+        var btn=$(e.currentTarget);
+        var event=btn.data("event");
+        btnEvent(event)
     });
+
+
     layui.$(document).on("click",".jk-btn[lay-filter=dialog]",function (e) {
         var dom=$(e.currentTarget);
         var width= dom.data("width");

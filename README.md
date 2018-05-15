@@ -20,17 +20,35 @@ class TestFormView: PageJkKtView() {
              listData.add(JkNameValueDataImpl("name${i}","value-${i}"));
          }
          jkForm {
-             jkInput(bind = vo!!::username,title = "哇哈哈", type = InputType.text);
+             jkInput(bind = vo!!::username,title = "哇哈哈", type = InputType.text,inputCall =
+             {
+                 //修改input属性
+                 it.id="sss"
+//                 lay-verify="required|
+                 it.attributes["lay-verify"]="required"
+                 it.attributes["dd"]="1s1s1s"
+             })
              jkAutoComplete(title = "自动完成",dataList =listData ,
-                     placeholder = "输入查询",bind = vo!!::username);
-             jkCheckBox(title = "选中",dataList = listData){}
-             jkDate(title = "日期"){
-                 this.attributes["data-"]
-             }
-             jkRadio(title = "单选框",dataList = listData,name = "rd");
+                     placeholder = "输入查询",bind = vo!!::username,selectCall = {
+                 it.attributes["sksk"]="sss"
+             });
+             jkCheckBox(title = "选中",dataList = listData,checkBoxCall ={
+                 it.attributes["sss"]="sss"
+             } ){}
+             jkDate(title = "日期",inputCall = {
 
-             jkSelect(title = "下拉框",dataList = listData,bind = vo!!::username)
+             }){
+
+             }
+             jkRadio(title = "单选框",dataList = listData,name = "rd",radioCall = {
+                 it.attributes["ss"]="ss"
+             });
+
+             jkSelect(title = "下拉框",dataList = listData,bind = vo!!::username,selectCall = {
+                 it.attributes["sss"]="ccc"
+             })
              jkUpload()
+             jkButton("提交",type = JkButtonType.ajax_submit)
 
 
          }
@@ -71,7 +89,50 @@ class TestFormView: PageJkKtView() {
 
 }
 ```
+# 1.3 其它功能
+## 1.3.1 按钮使用
 
+```kotlin
+ //按钮使用
+
+         //请求 url地址
+         jkButton("Ajax按钮",type = JkButtonType.doAjax,url = "http://www.baidu.com?dd=")
+         //打开对话框 加载 url地址
+         jkButton("对话框",type = JkButtonType.dialog,url = "http://www.baidu.com?dd=")
+
+         jkButton(
+                 "表单 ajax提交",
+                 type = JkButtonType.ajax_submit,
+                 option = hashMapOf("" to "")
+         )
+         jkButton("带确认的提示框",type = JkButtonType.confirm,url = "",option = "确认删除？")
+
+        }
+```
+## 1.3.2 表单验证
+具体表单验证规则 参考 layui
+```kotlin
+
+  jkInput(bind = vo!!::username,title = "哇哈哈", type = InputType.text,inputCall =
+             {
+                 //修改input属性
+//                 lay-verify="required|
+                 it.attributes["lay-verify"]="required"
+                 
+             })
+```
+
+# 1.4 扩展 html组件
+```kotlin
+
+fun FlowContent.jkTest(block: FlowContent.() -> Unit){
+    div { 
+        
+    }
+    block()
+}
+
+```
 
 
 

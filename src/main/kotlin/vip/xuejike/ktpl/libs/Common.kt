@@ -366,16 +366,22 @@ fun <T>jkUrlBuild(url:String,obj:T){
 }
 fun FlowContent.jkButton(title:String="按钮",
                          aLink:Boolean=false,
-                         type:String=JkButtonType.submit.name
+                         type:Any=JkButtonType.submit
                          ,event:String="",url:String=""
                          ,option:Map<String,Any>?=null,
                          block: FlowContent.() -> Unit={}){
 
+    var typeStr:String;
+    if(type is JkButtonType){
+        typeStr=type.name
+    }else {
+        typeStr=type.toString();
+    }
 
     if (aLink){
         a{
             href=url;
-            var mp=mapOf("lay-filter" to type,
+            var mp=mapOf("lay-filter" to typeStr,
                     "data-width" to option?.get("width").toString(),
                     "data-height" to option?.get("height").toString(),
                     "data-title" to option?.get("title").toString()
@@ -409,7 +415,8 @@ fun FlowContent.jkButton(title:String="按钮",
             }
             else->{
                 map["lay-submit"]="";
-                map["lay-filter"]=type
+                map["lay-filter"]=typeStr
+
                 var op=option;
                 if(option==null){
                     op= mapOf();
@@ -427,7 +434,7 @@ fun FlowContent.jkButton(title:String="按钮",
 
     }
 }
-enum class JkButtonType{
+enum class JkButtonType {
     /**
      * 打开tab
      */
@@ -482,7 +489,12 @@ fun <T>FlowContent.jkTable(headNames:LinkedHashMap<String, JkTableCol<T>>
                 tr {
                     for(head in headNames){
                         td {
+                            var map=head.value.attrsCall(item);
+                            if(map!=null){
+                                attributes.putAll(map);
+                            }
 
+                            head.value.call(item)
                             if(head.value.value!=null){
                                 when(head.value.value){
                                     is KProperty1<*,*>->{
@@ -499,12 +511,7 @@ fun <T>FlowContent.jkTable(headNames:LinkedHashMap<String, JkTableCol<T>>
                                     }
                                 }
                             }
-                            var map=head.value.attrsCall(item);
-                            if(map!=null){
-                                attributes.putAll(map);
-                            }
 
-                            head.value.call(item)
 
                         }
 

@@ -22,7 +22,9 @@ class TestFormView: PageJkKtView() {
              jkAutoComplete(title = "自动完成",dataList =listData ,
                      placeholder = "输入查询",bind = vo!!::username);
              jkCheckBox(title = "选中",dataList = listData){}
-             jkDate(title = "日期")
+             jkDate(title = "日期"){
+                 this.attributes["data-"]
+             }
              jkRadio(title = "单选框",dataList = listData,name = "rd");
 
              jkSelect(title = "下拉框",dataList = listData,bind = vo!!::username)

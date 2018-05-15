@@ -35,6 +35,7 @@ layui.use(["jquery","layer"],function () {
         });
         e.preventDefault();
     });
+
 });
 
 layui.use(["jquery","form"],function () {

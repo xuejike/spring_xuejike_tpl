@@ -18,17 +18,35 @@ class TestFormView: PageJkKtView() {
              listData.add(JkNameValueDataImpl("name${i}","value-${i}"));
          }
          jkForm {
-             jkInput(bind = vo!!::username,title = "哇哈哈", type = InputType.text);
+             jkInput(bind = vo!!::username,title = "哇哈哈", type = InputType.text,inputCall =
+             {
+                 //修改input属性
+                 it.id="sss"
+//                 lay-verify="required|
+                 it.attributes["lay-verify"]="required"
+                 it.attributes["dd"]="1s1s1s"
+             })
              jkAutoComplete(title = "自动完成",dataList =listData ,
-                     placeholder = "输入查询",bind = vo!!::username);
-             jkCheckBox(title = "选中",dataList = listData){}
-             jkDate(title = "日期"){
-                 this.attributes["data-"]
-             }
-             jkRadio(title = "单选框",dataList = listData,name = "rd");
+                     placeholder = "输入查询",bind = vo!!::username,selectCall = {
+                 it.attributes["sksk"]="sss"
+             });
+             jkCheckBox(title = "选中",dataList = listData,checkBoxCall ={
+                 it.attributes["sss"]="sss"
+             } ){}
+             jkDate(title = "日期",inputCall = {
 
-             jkSelect(title = "下拉框",dataList = listData,bind = vo!!::username)
+             }){
+
+             }
+             jkRadio(title = "单选框",dataList = listData,name = "rd",radioCall = {
+                 it.attributes["ss"]="ss"
+             });
+
+             jkSelect(title = "下拉框",dataList = listData,bind = vo!!::username,selectCall = {
+                 it.attributes["sss"]="ccc"
+             })
              jkUpload()
+             jkButton("提交",type = JkButtonType.ajax_submit)
 
 
          }

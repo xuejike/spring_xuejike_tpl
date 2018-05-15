@@ -1,0 +1,41 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.12.RELEASE'
+	}
+    ext.kotlin_version = '1.2.31'
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'kotlin'
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+	maven { url "https://jitpack.io" }
+	maven { url "https://jcenter.bintray.com" }
+	maven { url "http://repo.maven.apache.org/maven2" }
+	jcenter()
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-freemarker')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile project(":spring_tpl_builder")
+    compile "org.jetbrains.kotlinx:kotlinx-html-jvm:0.6.6"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+	compile group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: '1.2.40'
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}

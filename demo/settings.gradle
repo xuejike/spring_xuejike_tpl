@@ -1,0 +1,4 @@
+rootProject.name = 'demo'
+include("spring_tpl_builder")
+project(":spring_tpl_builder")
+        .projectDir=new File(settingsDir,"../")

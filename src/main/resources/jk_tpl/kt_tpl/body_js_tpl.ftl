@@ -1,5 +1,5 @@
-<#assign vipRoot="/vip/"/>
-<script type="text/javascript" src="${vipRoot}/frame/layui/layui.js"></script>
-<script type="text/javascript" src="${vipRoot}/js/index.js"></script>
-<script src="/vue.js"></script>
-<script src="/jkBuilderLib.js"></script>
+
+<script type="text/javascript" src="${vipRoot}/vip/frame/layui/layui.js"></script>
+<script type="text/javascript" src="${vipRoot}/vip/js/index.js"></script>
+<script src="${vipRoot}/vue.js"></script>
+<script src="${vipRoot}/jkBuilderLib.js"></script>

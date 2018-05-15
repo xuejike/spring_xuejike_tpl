@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<#assign vipRoot="/vip/"/>
 <head>
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
@@ -15,7 +14,7 @@
 <#include "body_js_tpl.ftl"/>
 ${content!}
 
-<script type="text/javascript" src="/jkBuilderInit.js"></script>
+<script type="text/javascript" src="${vipRoot}/jkBuilderInit.js"></script>
 ${footer!""}
 </body>
 </html>

@@ -1,11 +1,9 @@
 package vip.xuejike.ktpl.libs
 
 import com.alibaba.fastjson.JSON
-import com.bidanet.springmvc.demo.jkbuilder.annotation.JkDisable
 import com.bidanet.springmvc.demo.jkbuilder.data.JkNameValueData
 import kotlinx.html.*
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 import kotlin.collections.LinkedHashMap
 import kotlin.reflect.KCallable
@@ -124,6 +122,7 @@ fun FlowContent.jkAutoComplete(title: String="",
                 this.attributes["data-url"]=url;
                 this.attributes["data-bean-cls"]= beanCls!!.name
             }
+            selectCall(this)
             if (placeholder!=null){
                 option {
                     this.value=""
@@ -143,7 +142,7 @@ fun FlowContent.jkAutoComplete(title: String="",
                 }
             }
 
-            selectCall(this)
+
 
 
         }
@@ -154,13 +153,13 @@ fun FlowContent.jkAutoComplete(title: String="",
 fun FlowContent.jkCheckBox(
         dataList:List<out JkNameValueData>,
         title: String="",
-                           inline:Boolean=false,
-                           formItem:Boolean=true,
-                           bind: KMutableProperty0<out Any?>?=null,
-                           name: String?=null,
-                           value: Any?=null,
-                            checkBookCall:(INPUT)->Unit={},
-                           block: FlowContent.() -> Unit={}){
+        inline:Boolean=false,
+        formItem:Boolean=true,
+        bind: KMutableProperty0<out Any?>?=null,
+        name: String?=null,
+        value: Any?=null,
+        checkBoxCall:(INPUT)->Unit={},
+        block: FlowContent.() -> Unit={}){
 
     jkFormTitle (title, inline, formItem){
         for (item in dataList){
@@ -187,7 +186,7 @@ fun FlowContent.jkCheckBox(
                     }
 
                 }
-                checkBookCall(this)
+                checkBoxCall(this)
 
             }
         }
@@ -220,7 +219,7 @@ fun FlowContent.jkRadio(
         bind: KMutableProperty0<out Any?>?=null,
         name: String?=null,
         value: Any?=null,
-        checkBookCall:(INPUT)->Unit={},
+        radioCall:(INPUT)->Unit={},
         block: FlowContent.() -> Unit={}){
     jkFormTitle (title, inline, formItem){
         for (item in dataList){
@@ -234,7 +233,7 @@ fun FlowContent.jkRadio(
                 if (item.value==info.valueString){
                     this.checked=true;
                 }
-                checkBookCall(this)
+                radioCall(this)
 
             }
         }
@@ -356,10 +355,11 @@ fun FlowContent.jkUpload(title: String="",
             }
         }
 
-        jkJavaScript("""
+
+    }
+    jkJavaScript("""
             uploadComponent("${uploadId}","${url}","${maxNum}",${JSON.toJSONString(bindInfo.value)},"${fileType}","${exts}")
         """.trimIndent())
-    }
 }
 fun <T>jkUrlBuild(url:String,obj:T){
 

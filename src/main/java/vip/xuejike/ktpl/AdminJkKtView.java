@@ -2,6 +2,10 @@ package vip.xuejike.ktpl;
 
 import lombok.Data;
 
+/**
+ * 管理主页
+ * @author xuejike
+ */
 public class AdminJkKtView extends JkKtView {
     private AdminInfo info=new AdminInfo();
 
@@ -16,6 +20,7 @@ public class AdminJkKtView extends JkKtView {
 
     public void setInfo(AdminInfo info) {
         this.info = info;
+        this.map.put("info",info);
     }
 
     @Override

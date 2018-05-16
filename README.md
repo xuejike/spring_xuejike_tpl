@@ -2,7 +2,17 @@
 
 # 1.基于Kotlin的Layui 表单以及界面生成器
 # 1.1 环境搭建
+```kotlin
 
+    @RequestMapping("/form")
+    @ResponseBody
+    public String form(){
+//        FormJkKtView view = new FormJkKtView();
+        TestFormView view = new TestFormView();
+        view.setVo(new TestModel());
+        return view.toHtml();
+    }
+```
 
 # 1.2 基本使用
 

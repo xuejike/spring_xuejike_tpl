@@ -35,5 +35,6 @@ public class AdminJkKtView extends JkKtView {
         private String logoutUrl;
         private String top;
         private String left;
+        private String username;
     }
 }

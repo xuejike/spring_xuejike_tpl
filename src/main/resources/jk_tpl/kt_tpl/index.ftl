@@ -38,7 +38,7 @@
                 </dl>
             </li>
             <li class="layui-nav-item">
-                <a class="name" href="javascript:;"><img src="/vip/frame/static/image/code.png" alt="logo"> ${nickName!} </a>
+                <a class="name" href="javascript:;"><img src="${vipRoot}/vip/frame/static/image/code.png" alt="logo"> ${info.username!} </a>
                 <dl class="layui-nav-child">
 
                     <#--<dd><a href="javascript:;" href-url="demo/login.html"><i class="layui-icon">&#xe621;</i>登录页</a></dd>-->
@@ -77,9 +77,7 @@
     </div>
     <!-- footer -->
     <div class="layui-footer my-footer">
-
-        <p><a href="http://www.bidanet.com" target="_blank">vip-admin后台模板v1.8.0</a>&nbsp;&nbsp;&&nbsp;&nbsp;<a href="http://vip-admin.com/index/gather/index.html" target="_blank">苏州必答网络科技有限公司</a></p>
-        <p>2017 © copyright </p>
+        <p><a href="http://www.bidanet.com" target="_blank">苏州必答网络科技有限公司</a></p>
     </div>
 </div>
 
@@ -101,7 +99,7 @@
 </div>
  <#include "./body_js_tpl.ftl"/>
 
-<script type="text/javascript" src="/vip/frame/static/js/vip_comm.js"></script>
+<script type="text/javascript" src="${vipRoot}/vip/frame/static/js/vip_comm.js"></script>
 <script type="text/javascript">
 layui.use(['layer','vip_nav'], function () {
 

@@ -12,7 +12,17 @@ layui.use(["jquery","layer"],function () {
         btnEvent(event)
     });
 
+    layui.$(document).keyup(function(event){
 
+        switch(event.keyCode) {
+            case 27:
+                closeNow();
+                break;
+            case 96:
+                closeNow();
+                break;
+        }
+    });
     layui.$(document).on("click",".jk-btn[lay-filter=dialog]",function (e) {
         var dom=$(e.currentTarget);
         var width= dom.data("width");

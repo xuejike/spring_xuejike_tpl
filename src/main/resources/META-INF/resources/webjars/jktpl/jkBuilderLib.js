@@ -73,24 +73,27 @@ function ajaxDataHandle(res) {
     }
     ajaxActionHandle(res);
 }
+function closeNow() {
+    var index = parent.layer.getFrameIndex(window.name);
+    if(index){
+        //关闭对话框，且刷新当前tab
+        parent.layer.close(index); //再执行关闭
+
+    }else{
+        layui.use(["vip_tab"],function () {
+            vipTab = layui.vip_tab;
+            if(vipTab.getThisTabId()){
+                //在Tab中
+                vipTab.del(vipTab.getThisTabId());
+            }
+
+        });
+    }
+}
 function ajaxActionHandle(res) {
 
     if(res.closeCurrent == true){
-        var index = parent.layer.getFrameIndex(window.name);
-        if(index){
-            //关闭对话框，且刷新当前tab
-            parent.layer.close(index); //再执行关闭
-
-        }else{
-            layui.use(["vip_tab"],function () {
-                vipTab = layui.vip_tab;
-                if(vipTab.getThisTabId()){
-                    //在Tab中
-                    vipTab.del(vipTab.getThisTabId());
-                }
-
-            });
-        }
+        closeNow();
 
     }
 

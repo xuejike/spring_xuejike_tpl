@@ -73,7 +73,19 @@ function ajaxDataHandle(res) {
     }
     ajaxActionHandle(res);
 }
+function resetForm(formObj) {
+    layui.$(':input',layui.$(formObj))
+        .not(':button,:submit,:reset,:hidden')
+        .val('')
+        .removeAttr('checked')
+        .removeAttr('checked');
+}
+var lastCloseNowTime=new Date().getTime();
 function closeNow() {
+    if(new Date().getTime()-lastCloseNowTime<=1000){
+        return;
+    }
+    lastCloseNowTime=new Date().getTime();
     var index = parent.layer.getFrameIndex(window.name);
     if(index){
         //关闭对话框，且刷新当前tab

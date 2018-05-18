@@ -26,9 +26,6 @@ layui.use(["jquery","layer"],function () {
             case 27:
                 closeNow();
                 break;
-            case 96:
-                closeNow();
-                break;
         }
     });
     layui.$(document).on("click",".jk-btn[lay-filter=dialog]",function (e) {

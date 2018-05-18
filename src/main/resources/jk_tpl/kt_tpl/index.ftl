@@ -43,6 +43,7 @@
 
                     <#--<dd><a href="javascript:;" href-url="demo/login.html"><i class="layui-icon">&#xe621;</i>登录页</a></dd>-->
                     <#--<dd><a href="javascript:;" href-url="demo/map.html"><i class="layui-icon">&#xe621;</i>图表</a></dd>-->
+
                     <dd><a href="${info.logoutUrl!"./public/logout"}">
                         <i class="layui-icon">&#x1006;</i>退出</a></dd>
                 </dl>

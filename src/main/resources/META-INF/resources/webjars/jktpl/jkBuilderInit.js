@@ -9,7 +9,15 @@ layui.use(["jquery","layer"],function () {
     layui.$(document).on("click","button[lay-filter]",function (e) {
         var btn=$(e.currentTarget);
         var event=btn.data("event");
-        btnEvent(event)
+        if(event){
+            try{
+                btnEvent(event)
+            }catch (e) {
+                console.error(e)
+            }
+
+        }
+
     });
 
     layui.$(document).keyup(function(event){

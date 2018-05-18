@@ -64,6 +64,14 @@ function ajaxDataHandle(res) {
 
     if(res.statusCode==jkBuilderConfig.status.success){
         getLayer().msg(res.message)
+        var ifs=parent.getNowTabIframe();
+        if(ifs.length>0){
+            if(ifs[0].contentWindow.reloadContent){
+                ifs[0].contentWindow.reloadContent();
+            }else{
+                ifs[0].contentWindow.location.reload(true)
+            }
+        }
     }else if(res.statusCode == jkBuilderConfig.status.error){
         getLayer().msg(res.message)
     }else if(res.statusCode == jkBuilderConfig.status.timeout){
@@ -106,18 +114,9 @@ function ajaxActionHandle(res) {
 
     if(res.closeCurrent == true){
         closeNow();
-
     }
 
-    var ifs=parent.getNowTabIframe();
-    if(ifs.length>0){
-        if(ifs[0].contentWindow.reloadContent){
-            ifs[0].contentWindow.reloadContent();
-        }else{
-            ifs[0].contentWindow.location.reload(true)
-        }
 
-    }
 
     //
 }

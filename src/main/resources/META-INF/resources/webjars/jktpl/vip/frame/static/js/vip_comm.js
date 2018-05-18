@@ -13,7 +13,7 @@ layui.config({
 });
 
 // 主入口方法
-layui.use(['layer', 'element', 'util'], function () {
+layui.use(['layer', 'element', 'util','vip_nav'], function () {
 
     // 操作对象
     var device = layui.device()
@@ -21,6 +21,7 @@ layui.use(['layer', 'element', 'util'], function () {
         , layer = layui.layer
         , util = layui.util
         , $ = layui.jquery
+        , vipNav=layui.vip_nav
         , cardIdx = 0
         , cardLayId = 0
         , side = $('.my-side')
@@ -98,26 +99,15 @@ layui.use(['layer', 'element', 'util'], function () {
         // layer.msg(title);
     };
 
-    window.getNowTabIframe=function () {
-        var tabs= $(".layui-tab-title li");
-        var tabIndex=0;
-        for(var i=0;i<tabs.length;i++){
-            if($(tabs[i]).hasClass("layui-this")){
-                tabIndex=i;
-                break;
-            }
-        }
-        var ifr = $(document).find('.my-body .layui-tab-content .layui-tab-item iframe').eq(tabIndex);
-
-        return ifr;
-    };
     // 监听顶部左侧导航
     element.on('nav(side-top-left)', function (elem) {
         // 添加tab方法
+        // window.addTab(elem);
         var sbLi= layui.$(elem).parent().children();
         sbLi.removeClass("jk-menu-selected");
         layui.$(elem).addClass("jk-menu-selected");
-        window.addTab(elem);
+        console.log(elem);
+        vipNav.main(elem.children('a').attr('href-url'),'side-main',true);
     });
 
     // 监听顶部右侧导航
@@ -135,6 +125,7 @@ layui.use(['layer', 'element', 'util'], function () {
     // 监听导航(side-main)点击切换页面
     element.on('nav(side-main)', function (elem) {
         // 添加tab方法
+        console.log(elem);
         window.addTab(elem);
     });
 
@@ -144,6 +135,19 @@ layui.use(['layer', 'element', 'util'], function () {
         element.tabDelete('card', layId);
     };
 
+    window.getNowTabIframe=function () {
+        var tabs= $(".layui-tab-title li");
+        var tabIndex=0;
+        for(var i=0;i<tabs.length;i++){
+            if($(tabs[i]).hasClass("layui-this")){
+                tabIndex=i;
+                break;
+            }
+        }
+        var ifr = $(document).find('.my-body .layui-tab-content .layui-tab-item iframe').eq(tabIndex);
+
+        return ifr;
+    };
     // 删除所有选项卡
     window.delAllTab = function () {
         // 选项卡对象

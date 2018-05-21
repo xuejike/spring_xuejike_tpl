@@ -359,7 +359,7 @@ function initPage(id) {
             config["jump"]=function (obj, first) {
                 if(!first){
                     var params=getQueryString();
-                    params["pageNo"]=obj.curr;
+                    params["pageCurrent"]=obj.curr;
                     params["pageSize"]=obj.limit;
                     var url=window.location.pathname+"?";
                     for(var k in params){

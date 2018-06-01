@@ -2,6 +2,7 @@ package vip.xuejike.ktpl.libs
 
 import com.alibaba.fastjson.JSON
 import com.bidanet.springmvc.demo.jkbuilder.data.JkNameValueData
+import com.bidanet.springmvc.demo.jkbuilder.data.JkUploadFile
 import kotlinx.html.*
 import java.util.*
 import kotlin.collections.HashMap
@@ -199,16 +200,26 @@ fun FlowContent.jkCheckBox(
         block(this)
     }
 }
-fun FlowContent.jkDate(title:String="", formItem:Boolean=true, placeholder:String="", name:String="", value:Any?=null,
-                       bind: KMutableProperty0<out Any?>?=null, type:InputType=InputType.text,
-                       inline:Boolean=false, inputCall: (INPUT) -> Unit={}, block: FlowContent.() -> Unit={}
+fun FlowContent.jkDate(title:String="", formItem:Boolean=true,
+                       placeholder:String="", name:String="",
+                       value:Any?=null,
+                       bind: KMutableProperty0<out Any?>?=null,
+                       inline:Boolean=false,
+                       option:Any?=null,
+                       inputCall: (INPUT) -> Unit={}, block: FlowContent.() -> Unit={}
 ){
     val inputId = "id_${UUID.randomUUID()}"
-   jkInput(title, formItem, placeholder, name, value, bind, type, inline,
+   jkInput(title, formItem, placeholder, name, value, bind, InputType.text, inline,
            inputCall = {
+
         it.id= inputId
+               if (option!=null){
+                   it.attributes["lay-data"]=JSON.toJSONString(option);
+               }
+
                inputCall(it)
    }){
+
 
        jkJavaScript("""
                initDateInput("#${inputId}")
@@ -280,9 +291,9 @@ fun FlowContent.jkUpload(title: String="",
                          inline:Boolean=false,
                          formItem:Boolean=true,
                          disable:Boolean=false,
-                         bind: KMutableProperty0<out Any?>?=null,
+                         bind: KMutableProperty0<out Collection<JkUploadFile>?>?=null,
                          name: String?=null,
-                         value: Any?=null,
+                         value: Collection<JkUploadFile>?=null,
                          url: String="",
                          maxNum:Int=10,
                          exts:String="jpg|png|gif|bmp|jpeg",
@@ -315,22 +326,26 @@ fun FlowContent.jkUpload(title: String="",
                 classes+="layui-elem-quote layui-quote-nm"
                 attributes["style"]="margin-top: 10px;"
                 if(fileType=="images"){
-                    unsafe { """
+                    unsafe { raw(
+                            """
                     预览：
                 <div class="layui-upload-list" >
                     <span class="layui-upload-img " v-for="file in files">
                         <i class="layui-icon jk-remove" v-on:click="remove(index)">&#x1007;</i>
 
                         <i v-if="file.status =='loading'" class="layui-icon jk-upload layui-anim layui-anim-rotate layui-anim-loop">&#xe63d;</i>
-                        <img v-if="file.status =='finish'"
+                        <img v-else
                              style="width: 100px;height: 100px"
                              v-bind:src="file.url" v-bind:alt="file.filename"/>
                     </span>
                     <br style="clear:both;" />
                 </div>
-                """ }
+                """
+                    ) }
                 }else{
-                    unsafe { """
+                    unsafe {
+                        raw(
+                                """
                         <div class="layui-upload-list">
                     <table class="layui-table">
                         <thead>
@@ -342,9 +357,11 @@ fun FlowContent.jkUpload(title: String="",
                             <tr v-for="file in files">
                                 <td>{{file.filename}}</td>
                                 <td>
-                                    <i class="layui-icon" v-if="file.status=='finish'" style="color: #5FB878">&#xe616;</i>
-                                    <i class="layui-icon" v-if="file.status=='error'" style="color: red" >&#x1007;</i>
+
                                     <i class="layui-icon layui-anim layui-anim-rotate layui-anim-loop" v-if="file.status=='loading'">&#xe63e;</i>
+
+                                    <i class="layui-icon" v-else-if="file.status=='error'" style="color: red" >&#x1007;</i>
+                                    <i class="layui-icon" v-else style="color: #5FB878">&#xe616;</i>
                                 </td>
                                 <td>
                                     <a target="_blank" v-bind:href="file.url" class="layui-btn" >下载</a>
@@ -355,7 +372,9 @@ fun FlowContent.jkUpload(title: String="",
                         </tbody>
                     </table>
                 </div>
-                    """ }
+                    """
+                        )
+                    }
                 }
 
             }

@@ -1,6 +1,8 @@
 package com.example.demo.view
 
+import com.alibaba.fastjson.JSON
 import com.bidanet.springmvc.demo.jkbuilder.data.JkNameValueDataImpl
+import com.bidanet.springmvc.demo.jkbuilder.data.JkUploadFile
 import kotlinx.html.*
 import kotlinx.html.stream.createHTML
 import vip.xuejike.ktpl.PageJkKtView
@@ -22,7 +24,7 @@ class TestFormView: PageJkKtView() {
              {
                  //修改input属性
 //                 lay-verify="required|
-                 it.attributes["lay-verify"]="required"
+                 it.attributes["lay-verify"]="required|number"
 
              })
              jkAutoComplete(title = "自动完成",dataList =listData ,
@@ -34,9 +36,14 @@ class TestFormView: PageJkKtView() {
              } ){}
              jkDate(title = "日期",inputCall = {
 
+                 val map = hashMapOf("type" to "month","range" to "~" );
+                 it.attributes["lay-data"]= JSON.toJSONString(map);
+
              }){
 
              }
+
+
              jkRadio(title = "单选框",dataList = listData,name = "rd",radioCall = {
                  it.attributes["ss"]="ss"
              });
@@ -44,7 +51,8 @@ class TestFormView: PageJkKtView() {
              jkSelect(title = "下拉框",dataList = listData,bind = vo!!::username,selectCall = {
                  it.attributes["sss"]="ccc"
              })
-             jkUpload()
+             var f=JkUploadFile("https://www.baidu.com/img/baidu_jgylogo3.gif","ss");
+             jkUpload(url = "上传文件URL",value = listOf(f))
              jkButton("提交",type = JkButtonType.ajax_submit)
 
 
@@ -91,6 +99,8 @@ class TestFormView: PageJkKtView() {
                  type = JkButtonType.ajax_submit,
                  option = hashMapOf("" to "")
          )
+
+
          jkButton("带确认的提示框",type = JkButtonType.confirm,url = "",option = "确认删除？")
 
         }

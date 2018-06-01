@@ -19,6 +19,7 @@ class TestFormView: PageJkKtView() {
          for (i in 0..10){
              listData.add(JkNameValueDataImpl("name${i}","value-${i}"));
          }
+
          jkForm {
              jkInput(bind = vo!!::username,title = "哇哈哈", type = InputType.text,inputCall =
              {

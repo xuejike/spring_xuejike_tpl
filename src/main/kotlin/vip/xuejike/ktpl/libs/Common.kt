@@ -513,7 +513,12 @@ fun <T>FlowContent.jkTable(headNames:LinkedHashMap<String, JkTableCol<T>>
         thead {
             tr{
                 for (head in headNames){
-                    th { text(head.key) }
+                    th {
+                        attributes["width"]=head.value.width
+                        attributes.putAll(head.value.thAttrs!!)
+
+                        text(head.key)
+                    }
                 }
             }
         }
@@ -559,6 +564,8 @@ fun <T>FlowContent.jkTable(headNames:LinkedHashMap<String, JkTableCol<T>>
     }
 }
 data class JkTableCol<T>(var value:Any?=null,
+                         var width:String="200px",
+                         var thAttrs:Map<String,String>?=null,
                          var attrsCall:(T)->Map<String,String>?={null},
                       var call:(T)->Unit={})
 
@@ -572,6 +579,7 @@ fun FlowContent.jkPage(pageNo:Int,count:Int,limit:Int=30,block:(Map<String,Any>)
                 "limit" to limit
         );
         block(config)
+
         attributes["lay-data"]=JSON.toJSONString(
                 config
         );

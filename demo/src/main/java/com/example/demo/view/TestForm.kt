@@ -29,6 +29,7 @@ class TestFormView: PageJkKtView() {
 
              })
              jkAutoComplete(title = "自动完成",dataList =listData ,
+                     beanCls = TestModel::class.java,
                      placeholder = "输入查询",bind = vo!!::username,selectCall = {
                  it.attributes["sksk"]="sss"
              });
@@ -74,6 +75,12 @@ class TestFormView: PageJkKtView() {
                  "用户名" to JkTableCol(attrsCall = { mapOf("width" to "450px")}){
                      img { src="http://www.baidu.com/img/bd_logo1.png" }
                  },
+                 "" to JkTableCol(),
+                 "" to JkTableCol(),
+                 "" to JkTableCol(),
+                 "" to JkTableCol(),
+                 "" to JkTableCol()
+                 ,
                  "操作" to JkTableCol{
                      a {
                          href="http://www.baidu.com"

@@ -102,10 +102,10 @@ fun FlowContent.jkAutoComplete(title: String="",
                                name: String?=null,
                                value: Any?=null,
                                remote:Boolean=false,
-                               url:String="",
+                               url:String="/jkBuilder/selectDataSource",
                                search:Boolean=true,
                                dataList:List<out JkNameValueData>?=null,
-                               beanCls:Class<Any>?=null,
+                               beanCls:Class<*>?=null,
                                placeholder:String?=null,
                                selectCall:(SELECT)->Unit={},
                                block: FlowContent.() -> Unit={} ){
@@ -515,8 +515,9 @@ fun <T>FlowContent.jkTable(headNames:LinkedHashMap<String, JkTableCol<T>>
                 for (head in headNames){
                     th {
                         attributes["width"]=head.value.width
-                        attributes.putAll(head.value.thAttrs!!)
-
+                        if (head.value.thAttrs != null){
+                            attributes.putAll(head.value.thAttrs!!);
+                        }
                         text(head.key)
                     }
                 }

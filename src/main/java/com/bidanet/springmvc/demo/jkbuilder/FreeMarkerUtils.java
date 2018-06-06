@@ -9,6 +9,7 @@ import org.springframework.core.io.ClassPathResource;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -24,7 +25,9 @@ public class FreeMarkerUtils {
 
             configuration.setClassForTemplateLoading(FreeMarkerUtils.class,"/jk_tpl");
             configuration.setObjectWrapper(new DefaultObjectWrapper(Configuration.VERSION_2_3_22));
-
+            configuration.setDefaultEncoding("UTF-8");
+            configuration.setOutputEncoding("UTF-8");
+            configuration.setEncoding(Locale.CHINA,"UTF-8");
         } catch (Exception e) {
             e.printStackTrace();
 

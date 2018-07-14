@@ -62,7 +62,7 @@
         </div>
     </div>
     <!-- body -->
-    <div class="layui-body my-body">
+    <div class="layui-body my-body" style="bottom: 10px">
         <div class="layui-tab layui-tab-card my-tab" lay-filter="card"
              lay-allowClose="true">
             <ul class="layui-tab-title">

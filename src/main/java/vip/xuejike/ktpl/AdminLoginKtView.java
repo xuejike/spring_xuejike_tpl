@@ -13,6 +13,16 @@ public class AdminLoginKtView extends JkKtView {
         this.map.put("info",info);
     }
 
+    public LoginInfo getInfo() {
+        return info;
+    }
+
+    public void setInfo(LoginInfo info) {
+        this.info = info;
+        this.map.put("info",info);
+
+    }
+
     @NotNull
     @Override
     public String content() {

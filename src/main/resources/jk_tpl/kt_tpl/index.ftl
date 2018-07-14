@@ -76,10 +76,7 @@
             </div>
         </div>
     </div>
-    <!-- footer -->
-    <div class="layui-footer my-footer">
-        <p><a href="http://www.bidanet.com" target="_blank">苏州必答网络科技有限公司</a></p>
-    </div>
+
 </div>
 
 

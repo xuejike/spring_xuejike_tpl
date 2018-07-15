@@ -289,7 +289,7 @@ function uploadComponent(subId,url,max,data,type,exts) {
                 var filedata=[];
                 for(var i=0;i<this.files.length;i++){
                     var f= this.files[i];
-                    if(f.status=="finish"){
+                    if(f.status=="finish" || f.status == undefined){
                         filedata.push(f);
                     }
                 }

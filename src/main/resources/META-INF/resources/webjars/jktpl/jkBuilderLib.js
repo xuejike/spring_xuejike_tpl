@@ -9,6 +9,11 @@ var jkBuilderConfig={
     dialogSize:["900px","600px"],
     event:{
 
+    },
+    dialogOption:{
+        area:["900px","600px"],
+        maxmin:true,
+        resize:true
     }
 };
 
@@ -17,7 +22,7 @@ var jkBuilderConfig={
 function openUrlDialog(href,option) {
     option.type=2;
     option.content=href;
-    var df={area:jkBuilderConfig.dialogSize}
+    var df=jkBuilderConfig.dialogOption
     getLayer().open(layui.$.extend(df,option))
 }
 function openTab(href, title) {

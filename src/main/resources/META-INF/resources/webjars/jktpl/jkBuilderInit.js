@@ -33,7 +33,7 @@ layui.use(["jquery","layer"],function () {
         var width= dom.data("width");
         var height= dom.data("height");
         var title= dom.data("title");
-        var area=["800px","500px"];
+        var area=jkBuilderConfig.dialogOption.area;
         if(height){
             area[1]=height+"px";
         }

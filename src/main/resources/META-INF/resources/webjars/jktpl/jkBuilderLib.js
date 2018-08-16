@@ -16,13 +16,20 @@ var jkBuilderConfig={
         resize:true
     }
 };
+function initAutoDialogSize() {
+    var height = window.innerHeight;
+    var width = window.innerWidth;
+    if (width < 900 || height < 600){
+        jkBuilderConfig.dialogOption.area=[height*0.8+"px",width*0.8+"px"];
+    }
 
+}
 
 //通过URL打开对话框
 function openUrlDialog(href,option) {
     option.type=2;
     option.content=href;
-    var df=jkBuilderConfig.dialogOption
+    var df=jkBuilderConfig.dialogOption;
     getLayer().open(layui.$.extend(df,option))
 }
 function openTab(href, title) {

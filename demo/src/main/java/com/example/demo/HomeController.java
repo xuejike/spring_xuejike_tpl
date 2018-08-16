@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.bidanet.springmvc.demo.jkbuilder.data.JkMenu;
 import com.example.demo.view.TestFormView;
 import com.example.demo.view.TestModel;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,7 @@ public class HomeController {
 
 
         testView.getInfo().setTitle("极速模板");
-
+        testView.getInfo().getRightMenu().add(new JkMenu("修改密码","","http://www.baidu.com"));
         return testView.toHtml();
 
     }

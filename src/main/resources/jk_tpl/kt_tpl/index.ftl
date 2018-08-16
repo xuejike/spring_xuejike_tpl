@@ -38,12 +38,18 @@
                 </dl>
             </li>
             <li class="layui-nav-item">
-                <a class="name" href="javascript:;"><img src="${vipRoot}/vip/frame/static/image/code.png" alt="logo"> ${info.username!} </a>
+                <a class="name" href="javascript:;">
+                    <img src="${vipRoot}/vip/frame/static/image/code.png" alt="logo"> ${info.username!} </a>
                 <dl class="layui-nav-child">
 
                     <#--<dd><a href="javascript:;" href-url="demo/login.html"><i class="layui-icon">&#xe621;</i>登录页</a></dd>-->
                     <#--<dd><a href="javascript:;" href-url="demo/map.html"><i class="layui-icon">&#xe621;</i>图表</a></dd>-->
-
+                        <#if info.rightMenu??>
+                            <#list info.rightMenu as menu >
+                        <dd><a href="javascript:;" href-url="${menu.href}">
+                            <i class="layui-icon">${menu.icon!""}</i>${menu.text!""}</a></dd>
+                            </#list>
+                        </#if>
                     <dd><a href="${info.logoutUrl!"./public/logout"}">
                         <i class="layui-icon">&#x1006;</i>退出</a></dd>
                 </dl>

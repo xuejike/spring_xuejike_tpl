@@ -1,6 +1,10 @@
 package vip.xuejike.ktpl;
 
+import com.bidanet.springmvc.demo.jkbuilder.data.JkMenu;
 import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 管理主页
@@ -36,5 +40,6 @@ public class AdminJkKtView extends JkKtView {
         private String top;
         private String left;
         private String username;
+        private List<JkMenu> rightMenu =new ArrayList<>(5);
     }
 }

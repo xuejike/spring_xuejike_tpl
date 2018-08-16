@@ -422,52 +422,54 @@ fun FlowContent.jkButton(title:String="按钮",
             text(title)
             
         }
-    }
-    button {
+    }else{
+        button {
 
-        var map= HashMap<String,String>();
-        when(type){
-            "submit"->{
-                map["lay-submit"]="";
-                map["lay-filter"]="submit"
-            }
-            "ajax_submit"->{
-                map["lay-submit"]="";
-                map["lay-filter"]="ajax_submit"
-            }
-            "reset"->{
-                this.type=ButtonType.reset
-            }
-            "diy"->{
-                map["lay-submit"]="";
-                map["lay-filter"]=event
-                map["data-event"]=event
-            }
-            else->{
-                map["lay-submit"]="";
-                map["lay-filter"]=typeStr
-
-                var op:String;
-                when(option){
-                    null -> op= "{}";
-                    is Map<*, *> ->op=JSON.toJSONString(option)
-                    is String -> op="\"$option\""
-                    else ->op="{}"
+            var map= HashMap<String,String>();
+            when(type){
+                "submit"->{
+                    map["lay-submit"]="";
+                    map["lay-filter"]="submit"
                 }
+                "ajax_submit"->{
+                    map["lay-submit"]="";
+                    map["lay-filter"]="ajax_submit"
+                }
+                "reset"->{
+                    this.type=ButtonType.reset
+                }
+                "diy"->{
+                    map["lay-submit"]="";
+                    map["lay-filter"]=event
+                    map["data-event"]=event
+                }
+                else->{
+                    map["lay-submit"]="";
+                    map["lay-filter"]=typeStr
+
+                    var op:String;
+                    when(option){
+                        null -> op= "{}";
+                        is Map<*, *> ->op=JSON.toJSONString(option)
+                        is String -> op="\"$option\""
+                        else ->op="{}"
+                    }
 
 
-                map["data-event"]="${type}@${url}@${op}"
+                    map["data-event"]="${type}@${url}@${op}"
+                }
             }
+
+            attributes.putAll(map);
+            classes+="layui-btn"
+            block(this)
+            text(title)
+
+
+
         }
-
-        attributes.putAll(map);
-        classes+="layui-btn"
-        block(this)
-        text(title)
-
-
-
     }
+
 }
 enum class JkButtonType {
     /**

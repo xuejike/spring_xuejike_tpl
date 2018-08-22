@@ -22,7 +22,6 @@ function initAutoDialogSize() {
     if (width < 900 || height < 600){
         jkBuilderConfig.dialogOption.area=[height*0.8+"px",width*0.8+"px"];
     }
-
 }
 
 //通过URL打开对话框

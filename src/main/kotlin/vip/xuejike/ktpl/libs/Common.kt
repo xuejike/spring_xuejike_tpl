@@ -298,7 +298,10 @@ fun FlowContent.jkUpload(title: String="",
                          maxNum:Int=10,
                          exts:String="jpg|png|gif|bmp|jpeg",
                          fileType:String="images",
-                         btnTitle:String="上传图片"){
+                         btnTitle:String="上传图片",
+                         imageHeight:Int=300,
+                         imageWidth:Int=300
+                         ){
 
     var uploadId=UUID.randomUUID().toString();
     val bindInfo = getBindInfo(bind, name, value)
@@ -335,7 +338,7 @@ fun FlowContent.jkUpload(title: String="",
 
                         <i v-if="file.status =='loading'" class="layui-icon jk-upload layui-anim layui-anim-rotate layui-anim-loop">&#xe63d;</i>
                         <img v-else
-                             style="width: 100px;height: 100px"
+                             style="width: ${imageWidth}px;height:${imageHeight}px"
                              v-bind:src="file.url" v-bind:alt="file.filename"/>
                     </span>
                     <br style="clear:both;" />

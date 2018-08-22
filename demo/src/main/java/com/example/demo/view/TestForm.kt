@@ -21,7 +21,7 @@ class TestFormView: PageJkKtView() {
          }
 
          jkForm {
-             jkInput(bind = vo!!::username,title = "哇哈哈", type = InputType.text,inputCall =
+             jkInput(bind = vo!!::username,title = "文本框", type = InputType.text,inputCall =
              {
                  //修改input属性
 //                 lay-verify="required|
@@ -33,10 +33,10 @@ class TestFormView: PageJkKtView() {
                      placeholder = "输入查询",bind = vo!!::username,selectCall = {
                  it.attributes["sksk"]="sss"
              });
-             jkCheckBox(title = "选中",dataList = listData,checkBoxCall ={
+             jkCheckBox(title = "复选框",dataList = listData,checkBoxCall ={
                  it.attributes["sss"]="sss"
              } ){}
-             jkDate(title = "日期",inputCall = {
+             jkDate(title = "日期选择器",inputCall = {
 
                  val map = hashMapOf("type" to "month","range" to "~" );
                  it.attributes["lay-data"]= JSON.toJSONString(map);

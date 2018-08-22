@@ -70,8 +70,6 @@ fun FlowContent.jkInput(title:String="",formItem:Boolean=true,placeholder:String
             this.autoComplete=false
             this.placeholder=placeholder
             this.classes+="layui-input"
-
-
             var info=getBindInfo(
                     bind,
                     name,

@@ -1,11 +1,14 @@
 package vip.xuejike.ktpl
 
 import com.bidanet.springmvc.demo.jkbuilder.FreeMarkerUtils
+import vip.xuejike.ktpl.libs.commonFooter
+import vip.xuejike.ktpl.libs.commonHeader
 import java.util.ArrayList
 import java.util.HashMap
 
 
 abstract class JkKtView {
+
     @JvmField
     protected var tpl: String? = null
     @JvmField
@@ -20,6 +23,9 @@ abstract class JkKtView {
     abstract fun content(): String
     fun head(): String {
         val headBuilder = StringBuilder()
+        for (comm in commonHeader) {
+            headBuilder.append(comm).append("\n")
+        }
         for (link in headList) {
             headBuilder.append(link)
                     .append("\n")
@@ -30,6 +36,9 @@ abstract class JkKtView {
 
     fun footer(): String {
         var footerBuilder=StringBuffer();
+        for (comm in commonFooter) {
+            footerBuilder.append(comm).append("\n")
+        }
         for (link in footerList){
             footerBuilder.append(link).append("\n");
         }

@@ -5,11 +5,15 @@ import com.bidanet.springmvc.demo.jkbuilder.data.JkNameValueData
 import com.bidanet.springmvc.demo.jkbuilder.data.JkUploadFile
 import kotlinx.html.*
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 import kotlin.collections.LinkedHashMap
 import kotlin.reflect.KCallable
 import kotlin.reflect.KMutableProperty0
 import kotlin.reflect.KProperty1
+
+var commonHeader:ArrayList<String> = ArrayList<String>()
+var commonFooter:ArrayList<String> = ArrayList<String>();
 
 fun FlowContent.jkForm(title:String="", action:String="",
                        method:FormMethod=FormMethod.post, block:FlowContent.(FORM)->Unit={}){
@@ -18,6 +22,8 @@ fun FlowContent.jkForm(title:String="", action:String="",
         block(this)
 
     }
+
+
 }
 
 fun FlowContent.jkFormItem(block: FlowContent.() -> Unit={}){

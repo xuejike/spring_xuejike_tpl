@@ -1,28 +1,18 @@
 package com.example.demo
 
+import kotlinx.html.FlowContent
 import kotlinx.html.div
 import kotlinx.html.input
 import kotlinx.html.stream.createHTML
-import vip.xuejike.ktpl.libs.jkForm
+import vip.xuejike.ktpl.libs.commonFooter
+import vip.xuejike.ktpl.libs.commonHeader
 
-class TestView{
-    var x:String?=null;
-    var y:String?=null;
+fun loadTpl(){
+    commonHeader.add("ss")
+    commonFooter.add("ff")
+}
 
+var t=loadTpl()
+fun FlowContent.jkXuejike(){
 
-
-    fun content():String{
-       return createHTML().div {
-            div {
-                jkForm {
-                    input {  }
-                }
-            }
-        }
-//        return "--";
-    }
-
-    override fun toString(): String {
-        return content();
-    }
 }

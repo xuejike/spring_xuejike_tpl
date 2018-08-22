@@ -25,6 +25,114 @@
 
 ![功能展示](./img/img1.png)
 ## 1.2 使用
+### 1.2.1 引入依赖
+```xml
+	<repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+
+    <dependency>
+	    <groupId>com.github.xuejike</groupId>
+	    <artifactId>spring_xuejike_tpl</artifactId>
+	    <version>0.1.1</version>
+	</dependency>
+```
+### 1.2.2 引入Kotlin库和插件
+```gradle
+apply plugin: 'kotlin'
+
+buildscript {
+    ext.kotlin_version = '1.2.10'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+repositories {     
+     maven { url "https://jcenter.bintray.com" }
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compile "org.jetbrains.kotlinx:kotlinx-html-jvm:0.6.6"
+}
+```
+### 1.2.3 使用模板生成器
+#### 1、生成一个首页
+```java
+    @RequestMapping("/index")
+    @ResponseBody
+    public String index(){
+        AdminJkKtView testView = new AdminJkKtView();
+        testView.getInfo().setTitle("极速模板");
+        //首页地址
+        testView.getInfo().setIndexUrl("/index");
+        //定义左菜单加载的URL
+        testView.getInfo().setLeft("/left");
+        //定义头部菜单加载的URL
+        testView.getInfo().setTop("/top");
+        //定义 右菜单内容
+        testView.getInfo().getRightMenu()
+                .add(new JkMenu("修改密码","","http://www.baidu.com"));
+        //定义首页 初始化界面地址
+        testView.getInfo().setWelcomeUrl("/welcome");
+        //退出登录地址
+        testView.getInfo().setLogoutUrl("/public/logout");
+        //定义 当前登录的用户昵称
+        testView.getInfo().setUsername("超级管理员");
+        return testView.toHtml();
+    }
+```
+效果
+
+#### 2、生成一个表单页
+```java
+  @RequestMapping("/form")
+    @ResponseBody
+    public String form(){
+        TestFormView view = new TestFormView();
+        view.setVo(new TestModel());
+        return view.toHtml();
+    }
+```
+```kotlin
+
+class TestFormView: PageJkKtView() {
+    var vo:TestModel?=null;
+
+    override fun content(): String {
+     return createHTML().div {
+        vo=TestModel("ss")
+         jkForm {
+             jkInput(bind = vo!!::username,title = "文本框", type = InputType.text,inputCall =
+             {
+                 it.attributes["lay-verify"]="required|number"
+
+             })
+            jkFormTitle(){
+
+                jkButton("提交",type = JkButtonType.ajax_submit)
+
+            }
+         }
+
+         }
+
+
+    }
+
+}
+```
+#### 3、生成一个登录页
+
+
 
 ## 1.3 扩展
 使用Kotlin扩展的特性对Kotlin的html生成器进行扩展。下面这个例子就是扩展出一个带Layui样式的Form表单控件.

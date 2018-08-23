@@ -131,9 +131,99 @@ class TestFormView: PageJkKtView() {
 }
 ```
 #### 3、生成一个登录页
+```java
+ public String login(){
+        AdminLoginKtView adminLoginKtView = new AdminLoginKtView();
+        adminLoginKtView.getInfo().setActionUrl("/public/login");
+        adminLoginKtView.getInfo().setTitle("登录页");
+        adminLoginKtView.getInfo().setUserName("用户名");
+        adminLoginKtView.getInfo().setPwd("密码");
+        adminLoginKtView.getInfo().setMsg("登录失败的错误消息");
+        return adminLoginKtView.toHtml();
+    }
+```
+
+#### 4、在当前页面引入css、js文件
+```kotlin
+ override fun content(): String {
+        headList.add("<meta name=\"viewport\" content=\"width=device-width\">")
+        footerList.add("<script></script>")
+        addCssFile("/test.css")
+        addHeadJsFile("/head.js")
+        addFooterJsFile("/foot.js")
+     return createHTML().div {
+        vo= TestModel("ss")
+         jkForm {
+             jkInput(bind = vo!!::username,title = "文本框", type = InputType.text,inputCall =
+             {
+                 it.attributes["lay-verify"]="required|number"
+
+             })
+            jkFormTitle(){
+
+                jkButton("提交",type = JkButtonType.ajax_submit)
+
+            }
+         }
+
+         }
+    }
+```
+#### 5、在公共页面引入通用的CSS、JS、头部、尾部
+```kotlin
+import vip.xuejike.ktpl.libs.commonFooter
+import vip.xuejike.ktpl.libs.commonHeader
+
+fun loadTpl(){
+    commonHeader.add("ss")
+    commonFooter.add("ff")
+}
+
+var t=loadTpl()
+```
+#### 6、使用Spring MVC的MessageConverters自动转换
+Spring Boot 的MessageConverters的配置
+```java
+@Configuration
+public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
+
+    /**
+     * 配置静态访问资源
+     * @param registry
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+
+    }
 
 
 
+    List<JkHandlerInterceptor> jkHandlerInterceptorList;
+    /**
+     * 拦截器
+     * @param registry
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+    }
+
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        converters.add(0,new JkKtViewMessageConverters());
+        super.configureMessageConverters(converters);
+    }
+}
+```
+直接使用
+```java
+ @RequestMapping("/form")
+    @ResponseBody
+    public String form(){
+        TestFormView view = new TestFormView();
+        view.setVo(new TestModel());
+        return view;
+    }
+```
 ## 1.3 扩展
 使用Kotlin扩展的特性对Kotlin的html生成器进行扩展。下面这个例子就是扩展出一个带Layui样式的Form表单控件.
 ```kotlin
@@ -146,7 +236,7 @@ fun FlowContent.jkForm(action:String="",
     }
 }
 ```
-## 1.3 表单控件扩展
+## 1.4 表单控件扩展
 ### 1、组成
     表单控件主要有三部分组成:表单标题、表单块、表单控件。
     下面以输入框为例:

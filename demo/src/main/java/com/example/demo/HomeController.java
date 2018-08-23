@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import vip.xuejike.ktpl.AdminJkKtView;
+import vip.xuejike.ktpl.AdminLoginKtView;
 
 //@RequestMapping
 @Controller
@@ -40,5 +41,15 @@ public class HomeController {
         TestFormView view = new TestFormView();
         view.setVo(new TestModel());
         return view.toHtml();
+    }
+
+    public String login(){
+        AdminLoginKtView adminLoginKtView = new AdminLoginKtView();
+        adminLoginKtView.getInfo().setActionUrl("/public/login");
+        adminLoginKtView.getInfo().setTitle("登录页");
+        adminLoginKtView.getInfo().setUserName("用户名");
+        adminLoginKtView.getInfo().setPwd("密码");
+        adminLoginKtView.getInfo().setMsg("登录失败的错误消息");
+        return adminLoginKtView.toHtml();
     }
 }

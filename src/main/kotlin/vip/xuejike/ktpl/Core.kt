@@ -15,8 +15,8 @@ abstract class JkKtView {
     protected var rootPath="/webjars/jktpl"
     @JvmField
     protected var map = HashMap<String, Any>()
-    private val headList = ArrayList<String>()
-    private var footerList=ArrayList<String>()
+    protected val headList = ArrayList<String>()
+    protected var footerList=ArrayList<String>()
 
 
 

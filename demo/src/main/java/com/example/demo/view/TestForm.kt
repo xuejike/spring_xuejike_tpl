@@ -12,8 +12,13 @@ class TestFormView: PageJkKtView() {
     var vo:TestModel?=null;
 
     override fun content(): String {
+        headList.add("<meta name=\"viewport\" content=\"width=device-width\">")
+        footerList.add("<script></script>")
+        addCssFile("/test.css")
+        addHeadJsFile("/head.js")
+        addFooterJsFile("/foot.js")
      return createHTML().div {
-        vo=TestModel("ss")
+        vo= TestModel("ss")
          jkForm {
              jkInput(bind = vo!!::username,title = "文本框", type = InputType.text,inputCall =
              {

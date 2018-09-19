@@ -39,7 +39,6 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'1.5.4.RELEASE'
     compile group: 'com.google.guava', name: 'guava', version:'18.0'
     compile group: 'org.freemarker', name: 'freemarker', version:'2.3.26-incubating'
-    compile group: 'com.github.xuejike', name: 'bd_framework_core', version:'v0.1.5.6_starter'
     compile(group: 'commons-beanutils', name: 'commons-beanutils', version:'1.9.3') {
         exclude(module: 'commons-logging')
     }
@@ -49,9 +48,8 @@ dependencies {
     compile group: 'commons-codec', name: 'commons-codec', version:'1.10'
     compile group: 'commons-lang', name: 'commons-lang', version:'2.6'
     compile(group: 'org.projectlombok', name: 'lombok', version:'1.16.18') {
-        compile "org.jetbrains.kotlinx:kotlinx-html-jvm:0.6.6"
-       /* This dependency was originally in the Maven provided scope, but the project was not of type war.
-       This behavior is not yet supported by Gradle, so this dependency has been converted to a compile dependency.
-       Please review and delete this closure when resolved. */
+
     }
+    compile 'com.alibaba:fastjson:1.2.49'
+    compile "org.jetbrains.kotlinx:kotlinx-html-jvm:0.6.6"
 }

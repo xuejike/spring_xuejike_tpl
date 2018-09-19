@@ -74,8 +74,15 @@ layui.use(['layer', 'element', 'util','vip_nav'], function () {
     // 添加TAB选项卡
     window.addTab = function (elem, tit, url) {
         var card = 'card';                                              // 选项卡对象
-        var title = tit ? tit : elem.children('a').html();              // 导航栏text
-        var src = url ? url : elem.children('a').attr('href-url');      // 导航栏跳转URL
+        var title = tit;
+        var src = url;
+        try{
+            title = elem.children('a').html();
+            src=elem.children('a').attr('href-url');
+        }catch (e) {
+
+        }
+
         var id = new Date().getTime();                                  // ID
         var flag = getTitleId(card, title);                             // 是否有该选项卡存在
         // 大于0就是有该选项卡了

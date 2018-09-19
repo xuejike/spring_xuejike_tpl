@@ -22,9 +22,11 @@
 - [ ] 页面功能
     - [x] 主页
     - [x] 登录页
+- 
 
 ![功能展示](./img/img1.png)
 ## 1.2 使用
+如果项目是Spring Boot 可以直接引用,项目采用Spring boot start
 ### 1.2.1 引入依赖
 ```xml
 	<repositories>
@@ -181,7 +183,7 @@ fun loadTpl(){
 
 var t=loadTpl()
 ```
-#### 6、使用Spring MVC的MessageConverters自动转换
+#### 6、使用Spring MVC的MessageConverters自动转换,Spring boot 自动配置好的
 Spring Boot 的MessageConverters的配置
 ```java
 @Configuration

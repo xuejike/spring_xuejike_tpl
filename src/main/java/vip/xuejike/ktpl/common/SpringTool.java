@@ -1,7 +1,6 @@
 package vip.xuejike.ktpl.common;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
+
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -17,8 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 public class SpringTool  {
     protected static ApplicationContext applicationContext;
 
-    @Nullable
-    public static <T> T getBean(@NotNull Class<T> cls) {
+     public static <T> T getBean( Class<T> cls) {
         if (applicationContext != null){
             return applicationContext.getBean(cls);
         }

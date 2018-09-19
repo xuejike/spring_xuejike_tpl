@@ -1,16 +1,15 @@
 package com.bidanet.springmvc.demo.jkbuilder;
 
-import com.bidanet.bdcms.core.bean.ApiResult;
-import com.bidanet.bdcms.core.common.SpringWebTool;
+
+import vip.xuejike.ktpl.common.ApiResult;
+import vip.xuejike.ktpl.common.SpringTool;
 import com.bidanet.springmvc.demo.jkbuilder.data.JkNameValueData;
 import com.bidanet.springmvc.demo.jkbuilder.type.JkTypeDataSource;
 import com.bidanet.springmvc.demo.jkbuilder.type.JkVerifyRemote;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -25,7 +24,7 @@ public class JkBuilderController {
         String msg="";
         try {
             Class<?> beanClass = Class.forName(beanCls);
-            Object bean = SpringWebTool.getBean(beanClass);
+            Object bean = SpringTool.getBean(beanClass);
             if (bean instanceof JkTypeDataSource){
                 List<JkNameValueData> search = ((JkTypeDataSource) bean).search(key);
                 return search;
@@ -54,10 +53,10 @@ public class JkBuilderController {
     }
     @RequestMapping("/verify")
     @ResponseBody
-    public ApiResult<String> verify(String value,String beanCls){
+    public ApiResult<String> verify(String value, String beanCls){
         try {
             Class<?> beanClass = Class.forName(beanCls);
-            Object bean = SpringWebTool.getBean(beanClass);
+            Object bean = SpringTool.getBean(beanClass);
             if (bean instanceof JkVerifyRemote){
                 String verify = ((JkVerifyRemote) bean).verify(value);
                 if (verify==null){

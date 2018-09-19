@@ -5,5 +5,6 @@
 
 <link rel="stylesheet" href="${vipRoot}/vip/frame/layui/css/layui.css">
 <link rel="stylesheet" href="${vipRoot}/vip/frame/static/css/style.css">
+<link rel="stylesheet" href="${vipRoot}/vip/frame/static/css/formSelects-v4.css">
 <link rel="stylesheet" href="${vipRoot}/jkStyle.css">
 <link rel="icon" href="${vipRoot}/vip/frame/static/image/code.png">

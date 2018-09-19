@@ -1,9 +1,9 @@
 package com.bidanet.springmvc.demo.jkbuilder;
 
 import com.alibaba.fastjson.JSON;
-import com.bidanet.bdcms.core.common.SpringWebTool;
 import com.bidanet.springmvc.demo.jkbuilder.annotation.*;
 import com.bidanet.springmvc.demo.jkbuilder.annotation.type.JkColumnAlign;
+import vip.xuejike.ktpl.common.SpringTool;
 import com.bidanet.springmvc.demo.jkbuilder.exception.JkBuilderException;
 import com.bidanet.springmvc.demo.jkbuilder.type.*;
 
@@ -305,7 +305,7 @@ public class JkBuilder {
     }
 
     protected static String getUrlPath(){
-        String requestURI = SpringWebTool.getRequest().getRequestURI();
+        String requestURI = SpringTool.getRequest().getRequestURI();
         return requestURI;
     }
 

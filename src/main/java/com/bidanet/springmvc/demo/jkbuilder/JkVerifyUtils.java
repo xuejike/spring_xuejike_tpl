@@ -1,12 +1,12 @@
 package com.bidanet.springmvc.demo.jkbuilder;
 
-import com.bidanet.bdcms.core.common.SpringWebTool;
-import com.bidanet.bdcms.core.exception.CheckException;
+
 import com.bidanet.springmvc.demo.jkbuilder.annotation.JkVerify;
 import com.bidanet.springmvc.demo.jkbuilder.annotation.JkVerifyRegExp;
 import com.bidanet.springmvc.demo.jkbuilder.annotation.type.JkVerifyType;
+import vip.xuejike.ktpl.common.JkTplException;
+import vip.xuejike.ktpl.common.SpringTool;
 import com.bidanet.springmvc.demo.jkbuilder.type.JkVerifyRemote;
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.core.annotation.AnnotationUtils;
 
@@ -21,7 +21,7 @@ public class JkVerifyUtils {
      */
     public static void verify(Object obj){
         if (obj==null){
-            throw new CheckException("obj is null");
+            throw new JkTplException("obj is null");
         }
         Class<?> cls = obj.getClass();
         Field[] fields = cls.getDeclaredFields();
@@ -66,7 +66,7 @@ public class JkVerifyUtils {
         for (JkVerifyRegExp regExp : regExps) {
             boolean matches = Pattern.matches(regExp.regExp(), String.valueOf(property));
             if (!matches){
-                throw new CheckException(regExp.message());
+                throw new JkTplException(regExp.message());
             }
         }
 
@@ -74,24 +74,24 @@ public class JkVerifyUtils {
 
     protected static void checkRequired(Object obj,String msg){
         if (obj==null){
-            throw new CheckException(msg);
+            throw new JkTplException(msg);
         }
         if (obj instanceof String){
             if (((String) obj).isEmpty()){
-                throw new CheckException(msg);
+                throw new JkTplException(msg);
             }
         }
     }
 
     protected static void checkAjax(Object obj, Class<? extends JkVerifyRemote> aClass){
-        JkVerifyRemote bean = SpringWebTool.getBean(aClass);
+        JkVerifyRemote bean = SpringTool.getBean(aClass);
         if (bean!=null){
             String verify = bean.verify(String.valueOf(obj));
             if (verify!=null){
-                throw new CheckException(verify);
+                throw new JkTplException(verify);
             }
         }else{
-            throw new CheckException(aClass.getName()+"->未定义Bean");
+            throw new JkTplException(aClass.getName()+"->未定义Bean");
         }
     }
 }

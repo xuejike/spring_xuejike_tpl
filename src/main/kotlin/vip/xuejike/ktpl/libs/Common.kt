@@ -512,6 +512,35 @@ enum class JkButtonType {
      */
     brBtn
 }
+
+
+fun FlowContent.jkSelectChecked(title: String="",
+                                inline:Boolean=false,
+                                formItem:Boolean=true,
+                                bind: KMutableProperty0<out Any?>?=null,
+                                name: String?=null,
+                                value: Any?=null,
+                                dataList:List<out JkNameValueData>?=null,
+                                placeholder:String?=null,
+                                selectCall:(SELECT)->Unit={},
+                                block: FlowContent.() -> Unit={}){
+    val uuid = UUID.randomUUID().toString();
+    jkSelect(title, inline, formItem, bind, name, value, dataList= dataList, placeholder= placeholder, selectCall = {
+        it.attributes["xm-select"]=uuid
+        selectCall(it)
+    }, block=block)
+    jkJavaScript("""
+                layui.use(["formSelects"],function () {
+                    var formSelects=layui.formSelects;
+
+                    formSelects.render('${uuid}');
+                    formSelects.value('${uuid}', [${value}]);
+
+                        });
+
+            """.trimIndent())
+
+}
 //-----------------表单部分结束---------------------------
 fun <T>FlowContent.jkTable(headNames:LinkedHashMap<String, JkTableCol<T>>
                            ,dataList:List<T>){

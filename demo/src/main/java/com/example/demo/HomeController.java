@@ -37,10 +37,10 @@ public class HomeController {
     }
     @RequestMapping("/form")
     @ResponseBody
-    public String form(){
+    public TestFormView form(){
         TestFormView view = new TestFormView();
         view.setVo(new TestModel());
-        return view.toHtml();
+        return view;
     }
 
     public String login(){

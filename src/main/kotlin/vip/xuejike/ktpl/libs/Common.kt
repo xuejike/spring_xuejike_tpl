@@ -543,16 +543,18 @@ fun FlowContent.jkSelectChecked(title: String="",
 }
 //-----------------表单部分结束---------------------------
 fun <T>FlowContent.jkTable(headNames:LinkedHashMap<String, JkTableCol<T>>
-                           ,dataList:List<T>){
+                           ,dataList:List<T>,colgroupCallback:TABLE.() -> Unit={}){
 
 
     table {
         classes+="layui-table jk-table"
+        colgroupCallback(this)
         thead {
             tr{
                 for (head in headNames){
                     th {
-                        attributes["width"]=head.value.width
+//                        attributes["width"]=head.value.width
+
                         if (head.value.thAttrs != null){
                             attributes.putAll(head.value.thAttrs!!);
                         }
@@ -572,24 +574,44 @@ fun <T>FlowContent.jkTable(headNames:LinkedHashMap<String, JkTableCol<T>>
                             if(map!=null){
                                 attributes.putAll(map);
                             }
-
-                            head.value.call(item)
+                            var txt:String? = null;
                             if(head.value.value!=null){
+
                                 when(head.value.value){
                                     is KProperty1<*,*>->{
                                         var pget=head.value.value as KProperty1<T,*>;
-                                        text(pget.get(item).toString())
+                                        txt = (pget.get(item).toString())
                                     }
                                     is KCallable<*>->{
                                         var callM=head.value.value as KCallable<T>;
-                                        text(callM.call(item).toString())
+                                        txt = (callM.call(item).toString())
                                     }
 
                                     else->{
-                                        text(head.value.value.toString())
+                                        txt = (head.value.value.toString())
                                     }
                                 }
                             }
+                            if(head.value.width == null){
+                                head.value.call(item)
+                                if(txt != null){
+                                    text(txt)
+                                }
+                            }else{
+                                div{
+                                    this.attributes["style"] = "width:${head.value.width.toString()}"
+                                    val divAttr = head.value.divAttrCall(item)
+                                    if(divAttr != null){
+                                        this.attributes.putAll(divAttr);
+                                    }
+                                    head.value.call(item)
+                                    if(txt != null){
+                                        text(txt)
+                                    }
+                                }
+                            }
+
+
 
 
                         }
@@ -603,9 +625,10 @@ fun <T>FlowContent.jkTable(headNames:LinkedHashMap<String, JkTableCol<T>>
     }
 }
 data class JkTableCol<T>(var value:Any?=null,
-                         var width:String="200px",
+                         var width:String?=null,
                          var thAttrs:Map<String,String>?=null,
                          var attrsCall:(T)->Map<String,String>?={null},
+                         var divAttrCall:(T)->Map<String,String>?={null},
                       var call:(T)->Unit={})
 
 fun FlowContent.jkPage(pageNo:Int,count:Int,limit:Int=30,block:(Map<String,Any>) -> Unit={}){

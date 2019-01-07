@@ -19,19 +19,32 @@ class TestFormView: PageJkKtView() {
         addFooterJsFile("/foot.js")
      return createHTML().div {
         vo= TestModel("ss")
-         jkForm {
-             jkInput(bind = vo!!::username,title = "文本框", type = InputType.text,inputCall =
-             {
-                 it.attributes["lay-verify"]="required|number"
+         val list = listOf(vo, vo, vo)
+//         jkForm {
+//             jkInput(bind = vo!!::username,title = "文本框", type = InputType.text,inputCall =
+//             {
+//                 it.attributes["lay-verify"]="required|number"
+//
+//             })
+//            jkFormTitle(){
+//
+//                jkButton("提交",type = JkButtonType.ajax_submit)
+//
+//            }
+//         }
 
-             })
-            jkFormTitle(){
-
-                jkButton("提交",type = JkButtonType.ajax_submit)
+         jkTable(linkedMapOf(
+                 "index" to JkTableCol{ text("ssssssssssssssssss") },
+                 "index1" to JkTableCol{ text("ssssssssssssss") },
+                 "index2" to JkTableCol{ text("ssssssssssssss") },
+                 "index3" to JkTableCol{ text("ssssssssssssss") },
+                 "操作" to JkTableCol(width = "300px"){
+                     jkButton("按钮1")
+                     jkButton("按钮2")
+                     jkButton("按钮3")
+                 }),list){
 
             }
-         }
-
          }
 
 

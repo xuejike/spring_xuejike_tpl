@@ -580,7 +580,8 @@ fun <T>FlowContent.jkTable(headNames:LinkedHashMap<String, JkTableCol<T>>
                                 when(head.value.value){
                                     is KProperty1<*,*>->{
                                         var pget=head.value.value as KProperty1<T,*>;
-                                        txt = (pget.get(item).toString())
+                                        val getVal = pget.get(item)
+                                        txt = if (getVal==null) "" else (getVal.toString())
                                     }
                                     is KCallable<*>->{
                                         var callM=head.value.value as KCallable<T>;
